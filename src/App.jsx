@@ -13,6 +13,7 @@
 import Apply from './app/Apply';
 import Login from './app/admin/Login'
 import Dashboard from './app/admin/Dashboard'
+import Contact from './app/Contact';
 
   const App = () => {
     return (
@@ -29,6 +30,7 @@ import Dashboard from './app/admin/Dashboard'
           <Route path="/forms" element={<Forms />} />
           <Route path="/admin" element={<Login />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/contact" element={<Contact />} />
 
         </Routes>
         <Footer />
@@ -44,34 +46,3 @@ import Dashboard from './app/admin/Dashboard'
 
 
 
-// import React from 'react'
-// import './index.css'
-// import About from './app/About'
-// import Footer from './components/Footer'
-// import Navbar from './components/Navbar'
-// import { ThemeProvider } from "next-themes";
-// import Admission from './app/Admission'
-// import Eligibility from './app/Eligibility'
-// import Forms from './app/Forms'
-// import Home from './app/Home'
-// const App = () => {
-//   return (
-//     <div>
-//       <ThemeProvider attribute="class">
-
-
-//        <Navbar/>
-//        <Home/>
-//       <About />
-//       <Admission />
-//       <Eligibility/>
-//       <Forms/>
-//        <Footer/>
-//       </ThemeProvider>
-//     </div>
-//   )
-// }
-
-// // need to ready apply.contact.Dashboard.login
-
-// export default App

@@ -11,6 +11,8 @@
   import Eligibility from './app/Eligibility';
   import Forms from './app/Forms';
 import Apply from './app/Apply';
+import Login from './app/admin/Login'
+import Dashboard from './app/admin/Dashboard'
 
   const App = () => {
     return (
@@ -25,6 +27,9 @@ import Apply from './app/Apply';
           <Route path="/eligibility" element={<Eligibility />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/forms" element={<Forms />} />
+          <Route path="/admin" element={<Login />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+
         </Routes>
         <Footer />
         </ThemeProvider>

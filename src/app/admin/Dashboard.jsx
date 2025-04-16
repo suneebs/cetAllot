@@ -70,6 +70,12 @@ const applications = [
   },
 ]
 
+const departments = [
+  "Computer Science & Engineering",
+  "Electrical Engineering",
+  "Mechanical Engineering",
+]
+
 export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
@@ -183,7 +189,7 @@ export default function Dashboard() {
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">3</div>
+            <div className="text-2xl font-bold">{departments.length}</div>
             <p className="text-xs text-muted-foreground">Active PhD programs</p>
           </CardContent>
         </Card>
@@ -230,91 +236,65 @@ export default function Dashboard() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Departments</SelectItem>
-                  <SelectItem value="Computer Science & Engineering">Computer Science</SelectItem>
-                  <SelectItem value="Electrical Engineering">Electrical</SelectItem>
-                  <SelectItem value="Mechanical Engineering">Mechanical</SelectItem>
+                  {departments.map((dept) => (
+                    <SelectItem key={dept} value={dept}>
+                      {dept}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
-              <Button variant="outline" className="gap-1" onClick={handleExport} disabled={isLoading}>
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-                Export
-              </Button>
             </div>
           </div>
-
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Application ID</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Department</TableHead>
-                  <TableHead>Submitted</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Application ID</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Department</TableHead>
+                <TableHead>Submitted</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredApplications.map((application) => (
+                <TableRow key={application.id}>
+                  <TableCell>{application.id}</TableCell>
+                  <TableCell>{application.name}</TableCell>
+                  <TableCell>{application.email}</TableCell>
+                  <TableCell>{application.department}</TableCell>
+                  <TableCell>{application.submittedDate}</TableCell>
+                  <TableCell>{getStatusBadge(application.status)}</TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredApplications.length > 0 ? (
-                  filteredApplications.map((application) => (
-                    <TableRow key={application.id}>
-                      <TableCell className="font-medium">{application.id}</TableCell>
-                      <TableCell>
-                        <div className="flex flex-col">
-                          <span>{application.name}</span>
-                          <span className="text-xs text-muted-foreground">{application.email}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>{application.department}</TableCell>
-                      <TableCell>{application.submittedDate}</TableCell>
-                      <TableCell>{getStatusBadge(application.status)}</TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="ghost" size="sm">
-                          View
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className="h-24 text-center">
-                      No applications found.
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+              ))}
+            </TableBody>
+          </Table>
+          <div className="flex justify-end mt-4">
+            <Button variant="outline" className="gap-1" onClick={handleExport} disabled={isLoading}>
+              {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              Export
+            </Button>
           </div>
         </TabsContent>
+
         <TabsContent value="departments" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[ ...]}  {/* The departments data part is omitted here to save space */}
+            {departments.map((department, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle>{department}</CardTitle>
+                  <CardDescription>{`Manage ${department} PhD applications`}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm">View and manage all applications for {department}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </TabsContent>
-        <TabsContent value="settings" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Admin Settings</CardTitle>
-              <CardDescription>Manage your admin account and system preferences</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h3 className="text-lg font-medium">Account Information</h3>
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <User className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Administrator</p>
-                    <p className="text-muted-foreground">admin@example.com</p>
-                  </div>
-                </div>
-              </div>
-              <Button variant="outline" onClick={() => alert("Change password")}>
-                Change Password
-              </Button>
-            </CardContent>
-          </Card>
+
+        <TabsContent value="settings">
+          {/* Add your settings content here */}
         </TabsContent>
       </Tabs>
     </div>

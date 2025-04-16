@@ -56,7 +56,7 @@ export default function Navbar() {
           <Link to="/apply">
             <Button>Apply Now</Button>
           </Link>
-          <Link to="/admin">
+          <Link to="/login">
             <Button variant="outline">Admin Login</Button>
           </Link>
         </div>

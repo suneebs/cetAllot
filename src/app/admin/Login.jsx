@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { FormProvider } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -31,22 +33,23 @@ export default function Login() {
     },
   })
 
+  const navigate = useNavigate();  // Move this inside the component function
+
   function onSubmit(values) {
     setIsLoading(true)
     setError("")
-
+  
     // Simulate API call
     setTimeout(() => {
-      // For demo purposes, hardcoded credentials
       if (values.email === "admin@cet.edu" && values.password === "admin123") {
-        window.location.href = "/admin/dashboard"
+        navigate("/admin/dashboard")
       } else {
         setError("Invalid email or password")
         setIsLoading(false)
       }
     }, 2000)
   }
-
+  
   return (
     <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
       <Card className="w-full max-w-md">
@@ -57,7 +60,8 @@ export default function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Form {...form}>
+        <FormProvider {...form}>
+        
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
@@ -104,7 +108,7 @@ export default function Login() {
                 )}
               </Button>
             </form>
-          </Form>
+            </FormProvider>
         </CardContent>
         <CardFooter className="flex flex-col">
           <p className="text-xs text-center text-muted-foreground mt-4">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -11,16 +11,34 @@ const navigation = [
   { name: "Admission", href: "/admission" },
   { name: "Eligibility", href: "/eligibility" },
   { name: "Forms", href: "/forms" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact`", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollingDown, setScrollingDown] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const pathname = location.pathname;
+ useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setScrollingDown(true);
+      } else {
+        setScrollingDown(false);
+      }
+      setLastScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <header className="bg-background sticky top-0 z-50 border-b">
+    <header
+  className={`bg-background sticky top-0 z-50 border-b transition-transform duration-300 ${
+    scrollingDown ? "-translate-y-full" : "translate-y-0"
+  }`}
+>
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
@@ -56,7 +74,7 @@ export default function Navbar() {
           <Link to="/apply">
             <Button>Apply Now</Button>
           </Link>
-          <Link to="/login">
+          <Link to="/admin">
             <Button variant="outline">Admin Login</Button>
           </Link>
         </div>

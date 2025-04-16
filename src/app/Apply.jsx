@@ -1,612 +1,352 @@
-"use client"
+import React from "react";
+import { useForm, FormProvider } from "react-hook-form"; // Import FormProvider
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form"; 
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 
-import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-    import { zodResolver } from "@hookform/resolvers/zod"
-    import { useForm } from "react-hook-form"
-    import { z } from "zod"
-import { ArrowLeft, ArrowRight, Check, Info, Loader2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/Input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/RadioGroup"
-import { Checkbox } from "@/components/ui/Checkbox"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+// Define the Zod schema for validation.
+const FormSchema = z.object({
+  adharNumber: z
+    .string()
+    .length(12, "Adhar number must be exactly 12 digits")
+    .regex(/^\d+$/, "Adhar number must be numeric"),
 
-// Form schema
-const applicationSchema = z.object({
-  // Personal Information
-  firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
-  lastName: z.string().min(2, { message: "Last name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  phone: z.string().min(10, { message: "Please enter a valid phone number." }),
-  dateOfBirth: z.string().min(1, { message: "Date of birth is required." }),
-  gender: z.enum(["male", "female", "other"], { message: "Please select a gender." }),
-  nationality: z.string().min(2, { message: "Nationality is required." }),
-  address: z.string().min(5, { message: "Address is required." }),
+  name: z.string().min(2, "Name must be at least 2 characters long"),
 
-  // Academic Information
-  bachelorDegree: z.string().min(2, { message: "Bachelor's degree is required." }),
-  bachelorInstitution: z.string().min(2, { message: "Institution name is required." }),
-  bachelorYear: z.string().min(4, { message: "Year of completion is required." }),
-  bachelorGrade: z.string().min(1, { message: "Grade/CGPA is required." }),
+  email: z.string().email("Invalid email address"),
 
-  masterDegree: z.string().min(2, { message: "Master's degree is required." }),
-  masterInstitution: z.string().min(2, { message: "Institution name is required." }),
-  masterYear: z.string().min(4, { message: "Year of completion is required." }),
-  masterGrade: z.string().min(1, { message: "Grade/CGPA is required." }),
+  age: z
+    .string()
+    .refine((val) => !isNaN(val) && Number(val) >= 18 && Number(val) <= 80, {
+      message: "Age must be a number between 18 and 80",
+    }),
 
-  // Program Information
-  department: z.string().min(1, { message: "Please select a department." }),
-  researchArea: z.string().min(5, { message: "Research area is required." }),
-  researchProposal: z.string().min(100, { message: "Research proposal must be at least 100 characters." }),
+  company: z.string().min(1, "Company is required"),
 
-  // Additional Information
-  fundingSource: z.enum(["self", "scholarship", "sponsorship"], { message: "Please select a funding source." }),
-  publications: z.string().optional(),
+  experience: z.string().min(1, "Experience is required"),
 
-  // Terms and Conditions
-  agreeTerms: z.literal(true, {
-    errorMap: () => ({ message: "You must agree to the terms and conditions." }),
-  }),
-})
+  address: z.string().min(1, "Address is required"),
 
+  highestEducation: z.string().min(1, "Highest Education is required"),
 
+  mark: z.string().min(1, "Mark is required"),
+
+  category: z.string().min(1, "Category is required"),
+
+  distance: z
+    .string()
+    .refine((val) => !isNaN(val) && Number(val) <= 75, {
+      message: "Distance must be less than or equal to 75",
+    }),
+
+  priorityChoices: z
+    .object({
+      1: z.string().min(1, "Priority choice 1 is required"),
+      2: z.string().min(1, "Priority choice 2 is required"),
+      3: z.string().min(1, "Priority choice 3 is required"),
+    })
+    .refine((data) => {
+      const priorities = [data[1], data[2], data[3]];
+      return new Set(priorities).size === priorities.length; // Check if priorities are unique
+    }, {
+      message: "Priority choices must be unique",
+    }),
+});
+
+// Initial form data.
+const initialFormData = {
+  adharNumber: "",
+  name: "",
+  email: "",
+  age: "",
+  company: "",
+  experience: "",
+  address: "",
+  highestEducation: "",
+  mark: "",
+  category: "",
+  distance: "",
+  priorityChoices: { 1: "", 2: "", 3: "" },
+};
 
 export default function Apply() {
-    const [activeTab, setActiveTab] = useState("personal")
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const [applicationId, setApplicationId] = useState("")
-  
-    const form = useForm({
-      resolver: zodResolver(applicationSchema),
-      defaultValues: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        dateOfBirth: "",
-        gender: undefined,
-        nationality: "",
-        address: "",
-  
-        bachelorDegree: "",
-        bachelorInstitution: "",
-        bachelorYear: "",
-        bachelorGrade: "",
-  
-        masterDegree: "",
-        masterInstitution: "",
-        masterYear: "",
-        masterGrade: "",
-  
-        department: "",
-        researchArea: "",
-        researchProposal: "",
-  
-        fundingSource: undefined,
-        publications: "",
-  
-        agreeTerms: false,
-      },
-    })
-  
-    function onSubmit(data) {
-      setIsSubmitting(true)
-  
-      // Simulate API call
-      setTimeout(() => {
-        console.log(data)
-        setIsSubmitting(false)
-        setIsSubmitted(true)
-        setApplicationId("PHD" + Math.floor(100000 + Math.random() * 900000))
-      }, 2000)
-    }
-  
-    const nextTab = (tab) => {
-      setActiveTab(tab)
-    }
+  const form = useForm({
+    resolver: zodResolver(FormSchema),
+    defaultValues: initialFormData,
+  });
 
-  if (isSubmitted) {
-    return (
-      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 max-w-3xl">
-        <Card className="border-green-500">
-          <CardHeader className="text-center">
-            <div className="mx-auto w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-4">
-              <Check className="h-6 w-6 text-green-600" />
-            </div>
-            <CardTitle className="text-2xl">Application Submitted Successfully!</CardTitle>
-            <CardDescription>Thank you for applying to our PhD program</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Alert>
-              <Info className="h-4 w-4" />
-              <AlertTitle>Application ID</AlertTitle>
-              <AlertDescription>
-                Your application ID is <span className="font-bold">{applicationId}</span>. Please save this for future
-                reference.
-              </AlertDescription>
-            </Alert>
-            <p className="text-center text-muted-foreground">
-              We have sent a confirmation email to your registered email address. Our team will review your application
-              and get back to you soon.
-            </p>
-          </CardContent>
-          <CardFooter className="flex justify-center">
-            <Link href="/">
-              <Button>
-                <ArrowLeft className="mr-2 h-4 w-4" /> Return to Home
-              </Button>
-            </Link>
-          </CardFooter>
-        </Card>
-      </div>
-    )
-  }
+  // Function to handle form submission.
+  const onSubmit = (data) => {
+    console.log("Form Data Submitted: ", data);
+    // You can add further processing logic here.
+  };
 
   return (
-    <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">PhD Application Form</h1>
-        <p className="text-xl text-muted-foreground">Complete the form below to apply for our PhD program.</p>
-      </div>
+    <div className="container mx-auto p-6 md:p-12">
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Application Form</h1>
 
-      <div className="max-w-4xl mx-auto">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="personal">Personal</TabsTrigger>
-                <TabsTrigger value="academic">Academic</TabsTrigger>
-                <TabsTrigger value="research">Research</TabsTrigger>
-                <TabsTrigger value="additional">Additional</TabsTrigger>
-              </TabsList>
-
-              {/* Personal Information */}
-              <TabsContent value="personal" className="space-y-6 mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>First Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="John" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+      {/* Wrap the form with FormProvider */}
+      <FormProvider {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="bg-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto space-y-6"
+        >
+          {/* Adhar Number */}
+          <FormField
+            name="adharNumber"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Adhar Number</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Adhar Number"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                  <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Last Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Doe" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
+
+          {/* Name */}
+          <FormField
+            name="name"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Name"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                </div>
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="john.doe@example.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+          {/* Email */}
+          <FormField
+            name="email"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Email"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
-                        <FormControl>
-                          <Input placeholder="+1 (555) 123-4567" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
+
+          {/* Age */}
+          <FormField
+  name="age"
+  render={({ field, fieldState }) => (
+    <FormItem>
+      <FormLabel>Age</FormLabel>
+      <FormControl>
+        <Input
+          type="number"
+          placeholder="Enter your Age"
+          {...field}
+          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+        />
+      </FormControl>
+      {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+    </FormItem>
+  )}
+/>
+
+
+          {/* Company */}
+          <FormField
+            name="company"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Company</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Company"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                </div>
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="dateOfBirth"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Date of Birth</FormLabel>
-                        <FormControl>
-                          <Input type="date" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+          {/* Experience */}
+         <FormField
+  name="experience"
+  render={({ field, fieldState }) => (
+    <FormItem>
+      <FormLabel>Experience (in years)</FormLabel>
+      <FormControl>
+        <Input
+          type="number"
+          placeholder="Enter your Experience"
+          {...field}
+          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+        />
+      </FormControl>
+      {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+    </FormItem>
+  )}
+/>
+
+
+          {/* Address */}
+          <FormField
+            name="address"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Address</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Address"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                  <FormField
-                    control={form.control}
-                    name="gender"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Gender</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select gender" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="male">Male</SelectItem>
-                            <SelectItem value="female">Female</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
+
+          {/* Highest Education */}
+          <FormField
+            name="highestEducation"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Highest Education</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Highest Education"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                </div>
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="nationality"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Nationality</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., United States" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+          {/* Mark */}
+          <FormField
+            name="mark"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Mark</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Mark"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
-                </div>
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
 
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Address</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Enter your full address" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          {/* Category */}
+          <FormField
+            name="category"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Category</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your Category"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                  />
+                </FormControl>
+                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+              </FormItem>
+            )}
+          />
 
-                <div className="flex justify-end">
-                  <Button type="button" onClick={() => nextTab("academic")}>
-                    Next <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </TabsContent>
+          {/* Distance */}
+          <FormField
+  name="distance"
+  render={({ field, fieldState }) => (
+    <FormItem>
+      <FormLabel>Distance</FormLabel>
+      <FormControl>
+        <Input
+          type="number"
+          placeholder="Enter your Distance"
+          {...field}
+          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+        />
+      </FormControl>
+      {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+    </FormItem>
+  )}
+/>
 
-              {/* Academic Information */}
-              <TabsContent value="academic" className="space-y-6 mt-6">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium">Bachelor's Degree</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="bachelorDegree"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Degree</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., B.Tech in Computer Science" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="bachelorInstitution"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Institution</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., MIT" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="bachelorYear"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Year of Completion</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., 2020" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="bachelorGrade"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Grade/CGPA</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., 3.8/4.0" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium">Master's Degree</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="masterDegree"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Degree</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., M.Tech in Computer Science" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="masterInstitution"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Institution</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., Stanford University" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="masterYear"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Year of Completion</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., 2022" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="masterGrade"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Grade/CGPA</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., 3.9/4.0" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
+         {/* Priority Choices Dropdown */}
+         {["1", "2", "3"].map((key) => (
+  <FormField
+    key={key}
+    name={`priorityChoices.${key}`}
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>Priority {key}</FormLabel>
+        <Select
+          value={field.value}
+          onValueChange={field.onChange}
+          defaultValue={field.value}
+        >
+          <FormControl>
+            <SelectTrigger>
+              <SelectValue placeholder={`Select Department for Priority ${key}`} />
+            </SelectTrigger>
+          </FormControl>
+          <SelectContent>
+            <SelectItem value="ME">ME</SelectItem>
+            <SelectItem value="EE">EE</SelectItem>
+            <SelectItem value="EC">EC</SelectItem>
+          </SelectContent>
+        </Select>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+))}
 
-                <div className="flex justify-between">
-                  <Button type="button" variant="outline" onClick={() => nextTab("personal")}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Previous
-                  </Button>
-                  <Button type="button" onClick={() => nextTab("research")}>
-                    Next <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </TabsContent>
 
-              {/* Research Information */}
-              <TabsContent value="research" className="space-y-6 mt-6">
-                <FormField
-                  control={form.control}
-                  name="department"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Department</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select department" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="computer-science">Computer Science & Engineering</SelectItem>
-                          <SelectItem value="electrical">Electrical Engineering</SelectItem>
-                          <SelectItem value="mechanical">Mechanical Engineering</SelectItem>
-                          <SelectItem value="civil">Civil Engineering</SelectItem>
-                          <SelectItem value="chemical">Chemical Engineering</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="researchArea"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Research Area of Interest</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., Machine Learning, Robotics" {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Specify your primary research interests within your chosen department.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="researchProposal"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Research Proposal Summary</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Briefly describe your research proposal"
-                          className="min-h-[200px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Provide a brief summary of your research proposal (minimum 100 characters).
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="flex justify-between">
-                  <Button type="button" variant="outline" onClick={() => nextTab("academic")}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Previous
-                  </Button>
-                  <Button type="button" onClick={() => nextTab("additional")}>
-                    Next <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </TabsContent>
-
-              {/* Additional Information */}
-              <TabsContent value="additional" className="space-y-6 mt-6">
-                <FormField
-                  control={form.control}
-                  name="fundingSource"
-                  render={({ field }) => (
-                    <FormItem className="space-y-3">
-                      <FormLabel>Funding Source</FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                          className="flex flex-col space-y-1"
-                        >
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="self" />
-                            </FormControl>
-                            <FormLabel className="font-normal">Self-funded</FormLabel>
-                          </FormItem>
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="scholarship" />
-                            </FormControl>
-                            <FormLabel className="font-normal">Applying for scholarship</FormLabel>
-                          </FormItem>
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="sponsorship" />
-                            </FormControl>
-                            <FormLabel className="font-normal">External sponsorship</FormLabel>
-                          </FormItem>
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="publications"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Publications (if any)</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="List your publications in standard format"
-                          className="min-h-[100px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription>List your publications in a standard format (optional).</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="agreeTerms"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                      <FormControl>
-                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>I agree to the terms and conditions</FormLabel>
-                        <FormDescription>
-                          By submitting this application, I certify that all information provided is accurate and
-                          complete.
-                        </FormDescription>
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="flex justify-between">
-                  <Button type="button" variant="outline" onClick={() => nextTab("research")}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Previous
-                  </Button>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting
-                      </>
-                    ) : (
-                      "Submit Application"
-                    )}
-                  </Button>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </form>
-        </Form>
-      </div>
+          <Button type="submit" className="w-full py-3 bg-primary text-white rounded-lg mt-8">
+            Submit
+          </Button>
+        </form>
+      </FormProvider>
     </div>
-  )
+  );
 }

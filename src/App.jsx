@@ -10,6 +10,7 @@
   import Admission from './app/Admission';
   import Eligibility from './app/Eligibility';
   import Forms from './app/Forms';
+import Apply from './app/Apply';
 
   const App = () => {
     return (
@@ -22,6 +23,7 @@
           <Route path="/programs" element={<Home />} />
           <Route path="/admission" element={<Admission />} />
           <Route path="/eligibility" element={<Eligibility />} />
+          <Route path="/apply" element={<Apply />} />
           <Route path="/forms" element={<Forms />} />
         </Routes>
         <Footer />

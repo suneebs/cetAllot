@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -11,7 +11,7 @@ const navigation = [
   { name: "Admission", href: "/admission" },
   { name: "Eligibility", href: "/eligibility" },
   { name: "Forms", href: "/forms" },
-  { name: "Contact`", href: "/contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -20,7 +20,8 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const pathname = location.pathname;
- useEffect(() => {
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
         setScrollingDown(true);
@@ -35,33 +36,24 @@ export default function Navbar() {
 
   return (
     <header
-  className={`bg-background sticky top-0 z-50 border-b transition-transform duration-300 ${
-    scrollingDown ? "-translate-y-full" : "translate-y-0"
-  }`}
->
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
-          <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-            <span className="font-bold text-2xl">CET</span>
-            <span className="text-sm font-semibold hidden sm:inline-block">PhD Admissions</span>
-          </Link>
-        </div>
-        <div className="flex lg:hidden">
-          <Button
-            variant="ghost"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <Menu className="h-6 w-6" aria-hidden="true" />
-          </Button>
-        </div>
-        <div className="hidden lg:flex lg:gap-x-8">
+      className={`bg-background/90 backdrop-blur-md sticky top-0 z-50 shadow-sm transition-transform duration-300 ${
+        scrollingDown ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <span className="font-bold text-2xl">CET</span>
+          <span className="text-sm font-semibold hidden sm:inline">PhD Admissions</span>
+        </Link>
+
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-6">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className={`text-sm font-semibold leading-6 ${
+              className={`text-sm font-medium transition-colors ${
                 pathname === item.href ? "text-primary font-bold" : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -69,62 +61,77 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
+
+        {/* Desktop buttons */}
+        <div className="hidden lg:flex items-center gap-3">
           <ThemeToggle />
           <Link to="/apply">
-            <Button>Apply Now</Button>
+            <Button size="sm">Apply Now</Button>
           </Link>
           <Link to="/admin">
-            <Button variant="outline">Admin Login</Button>
+            <Button variant="outline" size="sm">
+              Admin Login
+            </Button>
           </Link>
+        </div>
+
+        {/* Mobile menu button */}
+        <div className="lg:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-md"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-background/95">
-          <div className="fixed inset-0 flex">
-            <div className="w-full">
-              <div className="flex items-center justify-between p-4">
-                <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-                  <span className="font-bold text-2xl">CET</span>
-                  <span className="text-sm font-semibold">PhD Admissions</span>
-                </Link>
-                <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="sr-only">Close menu</span>
-                  <X className="h-6 w-6" aria-hidden="true" />
+        <div className="lg:hidden fixed inset-0 z-50 bg-background/95 backdrop-blur-md animate-fadeIn">
+          <div className="flex justify-between items-center px-4 py-3 border-b border-muted">
+            <Link to="/" className="flex items-center gap-2">
+              <span className="font-bold text-2xl">CET</span>
+              <span className="text-sm font-semibold">PhD Admissions</span>
+            </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
+
+          <div className="px-6 py-4 space-y-4">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`block text-base font-medium transition-colors ${
+                  pathname === item.href
+                    ? "text-primary font-bold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            <div className="mt-6 flex flex-col gap-3">
+              <Link to="/apply" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full">Apply Now</Button>
+              </Link>
+              <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="outline" className="w-full">
+                  Admin Login
                 </Button>
-              </div>
-              <div className="mt-6 flow-root">
-                <div className="space-y-2 py-6 px-4">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 ${
-                        pathname === item.href
-                          ? "text-primary font-bold"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                  <div className="flex flex-col gap-2 mt-4">
-                    <Link to="/apply" onClick={() => setMobileMenuOpen(false)}>
-                      <Button className="w-full">Apply Now</Button>
-                    </Link>
-                    <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="outline" className="w-full">
-                        Admin Login
-                      </Button>
-                    </Link>
-                    <div className="flex justify-center mt-2">
-                      <ThemeToggle />
-                    </div>
-                  </div>
-                </div>
+              </Link>
+              <div className="flex justify-center mt-2">
+                <ThemeToggle />
               </div>
             </div>
           </div>

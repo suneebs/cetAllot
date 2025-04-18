@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, CheckCircle, FileText, GraduationCap, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  ArrowRight,
+  Calendar,
+  CheckCircle,
+  FileText,
+  GraduationCap,
+  Users,
+} from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/Accordion";
 
 export default function Admission() {
   return (
@@ -10,7 +22,8 @@ export default function Admission() {
       <div className="max-w-3xl mx-auto text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">PhD Admission Process</h1>
         <p className="text-xl text-muted-foreground">
-          Our streamlined admission process is designed to identify and support the most promising researchers.
+          Our streamlined admission process is designed to identify and support
+          the most promising researchers.
         </p>
       </div>
 
@@ -19,12 +32,14 @@ export default function Admission() {
         {[
           {
             title: "1. Application",
-            description: "Submit your online application with all required documents.",
+            description:
+              "Submit your online application with all required documents.",
             icon: <Calendar className="h-10 w-10 text-primary" />,
           },
           {
             title: "2. Review",
-            description: "Applications are reviewed by the departmental committee.",
+            description:
+              "Applications are reviewed by the departmental committee.",
             icon: <CheckCircle className="h-10 w-10 text-primary" />,
           },
           {
@@ -119,7 +134,10 @@ export default function Admission() {
               { date: "June 30, 2024", event: "Confirmation Deadline" },
               { date: "August 1, 2024", event: "Program Commencement" },
             ].map((item, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 rounded-lg border bg-card">
+              <div
+                key={index}
+                className="flex items-start gap-4 p-4 rounded-lg border bg-card"
+              >
                 <div className="min-w-[120px] font-semibold">{item.date}</div>
                 <div>{item.event}</div>
               </div>
@@ -134,28 +152,36 @@ export default function Admission() {
         <Accordion type="single" collapsible className="w-full">
           {[
             {
-              question: "What is the minimum eligibility criteria for PhD admission?",
-              answer: "Candidates must have a Master's degree in the relevant field with at least 60% marks or equivalent CGPA from a recognized university.",
+              question:
+                "What is the minimum eligibility criteria for PhD admission?",
+              answer:
+                "Candidates must have a Master's degree in the relevant field with at least 60% marks or equivalent CGPA from a recognized university.",
             },
             {
               question: "Is there an entrance examination for PhD admission?",
-              answer: "Yes, shortlisted candidates will need to appear for a written entrance examination followed by an interview.",
+              answer:
+                "Yes, shortlisted candidates will need to appear for a written entrance examination followed by an interview.",
             },
             {
               question: "What is the duration of the PhD program?",
-              answer: "The minimum duration is 3 years and the maximum is 6 years.",
+              answer:
+                "The minimum duration is 3 years and the maximum is 6 years.",
             },
             {
-              question: "Are there any scholarships available for PhD students?",
-              answer: "Yes, the college offers various scholarships and research assistantships based on merit and need.",
+              question:
+                "Are there any scholarships available for PhD students?",
+              answer:
+                "Yes, the college offers various scholarships and research assistantships based on merit and need.",
             },
             {
               question: "Can I apply for multiple departments?",
-              answer: "Yes, you can apply for up to two departments, but you will need to submit separate applications for each.",
+              answer:
+                "Yes, you can apply for up to two departments, but you will need to submit separate applications for each.",
             },
             {
               question: "Is there a provision for part-time PhD?",
-              answer: "Yes, working professionals can apply for part-time PhD programs, subject to certain conditions.",
+              answer:
+                "Yes, working professionals can apply for part-time PhD programs, subject to certain conditions.",
             },
           ].map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
@@ -168,9 +194,12 @@ export default function Admission() {
 
       {/* CTA */}
       <div className="text-center mt-12">
-        <h2 className="text-2xl font-bold mb-4">Ready to Begin Your Research Journey?</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Ready to Begin Your Research Journey?
+        </h2>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          Join our vibrant community of researchers and make significant contributions to your field.
+          Join our vibrant community of researchers and make significant
+          contributions to your field.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/apply">

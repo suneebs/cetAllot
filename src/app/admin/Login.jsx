@@ -1,16 +1,30 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { ArrowRight, Loader2, Lock, User } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { FormProvider } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { ArrowRight, Loader2, Lock, User } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
+import { FormProvider } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -19,11 +33,11 @@ const formSchema = z.object({
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
-})
+});
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -31,25 +45,25 @@ export default function Login() {
       email: "",
       password: "",
     },
-  })
+  });
 
-  const navigate = useNavigate();  // Move this inside the component function
+  const navigate = useNavigate(); // Move this inside the component function
 
   function onSubmit(values) {
-    setIsLoading(true)
-    setError("")
-  
+    setIsLoading(true);
+    setError("");
+
     // Simulate API call
     setTimeout(() => {
       if (values.email === "admin@cet.edu" && values.password === "admin123") {
-        navigate("/admin/dashboard")
+        navigate("/admin/dashboard");
       } else {
-        setError("Invalid email or password")
-        setIsLoading(false)
+        setError("Invalid email or password");
+        setIsLoading(false);
       }
-    }, 2000)
+    }, 2000);
   }
-  
+
   return (
     <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
       <Card className="w-full max-w-md">
@@ -60,8 +74,7 @@ export default function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-        <FormProvider {...form}>
-        
+          <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
@@ -72,7 +85,11 @@ export default function Login() {
                     <FormControl>
                       <div className="relative">
                         <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input placeholder="admin@cet.edu" className="pl-10" {...field} />
+                        <Input
+                          placeholder="admin@cet.edu"
+                          className="pl-10"
+                          {...field}
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -88,18 +105,26 @@ export default function Login() {
                     <FormControl>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input type="password" placeholder="******" className="pl-10" {...field} />
+                        <Input
+                          type="password"
+                          placeholder="******"
+                          className="pl-10"
+                          {...field}
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {error && <p className="text-sm font-medium text-destructive">{error}</p>}
+              {error && (
+                <p className="text-sm font-medium text-destructive">{error}</p>
+              )}
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Logging in...
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Logging
+                    in...
                   </>
                 ) : (
                   <>
@@ -108,7 +133,7 @@ export default function Login() {
                 )}
               </Button>
             </form>
-            </FormProvider>
+          </FormProvider>
         </CardContent>
         <CardFooter className="flex flex-col">
           <p className="text-xs text-center text-muted-foreground mt-4">
@@ -117,5 +142,5 @@ export default function Login() {
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }

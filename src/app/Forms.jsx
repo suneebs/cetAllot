@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 
 import { ArrowDown, ArrowRight, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/Button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 
 export default function Forms() {
   const forms = [
@@ -69,7 +76,8 @@ export default function Forms() {
       <div className="max-w-3xl mx-auto text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Downloadable Forms</h1>
         <p className="text-xl text-muted-foreground">
-          Download all the necessary forms and templates for your PhD application.
+          Download all the necessary forms and templates for your PhD
+          application.
         </p>
       </div>
 
@@ -112,12 +120,15 @@ export default function Forms() {
         <Card>
           <CardHeader>
             <CardTitle>Online Application</CardTitle>
-            <CardDescription>You can also apply online without downloading any forms.</CardDescription>
+            <CardDescription>
+              You can also apply online without downloading any forms.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              Our online application system allows you to complete your application entirely online. You can save your
-              progress and return to complete it later.
+              Our online application system allows you to complete your
+              application entirely online. You can save your progress and return
+              to complete it later.
             </p>
             <Link href="/apply">
               <Button className="gap-2">
@@ -132,11 +143,15 @@ export default function Forms() {
         <Card>
           <CardHeader>
             <CardTitle>Need Help?</CardTitle>
-            <CardDescription>Contact our admissions office if you need assistance with any forms.</CardDescription>
+            <CardDescription>
+              Contact our admissions office if you need assistance with any
+              forms.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              If you have any questions about the application forms or process, our admissions team is here to help.
+              If you have any questions about the application forms or process,
+              our admissions team is here to help.
             </p>
             <Link href="/contact">
               <Button variant="outline" className="gap-2">

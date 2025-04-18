@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle, XCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/Button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
 export default function Eligibility() {
   return (
@@ -25,7 +31,9 @@ export default function Eligibility() {
           <Card>
             <CardHeader>
               <CardTitle>Academic Requirements</CardTitle>
-              <CardDescription>Basic academic qualifications required for all PhD applicants</CardDescription>
+              <CardDescription>
+                Basic academic qualifications required for all PhD applicants
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {[
@@ -46,7 +54,8 @@ export default function Eligibility() {
                 },
                 {
                   title: "Research Proposal",
-                  description: "A well-defined research proposal in the area of interest.",
+                  description:
+                    "A well-defined research proposal in the area of interest.",
                 },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2">
@@ -63,7 +72,9 @@ export default function Eligibility() {
           <Card>
             <CardHeader>
               <CardTitle>Experience Requirements</CardTitle>
-              <CardDescription>Professional experience considerations</CardDescription>
+              <CardDescription>
+                Professional experience considerations
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {[
@@ -100,8 +111,9 @@ export default function Eligibility() {
                 <div>
                   <p className="font-medium">No Age Limit</p>
                   <p className="text-muted-foreground">
-                    There is no upper age limit for PhD admission. However, candidates must be at least 21 years of age
-                    at the time of application.
+                    There is no upper age limit for PhD admission. However,
+                    candidates must be at least 21 years of age at the time of
+                    application.
                   </p>
                 </div>
               </div>
@@ -114,7 +126,8 @@ export default function Eligibility() {
           {[
             {
               title: "Computer Science & Engineering",
-              description: "Specific requirements for Computer Science PhD applicants",
+              description:
+                "Specific requirements for Computer Science PhD applicants",
               points: [
                 {
                   title: "Master's Specialization",
@@ -135,7 +148,8 @@ export default function Eligibility() {
             },
             {
               title: "Electrical Engineering",
-              description: "Specific requirements for Electrical Engineering PhD applicants",
+              description:
+                "Specific requirements for Electrical Engineering PhD applicants",
               points: [
                 {
                   title: "Master's Specialization",
@@ -156,7 +170,8 @@ export default function Eligibility() {
             },
             {
               title: "Mechanical Engineering",
-              description: "Specific requirements for Mechanical Engineering PhD applicants",
+              description:
+                "Specific requirements for Mechanical Engineering PhD applicants",
               points: [
                 {
                   title: "Master's Specialization",
@@ -170,7 +185,8 @@ export default function Eligibility() {
                 },
                 {
                   title: "Design Experience",
-                  description: "Experience in mechanical design, analysis, or experimental work.",
+                  description:
+                    "Experience in mechanical design, analysis, or experimental work.",
                 },
               ],
             },
@@ -199,7 +215,8 @@ export default function Eligibility() {
       <div className="text-center mt-12">
         <h2 className="text-2xl font-bold mb-4">Ready to Apply?</h2>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          If you meet the eligibility criteria, we encourage you to apply to our PhD program.
+          If you meet the eligibility criteria, we encourage you to apply to our
+          PhD program.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/apply">

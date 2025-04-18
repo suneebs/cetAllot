@@ -8,17 +8,17 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form"; 
+} from "@/components/ui/Form";
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/Select";
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 
 // Define the Zod schema for validation.
 const FormSchema = z.object({
@@ -49,11 +49,9 @@ const FormSchema = z.object({
 
   category: z.string().min(1, "Category is required"),
 
-  distance: z
-    .string()
-    .refine((val) => !isNaN(val) && Number(val) <= 75, {
-      message: "Distance must be less than or equal to 75",
-    }),
+  distance: z.string().refine((val) => !isNaN(val) && Number(val) <= 75, {
+    message: "Distance must be less than or equal to 75",
+  }),
 
   priorityChoices: z
     .object({
@@ -61,12 +59,15 @@ const FormSchema = z.object({
       2: z.string().min(1, "Priority choice 2 is required"),
       3: z.string().min(1, "Priority choice 3 is required"),
     })
-    .refine((data) => {
-      const priorities = [data[1], data[2], data[3]];
-      return new Set(priorities).size === priorities.length; // Check if priorities are unique
-    }, {
-      message: "Priority choices must be unique",
-    }),
+    .refine(
+      (data) => {
+        const priorities = [data[1], data[2], data[3]];
+        return new Set(priorities).size === priorities.length; // Check if priorities are unique
+      },
+      {
+        message: "Priority choices must be unique",
+      }
+    ),
 });
 
 // Initial form data.
@@ -99,7 +100,9 @@ export default function Apply() {
 
   return (
     <div className="container mx-auto p-6 md:p-12">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Application Form</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+        Application Form
+      </h1>
 
       {/* Wrap the form with FormProvider */}
       <FormProvider {...form}>
@@ -120,7 +123,9 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
@@ -138,7 +143,9 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
@@ -156,30 +163,33 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
 
           {/* Age */}
           <FormField
-  name="age"
-  render={({ field, fieldState }) => (
-    <FormItem>
-      <FormLabel>Age</FormLabel>
-      <FormControl>
-        <Input
-          type="number"
-          placeholder="Enter your Age"
-          {...field}
-          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-        />
-      </FormControl>
-      {fieldState?.error && <FormMessage message={fieldState.error.message} />}
-    </FormItem>
-  )}
-/>
-
+            name="age"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Age</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter your Age"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                  />
+                </FormControl>
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
+              </FormItem>
+            )}
+          />
 
           {/* Company */}
           <FormField
@@ -194,30 +204,33 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
 
           {/* Experience */}
-         <FormField
-  name="experience"
-  render={({ field, fieldState }) => (
-    <FormItem>
-      <FormLabel>Experience (in years)</FormLabel>
-      <FormControl>
-        <Input
-          type="number"
-          placeholder="Enter your Experience"
-          {...field}
-          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-        />
-      </FormControl>
-      {fieldState?.error && <FormMessage message={fieldState.error.message} />}
-    </FormItem>
-  )}
-/>
-
+          <FormField
+            name="experience"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Experience (in years)</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter your Experience"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                  />
+                </FormControl>
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
+              </FormItem>
+            )}
+          />
 
           {/* Address */}
           <FormField
@@ -232,7 +245,9 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
@@ -250,7 +265,9 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
@@ -268,7 +285,9 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
@@ -286,63 +305,70 @@ export default function Apply() {
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 </FormControl>
-                {fieldState?.error && <FormMessage message={fieldState.error.message} />}
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
               </FormItem>
             )}
           />
 
           {/* Distance */}
           <FormField
-  name="distance"
-  render={({ field, fieldState }) => (
-    <FormItem>
-      <FormLabel>Distance</FormLabel>
-      <FormControl>
-        <Input
-          type="number"
-          placeholder="Enter your Distance"
-          {...field}
-          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-        />
-      </FormControl>
-      {fieldState?.error && <FormMessage message={fieldState.error.message} />}
-    </FormItem>
-  )}
-/>
+            name="distance"
+            render={({ field, fieldState }) => (
+              <FormItem>
+                <FormLabel>Distance</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter your Distance"
+                    {...field}
+                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                  />
+                </FormControl>
+                {fieldState?.error && (
+                  <FormMessage message={fieldState.error.message} />
+                )}
+              </FormItem>
+            )}
+          />
 
+          {/* Priority Choices Dropdown */}
+          {["1", "2", "3"].map((key) => (
+            <FormField
+              key={key}
+              name={`priorityChoices.${key}`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Priority {key}</FormLabel>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          placeholder={`Select Department for Priority ${key}`}
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="ME">ME</SelectItem>
+                      <SelectItem value="EE">EE</SelectItem>
+                      <SelectItem value="EC">EC</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
 
-         {/* Priority Choices Dropdown */}
-         {["1", "2", "3"].map((key) => (
-  <FormField
-    key={key}
-    name={`priorityChoices.${key}`}
-    render={({ field }) => (
-      <FormItem>
-        <FormLabel>Priority {key}</FormLabel>
-        <Select
-          value={field.value}
-          onValueChange={field.onChange}
-          defaultValue={field.value}
-        >
-          <FormControl>
-            <SelectTrigger>
-              <SelectValue placeholder={`Select Department for Priority ${key}`} />
-            </SelectTrigger>
-          </FormControl>
-          <SelectContent>
-            <SelectItem value="ME">ME</SelectItem>
-            <SelectItem value="EE">EE</SelectItem>
-            <SelectItem value="EC">EC</SelectItem>
-          </SelectContent>
-        </Select>
-        <FormMessage />
-      </FormItem>
-    )}
-  />
-))}
-
-
-          <Button type="submit" className="w-full py-3 bg-primary text-white rounded-lg mt-8">
+          <Button
+            type="submit"
+            className="w-full py-3 bg-primary text-white rounded-lg mt-8"
+          >
             Submit
           </Button>
         </form>

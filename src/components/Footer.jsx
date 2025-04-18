@@ -6,26 +6,26 @@ export default function Footer() {
     <footer className="bg-muted">
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          <a href="https://www.facebook.com/CollegeOfEngineeringTrivandrum/" className="text-muted-foreground hover:text-foreground">
             <span className="sr-only">Facebook</span>
             <Facebook className="h-5 w-5" />
           </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          <a href="https://www.instagram.com/cetians_/?hl=" className="text-muted-foreground hover:text-foreground">
             <span className="sr-only">Instagram</span>
             <Instagram className="h-5 w-5" />
           </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          <a href="https://x.com/cet_trivandrum" className="text-muted-foreground hover:text-foreground">
             <span className="sr-only">Twitter</span>
             <Twitter className="h-5 w-5" />
           </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground">
+          <a href="https://in.linkedin.com/school/college-of-engineering-trivandrum/" className="text-muted-foreground hover:text-foreground">
             <span className="sr-only">LinkedIn</span>
             <Linkedin className="h-5 w-5" />
           </a>
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
           <p className="text-center text-xs leading-5 text-muted-foreground">
-            &copy; {new Date().getFullYear()} College of Engineering and Technology. All rights reserved.
+            &copy; {new Date().getFullYear()} College of Engineering Trivandrum. All rights reserved.
           </p>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="mt-8 text-xs leading-5 text-muted-foreground md:order-1 md:mt-0">
-            Designed and developed by CET IT Department
+            Designed and Developed by CET MCA Department
           </p>
         </div>
       </div>

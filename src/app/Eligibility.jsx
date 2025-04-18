@@ -15,10 +15,9 @@ export default function Eligibility() {
       </div>
 
       <Tabs defaultValue="general" className="max-w-4xl mx-auto">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="general">General Criteria</TabsTrigger>
           <TabsTrigger value="department">Department-Specific</TabsTrigger>
-          <TabsTrigger value="international">International Students</TabsTrigger>
         </TabsList>
 
         {/* General Criteria Tab */}
@@ -194,79 +193,6 @@ export default function Eligibility() {
               </CardContent>
             </Card>
           ))}
-        </TabsContent>
-
-        {/* International Students Tab */}
-        <TabsContent value="international" className="space-y-6 mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Additional Requirements for International Students</CardTitle>
-              <CardDescription>Special requirements for applicants from outside the country</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {[
-                {
-                  title: "English Proficiency",
-                  description: "TOEFL score of at least 80 (iBT) or IELTS score of at least 6.5 or equivalent.",
-                },
-                {
-                  title: "Degree Equivalence",
-                  description:
-                    "Foreign degrees must be recognized as equivalent to Indian degrees by the Association of Indian Universities (AIU) or other authorized bodies.",
-                },
-                {
-                  title: "Visa Requirements",
-                  description: "Valid student visa for the entire duration of the PhD program.",
-                },
-                {
-                  title: "Financial Support",
-                  description: "Proof of financial support or scholarship for the duration of the program.",
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Scholarships for International Students</CardTitle>
-              <CardDescription>Financial aid opportunities for international applicants</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {[
-                {
-                  title: "CET International Scholarship",
-                  description:
-                    "Merit-based scholarship covering tuition fees and providing a monthly stipend for outstanding international applicants.",
-                },
-                {
-                  title: "Government Scholarships",
-                  description:
-                    "Various government-sponsored scholarships for international students from specific countries.",
-                },
-                {
-                  title: "Research Assistantships",
-                  description:
-                    "Opportunities to work as research assistants with faculty members on funded projects.",
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
         </TabsContent>
       </Tabs>
 

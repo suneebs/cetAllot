@@ -168,7 +168,7 @@ body {
   
 }
 
-@layer components {
+/* @layer components {
   .mobile-menu {
     background-color: var(--primary);
     color: var(--primary-foreground);
@@ -182,4 +182,4 @@ body {
     opacity: 0.8;
     transition: opacity 0.3s;
   }
-}
+} */

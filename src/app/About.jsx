@@ -38,7 +38,7 @@ export default function About() {
             </div>
           </div>
           <div className="order-1 lg:order-2 relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-            <img src="/placeholder.svg" alt="CET Campus" className="object-cover w-full h-full" />
+            <img src="/photo.webp" alt="CET Campus" className="object-cover w-full h-full" />
           </div>
         </div>
       </section>

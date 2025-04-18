@@ -1,4 +1,14 @@
 "use client";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix for default marker icon issue in React
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+
 
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,6 +42,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+
+
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -155,11 +175,19 @@ export default function Contact() {
 
           {/* Map Placeholder */}
           <div className="mt-8 rounded-lg overflow-hidden h-[300px] border">
-            <div className="w-full h-full bg-muted flex items-center justify-center">
-              <p className="text-muted-foreground">Interactive Map Would Be Embedded Here</p>
-            </div>
+      <MapContainer center={[51.505, -0.09]} zoom={13} className="w-full h-full">
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[51.505, -0.09]}>
+          <Popup>
+            A sample location! 🌍
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
           </div>
-        </div>
 
         {/* Contact Form */}
         <div>

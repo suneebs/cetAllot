@@ -1,69 +1,69 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, GraduationCap, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabList, TabPanel, Tab } from "@headlessui/react"; // Use @headlessui/react for tabs
+import { Link } from 'react-router-dom';
+import { ArrowRight, BookOpen, GraduationCap, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Programs() {
   const programs = [
     {
-      id: "computer-science-engineering",
-      title: "Computer Science & Engineering",
-      description: "Research in AI, machine learning, cybersecurity, and more.",
+      id: 'computer-science-engineering',
+      title: 'Computer Science & Engineering',
+      description: 'Research in AI, machine learning, cybersecurity, and more.',
       icon: <BookOpen className="h-10 w-10 text-primary" />,
-      image: "/placeholder.svg?height=300&width=500",
+      image: '/cet2.jpeg?height=300&width=500',
       areas: [
-        "Artificial Intelligence and Machine Learning",
-        "Cybersecurity and Network Security",
-        "Big Data Analytics and Cloud Computing",
-        "Computer Vision and Image Processing",
-        "Internet of Things (IoT)",
-        "Human-Computer Interaction",
+        'Artificial Intelligence and Machine Learning',
+        'Cybersecurity and Network Security',
+        'Big Data Analytics and Cloud Computing',
+        'Computer Vision and Image Processing',
+        'Internet of Things (IoT)',
+        'Human-Computer Interaction',
       ],
       faculty: [
-        { name: "Dr. Sarah Johnson", specialization: "AI and Machine Learning" },
-        { name: "Dr. Michael Chen", specialization: "Cybersecurity" },
-        { name: "Dr. Emily Rodriguez", specialization: "Computer Vision" },
+        { name: 'Dr. Sarah Johnson', specialization: 'AI and Machine Learning' },
+        { name: 'Dr. Michael Chen', specialization: 'Cybersecurity' },
+        { name: 'Dr. Emily Rodriguez', specialization: 'Computer Vision' },
       ],
     },
     {
-      id: "electrical-engineering",
-      title: "Electrical Engineering",
-      description: "Advanced research in power systems, communications, and electronics.",
+      id: 'electrical-engineering',
+      title: 'Electrical Engineering',
+      description: 'Advanced research in power systems, communications, and electronics.',
       icon: <GraduationCap className="h-10 w-10 text-primary" />,
-      image: "/placeholder.svg?height=300&width=500",
+      image: '/cet.png?height=300&width=500',
       areas: [
-        "Power Systems and Smart Grid",
-        "Renewable Energy Systems",
-        "Communication Systems",
-        "Signal Processing",
-        "VLSI Design",
-        "Control Systems",
+        'Power Systems and Smart Grid',
+        'Renewable Energy Systems',
+        'Communication Systems',
+        'Signal Processing',
+        'VLSI Design',
+        'Control Systems',
       ],
       faculty: [
-        { name: "Dr. Robert Williams", specialization: "Power Systems" },
-        { name: "Dr. Lisa Kumar", specialization: "Communication Systems" },
-        { name: "Dr. James Lee", specialization: "VLSI Design" },
+        { name: 'Dr. Robert Williams', specialization: 'Power Systems' },
+        { name: 'Dr. Lisa Kumar', specialization: 'Communication Systems' },
+        { name: 'Dr. James Lee', specialization: 'VLSI Design' },
       ],
     },
     {
-      id: "mechanical-engineering",
-      title: "Mechanical Engineering",
-      description: "Innovations in thermal sciences, manufacturing, and robotics.",
+      id: 'mechanical-engineering',
+      title: 'Mechanical Engineering',
+      description: 'Innovations in thermal sciences, manufacturing, and robotics.',
       icon: <Users className="h-10 w-10 text-primary" />,
-      image: "/placeholder.svg?height=300&width=500",
+      image: '/cett.webp?height=300&width=500',
       areas: [
-        "Thermal and Fluid Sciences",
-        "Manufacturing Engineering",
-        "Robotics and Automation",
-        "Materials Science",
-        "Computational Mechanics",
-        "Energy Systems",
+        'Thermal and Fluid Sciences',
+        'Manufacturing Engineering',
+        'Robotics and Automation',
+        'Materials Science',
+        'Computational Mechanics',
+        'Energy Systems',
       ],
       faculty: [
-        { name: "Dr. Thomas Brown", specialization: "Thermal Sciences" },
-        { name: "Dr. Anita Patel", specialization: "Robotics" },
-        { name: "Dr. David Wilson", specialization: "Materials Science" },
+        { name: 'Dr. Thomas Brown', specialization: 'Thermal Sciences' },
+        { name: 'Dr. Anita Patel', specialization: 'Robotics' },
+        { name: 'Dr. David Wilson', specialization: 'Materials Science' },
       ],
     },
   ];
@@ -92,30 +92,34 @@ export default function Programs() {
                 </Link>
               </div>
               <div className="order-1 lg:order-2 relative h-[300px] rounded-lg overflow-hidden shadow-lg">
-                <img src={program.image || "/placeholder.svg"} alt={program.title} className="object-cover w-full h-full" />
+                <img
+                  src={program.image || '/placeholder.svg'}
+                  alt={program.title}
+                  className="object-cover w-full h-full"
+                />
               </div>
             </div>
 
-            <Tabs>
-              <TabList className="grid w-full grid-cols-3">
-                <Tab>Research Areas</Tab>
-                <Tab>Faculty</Tab>
-                <Tab>Requirements</Tab>
-              </TabList>
+            <Tabs defaultValue="areas" className="mt-8">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="areas">Research Areas</TabsTrigger>
+                <TabsTrigger value="faculty">Faculty</TabsTrigger>
+                <TabsTrigger value="requirements">Requirements</TabsTrigger>
+              </TabsList>
 
-              <TabPanel className="p-4 border rounded-lg mt-2">
+              <TabsContent value="areas" className="p-4 border rounded-lg mt-2">
                 <h3 className="text-xl font-semibold mb-4">Research Areas</h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {program.areas.map((area, index) => (
                     <li key={index} className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-primary"></div>
+                      <div className="h-2 w-2 rounded-full bg-primary" />
                       {area}
                     </li>
                   ))}
                 </ul>
-              </TabPanel>
+              </TabsContent>
 
-              <TabPanel className="p-4 border rounded-lg mt-2">
+              <TabsContent value="faculty" className="p-4 border rounded-lg mt-2">
                 <h3 className="text-xl font-semibold mb-4">Faculty Members</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {program.faculty.map((faculty, index) => (
@@ -127,14 +131,16 @@ export default function Programs() {
                     </Card>
                   ))}
                 </div>
-              </TabPanel>
+              </TabsContent>
 
-              <TabPanel className="p-4 border rounded-lg mt-2">
+              <TabsContent value="requirements" className="p-4 border rounded-lg mt-2">
                 <h3 className="text-xl font-semibold mb-4">Program Requirements</h3>
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-medium">Coursework</h4>
-                    <p className="text-muted-foreground">Minimum of 18 credit hours of graduate-level courses.</p>
+                    <p className="text-muted-foreground">
+                      Minimum of 18 credit hours of graduate-level courses.
+                    </p>
                   </div>
                   <div>
                     <h4 className="font-medium">Qualifying Examination</h4>
@@ -155,10 +161,10 @@ export default function Programs() {
                     </p>
                   </div>
                 </div>
-              </TabPanel>
+              </TabsContent>
             </Tabs>
 
-            <div className="border-b my-12"></div>
+            <div className="border-b my-12" />
           </section>
         ))}
       </div>

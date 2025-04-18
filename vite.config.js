@@ -15,4 +15,9 @@ export default defineConfig({
     host: true,       // expose to network
     port: 5173,       // (optional) default is 5173
   },
+  // server: {
+  //   host: '0.0.0.0', //  Binds to all network interfaces
+  //   port: 5173,
+  // }
+  
 })

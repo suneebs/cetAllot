@@ -12,7 +12,7 @@ const navigation = [
   { name: "Eligibility", href: "/eligibility" },
   { name: "Forms", href: "/forms" },
   { name: "Contact", href: "/contact" },
-];
+];  
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -64,7 +64,7 @@ export default function Navbar() {
 
         {/* Desktop buttons */}
         <div className="hidden lg:flex items-center gap-3">
-          <ThemeToggle />
+      
           <Link to="/apply">
             <Button size="sm">Apply Now</Button>
           </Link>
@@ -131,7 +131,7 @@ export default function Navbar() {
                 </Button>
               </Link>
               <div className="flex justify-center mt-2">
-                <ThemeToggle />
+              
               </div>
             </div>
           </div>

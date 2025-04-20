@@ -20,6 +20,9 @@ import {
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
+import { toast, ToastContainer } from "react-toastify"; // Fix: Import toast correctly
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+
 // Define the Zod schema for validation.
 const FormSchema = z.object({
   adharNumber: z
@@ -94,8 +97,15 @@ export default function Apply() {
 
   // Function to handle form submission.
   const onSubmit = (data) => {
+    const confirmed = window.confirm(
+      "Are you sure all fields are filled in correctly?"
+    );
+    if (!confirmed) {
+      return; // Cancel submission if not confirmed
+    }
+
     console.log("Form Data Submitted: ", data);
-    // You can add further processing logic here.
+    toast.success("Your submission was successful!");
   };
 
   return (
@@ -118,6 +128,7 @@ export default function Apply() {
                 <FormLabel>Adhar Number</FormLabel>
                 <FormControl>
                   <Input
+                    type="number"
                     placeholder="Enter your Adhar Number"
                     {...field}
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
@@ -277,9 +288,11 @@ export default function Apply() {
             name="mark"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Mark</FormLabel>
+                <FormLabel>Mark (in %)</FormLabel>
                 <FormControl>
                   <Input
+                    type="number"
+                    step="0.01" // Allows decimal values
                     placeholder="Enter your Mark"
                     {...field}
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
@@ -299,11 +312,19 @@ export default function Apply() {
               <FormItem>
                 <FormLabel>Category</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your Category"
-                    {...field}
-                    className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-                  />
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="SC">SC</SelectItem>
+                      <SelectItem value="ST">ST</SelectItem>
+                      <SelectItem value="OBC">OBC</SelectItem>
+                      <SelectItem value="General">General</SelectItem>
+                      <SelectItem value="OEC">OEC</SelectItem>
+                      <SelectItem value="Others">Others</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 {fieldState?.error && (
                   <FormMessage message={fieldState.error.message} />
@@ -317,7 +338,7 @@ export default function Apply() {
             name="distance"
             render={({ field, fieldState }) => (
               <FormItem>
-                <FormLabel>Distance</FormLabel>
+                <FormLabel>Distance (in km)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -373,6 +394,7 @@ export default function Apply() {
           </Button>
         </form>
       </FormProvider>
+      <ToastContainer />
     </div>
   );
 }

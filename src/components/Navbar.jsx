@@ -119,7 +119,7 @@ export default function Navbar() {
             <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
               <span className="font-bold text-2xl">CET</span>
               <span className="text-sm font-semibold hidden sm:inline-block">
-                PhD Admissions
+                BTech Admission
               </span>
             </Link>
           </div>
@@ -180,11 +180,11 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="font-bold text-2xl">CET</span>
-                <span className="text-sm font-semibold">PhD Admissions</span>
+                <span className="text-sm font-semibold">BTech Admissions</span>
               </Link>
               <Button
                 variant="ghost"
-                className="-m-2.5 rounded-md p-2.5"
+                className="-m-2.5 rounded--2.5"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>

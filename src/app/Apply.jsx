@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, FormProvider } from "react-hook-form"; // Import FormProvider
+import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -20,8 +20,8 @@ import {
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
-import { toast, ToastContainer } from "react-toastify"; // Fix: Import toast correctly
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Define the Zod schema for validation.
 const FormSchema = z.object({
@@ -101,7 +101,7 @@ export default function Apply() {
       "Are you sure all fields are filled in correctly?"
     );
     if (!confirmed) {
-      return; // Cancel submission if not confirmed
+      return;
     }
 
     console.log("Form Data Submitted: ", data);

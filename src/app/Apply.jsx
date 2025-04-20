@@ -21,9 +21,14 @@ import { Button } from "@/components/ui/Button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+<<<<<<< HEAD
 // Firebase
 import { db } from "@/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+=======
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+>>>>>>> ccf8646 (Minor Changes)
 
 // Schema
 const FormSchema = z.object({
@@ -87,7 +92,13 @@ export default function Apply() {
     const confirmed = window.confirm(
       "Are you sure all fields are filled in correctly?"
     );
+<<<<<<< HEAD
     if (!confirmed) return;
+=======
+    if (!confirmed) {
+      return;
+    }
+>>>>>>> ccf8646 (Minor Changes)
 
     try {
       const formattedData = {

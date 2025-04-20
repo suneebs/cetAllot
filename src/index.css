@@ -159,23 +159,3 @@ body {
 }
 
 
-
-
-
-
-
-/* @layer components {
-  .mobile-menu {
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-  }
-
-  .mobile-menu a {
-    color: var(--primary-foreground);
-  }
-
-  .mobile-menu a:hover {
-    opacity: 0.8;
-    transition: opacity 0.3s;
-  }
-} */

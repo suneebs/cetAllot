@@ -489,7 +489,6 @@ export default function Dashboard() {
           >
             <Check className="mr-2 h-4 w-4" /> Publish Allotments
           </Button>
-          
         </div>
       </div>
 

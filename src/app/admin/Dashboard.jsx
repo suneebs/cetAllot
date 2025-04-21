@@ -489,18 +489,7 @@ export default function Dashboard() {
           >
             <Check className="mr-2 h-4 w-4" /> Publish Allotments
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => {
-              if (confirm("Are you sure you want to logout?")) {
-                // Clear user session/token if needed (e.g., localStorage, cookies)
-                localStorage.removeItem("authToken"); // Example
-                navigate("/"); // Redirect to home
-              }
-            }}
-          >
-            <LogOut className="mr-2 h-4 w-4" /> Logout
-          </Button>
+          
         </div>
       </div>
 

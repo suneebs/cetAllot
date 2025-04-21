@@ -5,10 +5,8 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import {
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "@/firebase"; 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase";
 
 import { User, Lock, ArrowRight, Loader2 } from "lucide-react";
 import {
@@ -62,17 +60,16 @@ export default function Login() {
 
   return (
     <div className="container mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-center">Admin Login</CardTitle>
-          <CardDescription className="text-center">
-            Login with your credentials 
-          </CardDescription>
+      <Card className="w-full max-w-md shadow-md">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-semibold">Admin Login</CardTitle>
+          <CardDescription>Login with your credentials to continue.</CardDescription>
         </CardHeader>
 
         <CardContent>
           <FormProvider {...form}>
-            <Form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Ensuring handleSubmit and other props are not passed to the form directly */}
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="email"
@@ -82,7 +79,11 @@ export default function Login() {
                     <FormControl>
                       <div className="relative">
                         <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input placeholder="email@example.com" className="pl-10" {...field} />
+                        <Input
+                          placeholder="email@example.com"
+                          className="pl-10"
+                          {...field}
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -99,7 +100,12 @@ export default function Login() {
                     <FormControl>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input type="password" placeholder="******" className="pl-10" {...field} />
+                        <Input
+                          type="password"
+                          placeholder="******"
+                          className="pl-10"
+                          {...field}
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -107,26 +113,34 @@ export default function Login() {
                 )}
               />
 
-              {error && <p className="text-sm font-medium text-destructive">{error}</p>}
+              {error && (
+                <p className="text-sm font-medium text-destructive text-center">
+                  {error}
+                </p>
+              )}
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full mt-2" disabled={isLoading}>
                 {isLoading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Logging in...
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Logging in...
                   </>
                 ) : (
                   <>
-                    Login <ArrowRight className="ml-2 h-4 w-4" />
+                    Login
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </>
                 )}
               </Button>
-            </Form>
+            </form>
           </FormProvider>
-
         </CardContent>
-        <CardFooter className="flex flex-col">
-          <p className="text-xs text-center text-muted-foreground mt-4">
-            For demo purposes, use: admin12@gmail.com / pass@1234
+
+        <CardFooter className="flex flex-col items-center gap-2">
+          <p className="text-xs text-muted-foreground text-center">
+            For demo purposes: <br />
+            <span className="font-medium">admin12@gmail.com</span> /{" "}
+            <span className="font-medium">pass@1234</span>
           </p>
         </CardFooter>
       </Card>

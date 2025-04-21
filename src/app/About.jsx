@@ -7,7 +7,7 @@ import {
   GraduationCap,
   Users,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button"; // if it's Button.jsx
+import { Button } from "@/components/ui/Button";
 
 import {
   Card,

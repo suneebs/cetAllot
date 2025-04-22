@@ -50,9 +50,9 @@ export default function Eligibility() {
           variants={fadeIn}
           className="max-w-3xl mx-auto text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-primary">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6">
             Eligibility Criteria
-          </h1>
+          </h1>{" "}
           <p className="text-xl text-gray-600">
             College of Engineering Trivandrum (CET)
           </p>
@@ -198,7 +198,7 @@ export default function Eligibility() {
                 {
                   title: "Mechanical Engineering (ME)",
                   points: [
-                    "Diploma in Mechanical/Automobile/Production Engineering",
+                    "Diploma in Mechanical/Automobile Engineering",
                     "Experience in mechanical workshops, manufacturing, or related fields",
                     "Knowledge of mechanical drawings and workshop practices",
                   ],
@@ -225,7 +225,7 @@ export default function Eligibility() {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.1 * idx + 0.1 * index }}
                         >
-                          <CheckCircle className="h-6 w-6 text-blue-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
                           <p className="text-gray-600 text-lg">{point}</p>
                         </motion.div>
                       ))}

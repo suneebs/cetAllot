@@ -158,7 +158,7 @@ export default function Home() {
               whileHover={{ scale: 1.02 }}
             >
               <img
-                src="/cet2.jpeg?height=400&width=600"
+                src="/cet0.jpg?height=400&width=600"
                 alt="CET Campus"
                 className="object-cover w-full h-full transition-all duration-500 hover:scale-105"
               />
@@ -424,7 +424,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full sm:w-auto border-primary-foreground/20 hover:bg-primary-foreground/10 hover:scale-105 transition-transform"
+                    className="w-full sm:w-auto border-primary text-black hover:bg-primary/10 hover:scale-105 transition-transform"
                   >
                     Contact Us
                   </Button>

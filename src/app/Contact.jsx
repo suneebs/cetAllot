@@ -156,7 +156,7 @@ export default function Contact() {
         style={{ y, opacity }}
       />
 
-      <div className="container mx-auto px-4 py-20 sm:px-6 lg:px-8 relative">
+      <div className="container mx-auto px-4 py-14 sm:px-6 lg:px-8 relative">
         {/* Header with animation */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

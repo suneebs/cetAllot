@@ -111,7 +111,7 @@ export default function Help() {
           variants={fadeIn}
           className="max-w-3xl mx-auto text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-primary">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6">
             Help Center
           </h1>
           <p className="text-xl text-gray-600">

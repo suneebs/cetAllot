@@ -50,7 +50,7 @@ export default function PartTimeBtech() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            Part-Time B.Tech at CET
+            BTech Admission Process
           </motion.h1>
 
           <motion.p

@@ -27,7 +27,7 @@ export default function Programs() {
       description:
         "CET's flagship program with 60+ years of excellence in VLSI, embedded systems, and semiconductor technologies. Our graduates lead in top tech companies worldwide.",
       icon: <Cpu className="h-10 w-10 text-primary" />,
-      image: "/cet-electronics-lab.jpg",
+      image: "/ec.avif",
       areas: [
         "VLSI and Chip Design",
         "Embedded Systems Development",
@@ -57,7 +57,7 @@ export default function Programs() {
       description:
         "CET's renowned program producing industry leaders in power systems, renewable energy, and smart grid technologies since 1939.",
       icon: <CircuitBoard className="h-10 w-10 text-primary" />,
-      image: "/cet-power-lab.jpg",
+      image: "/ee.jpg",
       areas: [
         "Power Systems Engineering",
         "Renewable Energy Technologies",
@@ -87,7 +87,7 @@ export default function Programs() {
       description:
         "CET's prestigious program combining traditional engineering excellence with modern automation and robotics technologies.",
       icon: <Gauge className="h-10 w-10 text-primary" />,
-      image: "/cet-mech-workshop.jpg",
+      image: "/me.avif",
       areas: [
         "Thermodynamics and Heat Transfer",
         "Advanced Manufacturing",
@@ -130,7 +130,7 @@ export default function Programs() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            Transform Your Future at CET's Engineering Programs
+            Engineering Programs
           </motion.h1>
 
           <motion.p

@@ -92,7 +92,7 @@ export default function About() {
             viewport={{ once: true, amount: 0.5 }} // triggers once when 50% in view
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            Transform Your Future with Our B.Tech Program
+            About Our BTech Program
           </motion.h1>
 
           <motion.p
@@ -426,7 +426,7 @@ export default function About() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8 }}
-          className="bg-gradient-to-r from-primary to-blue-600 text-primary-foreground rounded-xl p-8 md:p-12 text-center shadow-xl overflow-hidden relative"
+          className="bg-primary rounded-xl p-8 md:p-12 text-center shadow-xl overflow-hidden relative"
         >
           <motion.div
             className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-2xl"

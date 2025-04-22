@@ -121,10 +121,16 @@ export default function Navbar() {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-              <span className="font-bold text-2xl">CET</span>
-              <span className="text-sm font-semibold hidden sm:inline-block">
-                BTech Admission
+            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-1">
+              <div className="relative">
+                {/* Modern badge-style container */}
+                <div className="absolute -inset-1 bg-blue-500/10 rounded-lg blur-sm"></div>
+                <span className="relative font-bold text-3xl bg-black bg-clip-text text-transparent">
+                  CET
+                </span>
+              </div>
+              <span className="text-sm font-semibold hidden sm:inline-block bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-gray-800 dark:text-gray-200">
+                Allot
               </span>
             </Link>
           </div>
@@ -190,7 +196,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="font-bold text-2xl">CET</span>
-                <span className="text-sm font-semibold">BTech Admissions</span>
+                <span className="text-sm font-semibold">Allot</span>
               </Link>
               <Button
                 variant="ghost"

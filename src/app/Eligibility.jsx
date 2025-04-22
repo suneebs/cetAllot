@@ -225,7 +225,7 @@ export default function Eligibility() {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.1 * idx + 0.1 * index }}
                         >
-                          <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                           <p className="text-gray-600 text-lg">{point}</p>
                         </motion.div>
                       ))}

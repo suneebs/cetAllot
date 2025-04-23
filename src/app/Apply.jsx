@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -21,14 +22,9 @@ import { Button } from "@/components/ui/Button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-<<<<<<< HEAD
 // Firebase
 import { db } from "@/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-=======
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
->>>>>>> ccf8646 (Minor Changes)
 
 // Schema
 const FormSchema = z.object({
@@ -62,7 +58,9 @@ const FormSchema = z.object({
       (data) => {
         const priorities = [data[1], data[2], data[3]];
         return new Set(priorities).size === priorities.length;
+        return new Set(priorities).size === priorities.length;
       },
+      { message: "Priority choices must be unique" }
       { message: "Priority choices must be unique" }
     ),
 });
@@ -89,16 +87,11 @@ export default function Apply() {
   });
 
   const onSubmit = async (data) => {
+  const onSubmit = async (data) => {
     const confirmed = window.confirm(
       "Are you sure all fields are filled in correctly?"
     );
-<<<<<<< HEAD
     if (!confirmed) return;
-=======
-    if (!confirmed) {
-      return;
-    }
->>>>>>> ccf8646 (Minor Changes)
 
     try {
       const formattedData = {
@@ -166,6 +159,42 @@ export default function Apply() {
           ))}
 
           {/* Category Dropdown */}
+          {[
+            { name: "adharNumber", label: "Adhar Number", type: "number" },
+            { name: "name", label: "Name" },
+            { name: "email", label: "Email" },
+            { name: "age", label: "Age", type: "number" },
+            { name: "company", label: "Company" },
+            { name: "experience", label: "Experience (in years)", type: "number" },
+            { name: "address", label: "Address" },
+            { name: "highestEducation", label: "Highest Education" },
+            { name: "mark", label: "Mark (in %)", type: "number", step: "0.01" },
+            { name: "distance", label: "Distance (in km)", type: "number" },
+          ].map(({ name, label, type = "text", step }) => (
+            <FormField
+              key={name}
+              name={name}
+              render={({ field, fieldState }) => (
+                <FormItem>
+                  <FormLabel>{label}</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type={type}
+                      step={step}
+                      placeholder={`Enter your ${label}`}
+                      className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                  </FormControl>
+                  {fieldState?.error && (
+                    <FormMessage message={fieldState.error.message} />
+                  )}
+                </FormItem>
+              )}
+            />
+          ))}
+
+          {/* Category Dropdown */}
           <FormField
             name="category"
             render={({ field, fieldState }) => (
@@ -177,6 +206,11 @@ export default function Apply() {
                       <SelectValue placeholder="Select your Category" />
                     </SelectTrigger>
                     <SelectContent>
+                      {["SC", "ST", "OBC", "General", "OEC", "Others"].map((opt) => (
+                        <SelectItem key={opt} value={opt}>
+                          {opt}
+                        </SelectItem>
+                      ))}
                       {["SC", "ST", "OBC", "General", "OEC", "Others"].map((opt) => (
                         <SelectItem key={opt} value={opt}>
                           {opt}
@@ -232,6 +266,7 @@ export default function Apply() {
           </Button>
         </form>
       </FormProvider>
+
 
       <ToastContainer />
     </div>

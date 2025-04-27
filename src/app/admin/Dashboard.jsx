@@ -9,6 +9,8 @@ import { ApplicationDialog } from "./ApplicationDialog";
 import { DepartmentDialog } from "./DepartmentDialog";
 import { NoticeDialog } from "./NoticeDialog";
 import { AllotmentDialog } from "./AllotmentDialog";
+import { db } from "@/firebase"; // your firebase.js
+import { collection, getDocs } from "firebase/firestore";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -31,47 +33,50 @@ export default function Dashboard() {
   const [editDeptData, setEditDeptData] = useState(null);
   const [editNoticeData, setEditNoticeData] = useState(null);
 
-  // Use effect without Firebase subscriptions
+  // Fetch data from Firestore
   useEffect(() => {
-    // Mock data or other logic can go here for applications, departments, and notices.
-    // Example:
-    setApplications([
-      {
-        id: 1,
-        name: "John Doe",
-        email: "john@example.com",
-        status: "pending",
-        department: "Computer Science",
-      },
-      // Add more mock applications here
-    ]);
-    setDepartments([
-      { id: 1, name: "Computer Science", totalSeats: 50 },
-      // Add more mock departments here
-    ]);
-    setNotices([
-      {
-        id: 1,
-        title: "Important Notice",
-        message: "This is an important notice.",
-      },
-      // Add more mock notices here
-    ]);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+
+        const applicationsSnapshot = await getDocs(collection(db, "applications"));
+        const departmentsSnapshot = await getDocs(collection(db, "departments"));
+        const noticesSnapshot = await getDocs(collection(db, "notices"));
+
+        const applicationsData = applicationsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const departmentsData = departmentsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const noticesData = noticesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setApplications(applicationsData);
+        setDepartments(departmentsData);
+        setNotices(noticesData);
+      } catch (error) {
+        console.error("Error fetching dashboard data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   // Application handlers
   const handleSaveApp = async () => {
     if (!editAppData) return;
-
     try {
       setIsLoading(true);
-      // Mock save logic for applications (add or update)
-      if (editAppData.id) {
-        // Update application logic
-      } else {
-        // Add new application logic
-      }
-
+      // Here, saving logic would be written (like addDoc or updateDoc).
       setAppDialogOpen(false);
       setEditAppData(null);
     } catch (error) {
@@ -82,20 +87,18 @@ export default function Dashboard() {
     }
   };
 
-  // Mock logout handler
+  // Logout handler
   const handleLogout = () => {
-    // Logic for logging out (e.g., clearing user session)
-    navigate("/login"); // Redirect to login
+    navigate("/login");
   };
 
   const filteredApplications = applications.filter((app) => {
     const matchesSearch =
-      app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.id.toLowerCase().includes(searchTerm.toLowerCase());
+      app.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      app.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      app.id?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || app.status === statusFilter;
-    const matchesDepartment =
-      departmentFilter === "all" || app.department === departmentFilter;
+    const matchesDepartment = departmentFilter === "all" || app.department === departmentFilter;
     return matchesSearch && matchesStatus && matchesDepartment;
   });
 
@@ -133,7 +136,7 @@ export default function Dashboard() {
             departmentFilter={departmentFilter}
             setDepartmentFilter={setDepartmentFilter}
             isLoading={isLoading}
-            onEdit={handleSaveApp} // Replace with appropriate handler
+            onEdit={handleSaveApp} // Replace with appropriate edit handler
             onDelete={() => {}} // Placeholder
             onNewApplication={() => {
               setEditAppData({

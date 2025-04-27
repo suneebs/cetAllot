@@ -22,10 +22,9 @@ const baseNavigation = [
   { name: "Programs", href: "/programs" },
   { name: "Admission", href: "/admission" },
   { name: "Eligibility", href: "/eligibility" },
-  { name: "Forms", href: "/forms" },
+  { name: "Help", href: "/help" },
   { name: "Contact", href: "/contact" },
 ];
-
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,9 +37,8 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const navigation = user
-  ? [...baseNavigation, { name: "Dashboard", href: "/admin/dashboard" }]
-  : baseNavigation;
-
+    ? [...baseNavigation, { name: "Dashboard", href: "/admin/dashboard" }]
+    : baseNavigation;
 
   // Track Firebase auth user
   useEffect(() => {
@@ -123,10 +121,16 @@ export default function Navbar() {
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-              <span className="font-bold text-2xl">CET</span>
-              <span className="text-sm font-semibold hidden sm:inline-block">
-                BTech Admission
+            <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-1">
+              <div className="relative">
+                {/* Modern badge-style container */}
+                <div className="absolute -inset-1 bg-blue-500/10 rounded-lg blur-sm"></div>
+                <span className="relative font-bold text-3xl bg-black bg-clip-text text-transparent">
+                  CET
+                </span>
+              </div>
+              <span className="text-sm font-semibold hidden sm:inline-block bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-gray-800 dark:text-gray-200">
+                Allot
               </span>
             </Link>
           </div>
@@ -163,21 +167,20 @@ export default function Navbar() {
           </div>
 
           {/* Desktop buttons */}
-<div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
-  <Link to="/apply">
-    <Button>Apply Now</Button>
-  </Link>
-  {user ? (
-    <Button variant="outline" onClick={handleLogout}>
-      Logout
-    </Button>
-  ) : (
-    <Link to="/admin">
-      <Button variant="outline">Admin Login</Button>
-    </Link>
-  )}
-</div>
-
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
+            <Link to="/apply">
+              <Button>Apply Now</Button>
+            </Link>
+            {user ? (
+              <Button variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <Link to="/admin">
+                <Button variant="outline">Admin Login</Button>
+              </Link>
+            )}
+          </div>
         </nav>
       </header>
 
@@ -193,7 +196,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="font-bold text-2xl">CET</span>
-                <span className="text-sm font-semibold">BTech Admissions</span>
+                <span className="text-sm font-semibold">Allot</span>
               </Link>
               <Button
                 variant="ghost"
@@ -230,10 +233,19 @@ export default function Navbar() {
                 </Link>
                 {user ? (
                   <>
-                    <Link to="/admin/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="ghost" className="w-full">Dashboard</Button>
+                    <Link
+                      to="/admin/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Button variant="ghost" className="w-full">
+                        Dashboard
+                      </Button>
                     </Link>
-                    <Button variant="outline" className="w-full" onClick={handleLogout}>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={handleLogout}
+                    >
                       Logout
                     </Button>
                   </>

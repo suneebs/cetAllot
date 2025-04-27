@@ -388,7 +388,7 @@ export default function Apply() {
 
           <Button
             type="submit"
-            className="w-full py-3 bg-primary text-white rounded-lg mt-8"
+            className="w-full py-3 bg-primary text-white font-bold rounded-lg mt-8"
           >
             Submit
           </Button>

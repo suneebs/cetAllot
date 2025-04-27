@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -9,227 +10,266 @@ import {
   CardTitle,
 } from "@/components/ui/Card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Eligibility() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  };
+
   return (
-    <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Eligibility Criteria</h1>
-        <p className="text-xl text-muted-foreground">
-          Check if you meet the requirements for our PhD programs.
-        </p>
-      </div>
+    <div ref={containerRef} className="relative overflow-hidden min-h-screen">
+      {/* Parallax Background */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white -z-10"
+        style={{ y }}
+      />
 
-      <Tabs defaultValue="general" className="max-w-4xl mx-auto">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="general">General Criteria</TabsTrigger>
-          <TabsTrigger value="department">Department-Specific</TabsTrigger>
-        </TabsList>
+      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="max-w-3xl mx-auto text-center mb-12"
+        >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6">
+            Eligibility Criteria
+          </h1>{" "}
+          <p className="text-xl text-gray-600">
+            College of Engineering Trivandrum (CET)
+          </p>
+        </motion.div>
 
-        {/* General Criteria Tab */}
-        <TabsContent value="general" className="space-y-6 mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Academic Requirements</CardTitle>
-              <CardDescription>
-                Basic academic qualifications required for all PhD applicants
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="max-w-4xl mx-auto"
+        >
+          <Tabs defaultValue="general" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-blue-50 to-indigo-50 h-12">
+              <TabsTrigger
+                value="general"
+                className="text-base data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              >
+                General Criteria
+              </TabsTrigger>
+              <TabsTrigger
+                value="branch"
+                className="text-base data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              >
+                Branch Specific
+              </TabsTrigger>
+            </TabsList>
+
+            {/* General Criteria */}
+            <TabsContent value="general" className="space-y-6 mt-6">
+              <motion.div variants={fadeIn}>
+                <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-black black text-2xl">
+                      Academic Qualifications
+                    </CardTitle>
+                    <CardDescription className="text-lg">
+                      Minimum requirements for all part-time BTech applicants
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {[
+                      {
+                        title: "Diploma in Engineering",
+                        description:
+                          "3-year diploma in relevant engineering branch with minimum 50% marks from Kerala State Board of Technical Education or equivalent",
+                      },
+                      {
+                        title: "Work Experience",
+                        description:
+                          "Minimum 2 years of professional experience in relevant field after diploma",
+                      },
+                      {
+                        title: "CET Admission Test",
+                        description:
+                          "Qualified in CET's part-time BTech entrance examination",
+                      },
+                      {
+                        title: "Employer NOC",
+                        description:
+                          "No Objection Certificate from current employer (for working professionals)",
+                      },
+                    ].map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        className="flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * idx }}
+                      >
+                        <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium text-lg">{item.title}</p>
+                          <p className="text-gray-600">{item.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div variants={fadeIn} transition={{ delay: 0.2 }}>
+                <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-black  text-2xl">
+                      Age & Other Requirements
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <motion.div
+                      className="flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <XCircle className="h-6 w-6 text-red-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium text-lg">No Age Limit</p>
+                        <p className="text-gray-600">
+                          No upper age limit, but candidates must be at least 18
+                          years old
+                        </p>
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      className="flex items-start gap-4 p-4 rounded-lg hover:bg-blue-50 transition-colors"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium text-lg">Residency</p>
+                        <p className="text-gray-600">
+                          Preference given to candidates currently working in
+                          Kerala
+                        </p>
+                      </div>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+
+            {/* Branch Specific Criteria */}
+            <TabsContent value="branch" className="space-y-6 mt-6">
               {[
                 {
-                  title: "Master's Degree",
-                  description:
-                    "A Master's degree in the relevant field with at least 60% marks or equivalent CGPA from a recognized university.",
+                  title: "Electrical Engineering (EE)",
+                  points: [
+                    "Diploma in Electrical Engineering/Power Systems",
+                    "Work experience in electrical maintenance, power distribution, or related fields",
+                    "Basic knowledge of electrical circuits and machines",
+                  ],
                 },
                 {
-                  title: "Bachelor's Degree",
-                  description:
-                    "A Bachelor's degree with at least 65% marks or equivalent CGPA from a recognized university.",
+                  title: "Electronics & Communication (EC)",
+                  points: [
+                    "Diploma in Electronics/Communication Engineering",
+                    "Experience in electronics manufacturing, telecom, or related industries",
+                    "Familiarity with electronic components and circuits",
+                  ],
                 },
                 {
-                  title: "Entrance Examination",
-                  description:
-                    "Qualified in a national level entrance examination like GATE/NET/SLET or equivalent.",
+                  title: "Mechanical Engineering (ME)",
+                  points: [
+                    "Diploma in Mechanical/Automobile Engineering",
+                    "Experience in mechanical workshops, manufacturing, or related fields",
+                    "Knowledge of mechanical drawings and workshop practices",
+                  ],
                 },
-                {
-                  title: "Research Proposal",
-                  description:
-                    "A well-defined research proposal in the area of interest.",
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
+              ].map((branch, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                >
+                  <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                    <CardHeader>
+                      <CardTitle className="text-primary text-2xl">
+                        {branch.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {branch.points.map((point, idx) => (
+                        <motion.div
+                          key={idx}
+                          className="flex items-start gap-4 p-4 rounded-lg hover:bg-indigo-50 transition-colors"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 * idx + 0.1 * index }}
+                        >
+                          <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
+                          <p className="text-gray-600 text-lg">{point}</p>
+                        </motion.div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
-            </CardContent>
-          </Card>
+            </TabsContent>
+          </Tabs>
+        </motion.div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Experience Requirements</CardTitle>
-              <CardDescription>
-                Professional experience considerations
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {[
-                {
-                  title: "Research Experience (Preferred)",
-                  description:
-                    "Prior research experience in the form of publications, projects, or work in research organizations is preferred.",
-                },
-                {
-                  title: "Industry Experience (For Part-time PhD)",
-                  description:
-                    "Minimum 2 years of relevant industry experience for candidates applying for part-time PhD programs.",
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Age Limit</CardTitle>
-              <CardDescription>Age restrictions for applicants</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-start gap-2">
-                <XCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium">No Age Limit</p>
-                  <p className="text-muted-foreground">
-                    There is no upper age limit for PhD admission. However,
-                    candidates must be at least 21 years of age at the time of
-                    application.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* Department-Specific Tab */}
-        <TabsContent value="department" className="space-y-6 mt-6">
-          {[
-            {
-              title: "Computer Science & Engineering",
-              description:
-                "Specific requirements for Computer Science PhD applicants",
-              points: [
-                {
-                  title: "Master's Specialization",
-                  description:
-                    "M.Tech/M.E. in Computer Science, Information Technology, or related disciplines.",
-                },
-                {
-                  title: "Programming Skills",
-                  description:
-                    "Proficiency in at least one programming language (C++, Java, Python, etc.).",
-                },
-                {
-                  title: "Mathematics Background",
-                  description:
-                    "Strong foundation in discrete mathematics, algorithms, and data structures.",
-                },
-              ],
-            },
-            {
-              title: "Electrical Engineering",
-              description:
-                "Specific requirements for Electrical Engineering PhD applicants",
-              points: [
-                {
-                  title: "Master's Specialization",
-                  description:
-                    "M.Tech/M.E. in Electrical Engineering, Electronics, Communication, or related disciplines.",
-                },
-                {
-                  title: "Technical Skills",
-                  description:
-                    "Experience with circuit design, signal processing, or power systems depending on the area of research.",
-                },
-                {
-                  title: "Laboratory Experience",
-                  description:
-                    "Hands-on experience with electrical engineering laboratory equipment and software tools.",
-                },
-              ],
-            },
-            {
-              title: "Mechanical Engineering",
-              description:
-                "Specific requirements for Mechanical Engineering PhD applicants",
-              points: [
-                {
-                  title: "Master's Specialization",
-                  description:
-                    "M.Tech/M.E. in Mechanical Engineering, Manufacturing, Thermal Sciences, or related disciplines.",
-                },
-                {
-                  title: "Technical Skills",
-                  description:
-                    "Experience with CAD/CAM software, thermal analysis, or manufacturing processes depending on the area of research.",
-                },
-                {
-                  title: "Design Experience",
-                  description:
-                    "Experience in mechanical design, analysis, or experimental work.",
-                },
-              ],
-            },
-          ].map((dept, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle>{dept.title}</CardTitle>
-                <CardDescription>{dept.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {dept.points.map((pt, idx) => (
-                  <div key={idx} className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">{pt.title}</p>
-                      <p className="text-muted-foreground">{pt.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
-        </TabsContent>
-      </Tabs>
-
-      <div className="text-center mt-12">
-        <h2 className="text-2xl font-bold mb-4">Ready to Apply?</h2>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          If you meet the eligibility criteria, we encourage you to apply to our
-          PhD program.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/apply">
-            <Button size="lg">
-              Apply Now <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link to="/contact">
-            <Button size="lg" variant="outline">
-              Contact Admissions
-            </Button>
-          </Link>
-        </div>
+        {/* CTA Section */}
+        <motion.div
+          className="text-center mt-12 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">
+            Ready to Join CET's Part-Time BTech?
+          </h2>
+          <p className="text-gray-600 text-xl mb-6 max-w-2xl mx-auto">
+            Applications are accepted annually through the Kerala Technical
+            University portal.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/apply">
+              <Button className="bg-primary text-lg px-8 py-6">
+                Apply Now <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button
+                variant="outline"
+                className="border-blak-600 text-black hover:bg-blue-50 text-lg px-8 py-6"
+              >
+                Contact Us
+              </Button>
+            </Link>
+          </div>
+          <p className="text-gray-500 mt-6 text-sm">
+            Last updated: June 2023 | College of Engineering Trivandrum
+          </p>
+        </motion.div>
       </div>
     </div>
   );

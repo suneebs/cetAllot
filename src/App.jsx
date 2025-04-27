@@ -16,7 +16,7 @@ import Home from "./app/Home";
 import About from "./app/About";
 import Admission from "./app/Admission";
 import Eligibility from "./app/Eligibility";
-import Help from "./app/Help";
+import Forms from "./app/Forms";
 import Apply from "./app/Apply";
 import Programs from "./app/Programs";
 import Login from "./app/admin/Login";
@@ -33,7 +33,6 @@ const ProtectedRoute = ({ children }) => {
 const App = () => {
   return (
     <>
-      {/* <ThemeProvider attribute="class"> */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -42,7 +41,7 @@ const App = () => {
         <Route path="/admission" element={<Admission />} />
         <Route path="/eligibility" element={<Eligibility />} />
         <Route path="/apply" element={<Apply />} />
-        <Route path="/help" element={<Help />} />
+        <Route path="/forms" element={<Forms />} />
         <Route path="/admin" element={<Login />} />
         {/* <Route path="/admin/dashboard" element={<Dashboard />} /> */}
         <Route path="/contact" element={<Contact />} />

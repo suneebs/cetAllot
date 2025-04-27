@@ -16,12 +16,13 @@ import Home from "./app/Home";
 import About from "./app/About";
 import Admission from "./app/Admission";
 import Eligibility from "./app/Eligibility";
-import Forms from "./app/Forms";
+
 import Apply from "./app/Apply";
 import Programs from "./app/Programs";
 import Login from "./app/admin/Login";
 import Dashboard from "./app/admin/Dashboard";
 import Contact from "./app/Contact";
+import Help from "./app/Help";
 
 const ProtectedRoute = ({ children }) => {
   const [user, loading] = useAuthState(auth);
@@ -41,10 +42,11 @@ const App = () => {
         <Route path="/admission" element={<Admission />} />
         <Route path="/eligibility" element={<Eligibility />} />
         <Route path="/apply" element={<Apply />} />
-        <Route path="/forms" element={<Forms />} />
+
         <Route path="/admin" element={<Login />} />
         {/* <Route path="/admin/dashboard" element={<Dashboard />} /> */}
         <Route path="/contact" element={<Contact />} />
+        <Route path="/help" element={<Help />} />
         <Route
           path="/admin/dashboard"
           element={

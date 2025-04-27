@@ -15,14 +15,8 @@ export const DashboardHeader = ({
         </p>
       </div>
       <div className="flex gap-2">
-        <Button onClick={onNewNotice}>
-          <Bell className="mr-2 h-4 w-4" /> New Notice
-        </Button>
         <Button variant="outline" onClick={onPublishAllotments}>
           <Check className="mr-2 h-4 w-4" /> Publish Allotments
-        </Button>
-        <Button variant="outline" onClick={onLogout}>
-          <LogOut className="mr-2 h-4 w-4" /> Logout
         </Button>
       </div>
     </div>

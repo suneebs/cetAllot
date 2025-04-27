@@ -8,9 +8,13 @@ export const StatusBadge = ({ status }) => {
     rejected: "bg-red-50 text-red-700 border-red-200",
   };
 
+  const displayStatus = status
+    ? status.charAt(0).toUpperCase() + status.slice(1)
+    : "Unknown"; // fallback if status is missing
+
   return (
-    <Badge variant="outline" className={badgeMap[status] || ""}>
-      {status.charAt(0).toUpperCase() + status.slice(1)}
+    <Badge variant="outline" className={badgeMap[status] || "bg-gray-50 text-gray-700 border-gray-200"}>
+      {displayStatus}
     </Badge>
   );
 };

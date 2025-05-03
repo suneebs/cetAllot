@@ -30,7 +30,6 @@ import {
   Trash2,
   PlusCircle
 } from "lucide-react";
-import { StatusBadge, AllotmentBadge } from "./StatusBadge";
 import ApplicationModal from "./ApplicationModal";
 import { toast } from "sonner"; // ✅ using 'sonner'
 

@@ -5,7 +5,6 @@ import { DashboardHeader } from "./DashboardHeader";
 import { ApplicationTable } from "./ApplicationTable";
 import { DepartmentCards } from "./DepartmentCards";
 import { NoticeCards } from "./NoticeCards";
-import { ApplicationDialog } from "./ApplicationDialog";
 import { DepartmentDialog } from "./DepartmentDialog";
 import { NoticeDialog } from "./NoticeDialog";
 import { AllotmentDialog } from "./AllotmentDialog";
@@ -189,15 +188,7 @@ export default function Dashboard() {
       </Tabs>
 
       {/* Dialogs */}
-      <ApplicationDialog
-        open={isAppDialogOpen}
-        onOpenChange={setAppDialogOpen}
-        application={editAppData}
-        departments={departments}
-        onSave={handleSaveApp}
-        onChange={setEditAppData}
-        isLoading={isLoading}
-      />
+      
 
       <DepartmentDialog
         open={isDeptDialogOpen}

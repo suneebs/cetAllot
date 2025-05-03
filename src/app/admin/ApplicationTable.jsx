@@ -31,7 +31,8 @@ import {
   PlusCircle
 } from "lucide-react";
 import ApplicationModal from "./ApplicationModal";
-import { toast } from "sonner"; // ✅ using 'sonner'
+import { toast } from "sonner";
+import * as XLSX from "xlsx"; // ✅ added for export
 
 export const ApplicationTable = ({
   departments,
@@ -44,7 +45,6 @@ export const ApplicationTable = ({
   isLoading,
   onEdit,
   onNewApplication,
-  onExport,
 }) => {
   const [applications, setApplications] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,6 +92,33 @@ export const ApplicationTable = ({
 
     return matchesSearch && matchesStatus && matchesDepartment;
   });
+
+  // ✅ EXPORT FUNCTIONALITY
+  const onExport = () => {
+    const exportData = filteredApps.map((app) => ({
+      Name: app.name,
+      Email: app.email,
+      Address: app.address,
+      Age: app.age,
+      Caste: app.caste,
+      Religion: app.religion,
+      Category: app.category,
+      Distance: app.distance,
+      Mark: app.mark,
+      Phone: app.phone,
+      "Priority 1": app.priorityChoices?.[1],
+      "Priority 2": app.priorityChoices?.[2],
+      "Priority 3": app.priorityChoices?.[3],
+      "LET Reg No": app.letRegNo,
+      "LET Rank": app.letRank,
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Applications");
+
+    XLSX.writeFile(workbook, "Applications.xlsx");
+  };
 
   return (
     <>
@@ -167,9 +194,9 @@ export const ApplicationTable = ({
               <TableCell>{app.distance}</TableCell>
               <TableCell>{app.mark}</TableCell>
               <TableCell>{app.phone}</TableCell>
-              <TableCell>{app.priorityChoices[1]}</TableCell>
-              <TableCell>{app.priorityChoices[2]}</TableCell>
-              <TableCell>{app.priorityChoices[3]}</TableCell>
+              <TableCell>{app.priorityChoices?.[1]}</TableCell>
+              <TableCell>{app.priorityChoices?.[2]}</TableCell>
+              <TableCell>{app.priorityChoices?.[3]}</TableCell>
               <TableCell>{app.letRegNo}</TableCell>
               <TableCell>{app.letRank}</TableCell>
 

@@ -118,7 +118,7 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="allotment">
-          <AllotmentResults applications={applications} departments={departments} />
+          <AllotmentResults />
         </TabsContent>
 
         <TabsContent value="notices">

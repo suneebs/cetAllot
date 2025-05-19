@@ -1,6 +1,16 @@
-import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { calculateAllotment } from "./calculateAllotment";
 import { db } from "@/firebase";
+
+// Helper function to clear previous allotment
+const clearPreviousAllotment = async (department) => {
+  const snapshot = await getDocs(collection(db, `allotment/${department}/students`));
+  const deletions = snapshot.docs.map((docSnap) =>
+    deleteDoc(doc(db, `allotment/${department}/students`, docSnap.id))
+  );
+  await Promise.all(deletions);
+  console.log(`🗑️ Cleared previous data in allotment/${department}/students`);
+};
 
 export const runAllotmentHandler = async () => {
   try {
@@ -20,9 +30,14 @@ export const runAllotmentHandler = async () => {
       { name: "mech", totalSeats: 10 },
     ];
     const { updatedApplications, updatedDepartments } = calculateAllotment(applications, departments);
-
     console.log("🧮 Allotment completed. Departments:", updatedDepartments);
 
+    // 🔄 Clear old data before inserting new ones
+    for (const dept of updatedDepartments) {
+      await clearPreviousAllotment(dept.name);
+    }
+
+    // ✅ Write new allotment results
     for (const dept of updatedDepartments) {
       const studentsInDept = updatedApplications.filter(
         (app) => app.allottedDepartment === dept.name

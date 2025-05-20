@@ -130,31 +130,22 @@ export const ApplicationTable = ({
             onChange={(e) => setSearchTerm(e.target.value)}
             className="max-w-sm"
           />
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="Filter by status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="reviewing">Reviewing</SelectItem>
-              <SelectItem value="approved">Approved</SelectItem>
-              <SelectItem value="rejected">Rejected</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Filter by department" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Departments</SelectItem>
-              {departments.map((dept) => (
-                <SelectItem key={dept.id} value={dept.name}>
-                  {dept.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          
+          <div className="flex justify-end">
+        <Button
+          variant="outline"
+          className="gap-1"
+          onClick={onExport}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Download className="h-4 w-4" />
+          )}
+          Export
+        </Button>
+      </div>
         </div>
         <Button onClick={() => setIsModalOpen(true)}>
           <PlusCircle className="mr-2 h-4 w-4" /> New Application
@@ -164,6 +155,7 @@ export const ApplicationTable = ({
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>#</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Address</TableHead>
@@ -182,8 +174,9 @@ export const ApplicationTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredApps.map((app) => (
+          {filteredApps.map((app,index) => (
             <TableRow key={app.id}>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.address}</TableCell>
@@ -218,21 +211,7 @@ export const ApplicationTable = ({
         </TableBody>
       </Table>
 
-      <div className="flex justify-end mt-4">
-        <Button
-          variant="outline"
-          className="gap-1"
-          onClick={onExport}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Download className="h-4 w-4" />
-          )}
-          Export
-        </Button>
-      </div>
+      
 
       <ApplicationModal
         open={isModalOpen}

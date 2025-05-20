@@ -1,0 +1,1928 @@
+[
+ {
+   "name": "KAVITHA C S",
+   "email": "kavithacs@hllhites.com",
+   "phone": "9875434555",
+   "letRegNo": "170120",
+   "letRank": "348",
+   "caste": "SC-PULAYA",
+   "religion": "HINDU",
+   "category": "SC PULAYA",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "11.8",
+   "mark": "68"
+ },
+ {
+   "name": "Shaiju. C",
+   "email": "shaijuchellappan@gmail.com",
+   "phone": "9441849163",
+   "letRegNo": "170271",
+   "letRank": "35",
+   "caste": "Ezhava",
+   "religion": " Hindu",
+   "category": "Unreserved",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "18",
+   "mark": "64.4"
+ },
+ {
+   "name": "ASHOK R",
+   "email": "ashokrajan1504@gmail.com",
+   "phone": "8547742456",
+   "letRegNo": "170174",
+   "letRank": "305",
+   "caste": " SOURASTRA",
+   "religion": "hindhu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "27",
+   "mark": "78"
+ },
+ {
+   "name": "MAHESH M",
+   "email": "mahesh9159@gmail.com",
+   "phone": "8681883392",
+   "letRegNo": "170648",
+   "letRank": "197",
+   "caste": "PALLAN",
+   "religion": " HINDU",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "220",
+   "mark": "73.93"
+ },
+ {
+   "name": "Isac Thankachan",
+   "email": "isacvilayil@gmail.com",
+   "phone": "9446890408",
+   "letRegNo": "14240700",
+   "letRank": "3",
+   "caste": "malankara catholic",
+   "religin": " christian",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "5",
+   "mark": "50"
+ },
+ {
+   "name": "DEEPU K V",
+   "email": "deepukv10@gmail.com",
+   "phone": "9746372230",
+   "letRegNo": "170903",
+   "letRank": "1",
+   "caste": "Nadar",
+   "religion": "hindhu",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "6",
+   "mark": "81.64"
+ },
+ {
+   "name": "JINCYMOL S M",
+   "email": "jincymolchinchu@gmail.com",
+   "phone": "9400683897",
+   "letRegNo": "",
+   "letRank": "0",
+   "caste": "SIUC NADAR ",
+   "religion": "CHRISTIAN",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "",
+   "mark": "80.18"
+ },
+ {
+   "name": "SURESH S",
+   "email": "suresh85rose@gmail.com",
+   "phone": "9446963896",
+   "letRegNo": "163192",
+   "letRank": "0",
+   "caste": " Nadar",
+   "religion": "Hindu",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "8",
+   "mark": "95.62"
+ },
+ {
+   "name": "DONALD E",
+   "email": "donald7star@gmail.com",
+   "phone": "9995400844",
+   "letRegNo": "17240661",
+   "letRank": "278",
+   "caste": "NADAR",
+   "religion": "CHRISTIAN",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "26",
+   "mark": "65"
+ },
+ {
+   "name": "Govind Prasad",
+   "email": "prasadgovind000@gmail.com",
+   "phone": "7356319383",
+   "letRegNo": "170535",
+   "letRank": "287",
+   "caste": "VISWAKARMA",
+   "religion": "hindhu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10.8",
+   "mark": "39.16"
+ },
+ {
+   "name": "Sathyan M",
+   "email": "sathyanmadhu86@gmail.com",
+   "phone": "7012897789",
+   "letRegNo": "24234207",
+   "letRank": "26",
+   "caste": "Ezhuthachan.",
+   "religion": "Hindhu",
+   "category": "Obc",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "6",
+   "mark": "94.2"
+ },
+ {
+   "name": "Surya Jeevan R",
+   "email": "suryajeevan51@gmail.com",
+   "phone": "9747067787",
+   "letRegNo": "17240213",
+   "letRank": "97",
+   "caste": "Ezhava",
+   "religion": "hindhu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "25",
+   "mark": "47.5"
+ },
+ {
+   "name": "SHAFEER HUSSAIN S",
+   "email": "shafeerhussain1997@gmail.com",
+   "phone": "9020732010",
+   "letRegNo": "9020732010",
+   "letRank": "337",
+   "caste": "",
+   "religion": "Muslim",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "4",
+   "mark": "36.67"
+ },
+ {
+   "name": "JYOTISHMAN BORAH",
+   "email": "savagejyotish@gmail.com",
+   "phone": "9988892893",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "OBC",
+   "religion": " HINDU",
+   "category": "GENERAL",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "",
+   "mark": "73"
+ },
+ {
+   "name": "BINU CHANDRAN B",
+   "email": "binuchandran735@gmail.com",
+   "phone": "7025669294",
+   "letRegNo": "170673",
+   "letRank": "44",
+   "caste": "Ezhava",
+   "religion": "Hindu",
+   "category": "Obc",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Civil Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "23",
+   "mark": "19.87"
+ },
+ {
+   "name": "Saji.S",
+   "email": "sajis182@gmail.com",
+   "phone": "9496083624",
+   "letRegNo": "NIL",
+   "letRank": "NIL",
+   "caste": "",
+   "religion": "HINDU",
+   "category": "NIL",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5",
+   "mark": "83"
+ },
+ {
+   "name": "AYISHA A R",
+   "email": "ayishaar2004@gmail.com",
+   "phone": "9526545896",
+   "letRegNo": "170487",
+   "letRank": "307",
+   "caste": " ISLAM",
+   "religion": "Muslim",
+   "category": "MUSLIM",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "4.9",
+   "mark": "82.84"
+ },
+ {
+   "name": "JAIGANESH P.",
+   "email": "jaiganesh33@gmail.com",
+   "phone": "9768809444",
+   "letRegNo": "170755",
+   "letRank": "279",
+   "caste": "BC",
+   "religion": "",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "13",
+   "mark": "87"
+ },
+ {
+   "name": "Akshay Chandran L",
+   "email": "akshaychandran.l1999@gmail.com",
+   "phone": "8921837926",
+   "letRegNo": "170045",
+   "letRank": "296",
+   "caste": " Nair",
+   "religion": "hindhu",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "6",
+   "mark": "72"
+ },
+ {
+   "name": "Bernard jeyasooriya",
+   "email": "bernardjeyasooriya22@gmail.com",
+   "phone": "9544970895",
+   "letRegNo": "170647",
+   "letRank": "157",
+   "caste": "nadar",
+   "religion": "christian",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "23",
+   "mark": "69"
+ },
+ {
+   "name": "RAJEEV P V",
+   "email": "rajeevpv2013@gmail.com",
+   "phone": "9744689096",
+   "letRegNo": "24234382",
+   "letRank": "47",
+   "caste": " NAIR",
+   "religion": "hindhu",
+   "category": "GENERAL",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "9",
+   "mark": "51.66"
+ },
+ {
+   "name": "RENJITH KUMAR",
+   "email": "krenjith1996@gmail.com",
+   "phone": "9539370452",
+   "letRegNo": "170860",
+   "letRank": "351",
+   "caste": "LATIN CATHOLICS",
+   "religion": " CHRISTIAN",
+   "category": "LATIN CATHOLICS",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "8",
+   "mark": "68"
+ },
+ {
+   "name": "Mohammed Adil Alangadan",
+   "email": "adilm441@gmail.com",
+   "phone": "8891224747",
+   "letRegNo": "17240542",
+   "letRank": "9",
+   "caste": "OBC ",
+   "religion": "ISLAM",
+   "category": "MUSLIM",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "35",
+   "mark": "86.51"
+ },
+ {
+   "name": "AYISHA A R",
+   "email": "ayishaar2004@gmail.com",
+   "phone": "9526545896",
+   "letRegNo": "170487",
+   "letRank": "307",
+   "caste": " ISLAM",
+   "religion": "Muslim",
+   "category": "MUSLIM",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "5",
+   "mark": "82.84"
+ },
+ {
+   "name": "VIPIN KUMAR S",
+   "email": "vipinkumarspvtr1997@gmail.com",
+   "phone": "9447666124",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "Nair",
+   "religion": "hindu",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10",
+   "mark": "69.5"
+ },
+ {
+   "name": "AHAMMED MUJTHABA P M",
+   "email": "peerumujthaba@gmail.com",
+   "phone": "8547094337",
+   "letRegNo": "170928",
+   "letRank": "",
+   "caste": "islam ",
+   "religion": "muslim",
+   "category": "muslim",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "11",
+   "mark": "68.5"
+ },
+ {
+   "name": "AHAMMED MUJTHABA P M",
+   "email": "peerumujthaba@gmail.com",
+   "phone": "8547094337",
+   "letRegNo": "170928",
+   "letRank": "243",
+   "caste": "islam",
+   "religion": " muslim",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "11",
+   "mark": "68.5"
+ },
+ {
+   "name": "Vishnudas T P",
+   "email": "vishnuambalapara@gmail.com",
+   "phone": "8111837490",
+   "letRegNo": "24234543",
+   "letRank": "24",
+   "caste": "Asari",
+   "religion": " Hindu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "5.5",
+   "mark": "87.02"
+ },
+ {
+   "name": "DINU KRISHNAN",
+   "email": "dinukrishnan16@gmail.com",
+   "phone": "9645890731",
+   "letRegNo": "170570",
+   "letRank": "63",
+   "caste": " Viswakarma",
+   "religion": "hindhu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "13",
+   "mark": "80.4"
+ },
+ {
+   "name": "Arun.A.R",
+   "email": "arun18041984@gmail.com",
+   "phone": "9895153453",
+   "letRegNo": "170688",
+   "letRank": "124",
+   "caste": " Nair",
+   "religion": "hindhu",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10",
+   "mark": "69.67"
+ },
+ {
+   "name": "MAHESH M",
+   "email": "mahesh9159@gmail.com",
+   "phone": "8681883392",
+   "letRegNo": "170648",
+   "letRank": "2215",
+   "caste": "Pallan",
+   "religion": " Hindu",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "220",
+   "mark": "73.93"
+ },
+ {
+   "name": "FAWAS V K",
+   "email": "fawasvettathur@gmail.com",
+   "phone": "9656589651",
+   "letRegNo": "24234194",
+   "letRank": "93",
+   "caste": "ISLAM",
+   "religion": " MUSLIM",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "23",
+   "mark": "72.58"
+ },
+ {
+   "name": "Sheeja VS",
+   "email": "sheejavs@nhpc.nic.in",
+   "phone": "7908251683",
+   "letRegNo": "170054",
+   "letRank": "164",
+   "caste": "Nair",
+   "religion": " Hindu",
+   "category": "NA",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "8",
+   "mark": "79.68"
+ },
+ {
+   "name": "SOORAJ S",
+   "email": "soorajsvla@gmail.com",
+   "phone": "9496814594",
+   "letRegNo": "Nil",
+   "letRank": "Nil",
+   "caste": "Viswakarma",
+   "religion": " Hindu",
+   "category": "Viswakarma",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "4",
+   "mark": "71.68"
+ },
+ {
+   "name": "ANOOP B",
+   "email": "anpbchandran1987@gmail.com",
+   "phone": "9847578341",
+   "letRegNo": "170590",
+   "letRank": "154",
+   "caste": "NAIR",
+   "religion": " HINDU",
+   "category": "GENERAL",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "6",
+   "mark": "83.125"
+ },
+ {
+   "name": "HARSHA SURESH",
+   "email": "harshasuresh9995@gmail.com",
+   "phone": "8075026560",
+   "letRegNo": "17240782",
+   "letRank": "251",
+   "caste": "HINDU ",
+   "religion": "ARAYA",
+   "category": "YES,OEC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "5",
+   "mark": "68"
+ },
+ {
+   "name": "HARISON M J",
+   "email": "harisonmj555@gmail.com",
+   "phone": "98785453447",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "RC ",
+   "religion": "Christian",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "",
+   "mark": "76"
+ },
+ {
+   "name": "SOJIMON V K",
+   "email": "sojimon68@gmail.com",
+   "phone": "9745677548",
+   "letRegNo": "17240841",
+   "letRank": "10",
+   "caste": "Latin catholic",
+   "religion": " Christian",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "14",
+   "mark": "85"
+ },
+ {
+   "name": "Sheeba k",
+   "email": "sheebakdd@gmail.com",
+   "phone": "9744380575",
+   "letRegNo": "170415",
+   "letRank": "136",
+   "caste": "Thiyya",
+   "religion": " Hindu",
+   "category": "EZ",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10",
+   "mark": "70.9"
+ },
+ {
+   "name": "SREERAJ R",
+   "email": "sreerajsree93@gmail.com",
+   "phone": "7736642864",
+   "letRegNo": "170949",
+   "letRank": "4377",
+   "caste": "EZHAVA",
+   "religion": "HINDU",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "15",
+   "mark": "67"
+ },
+ {
+   "name": "Sheeba K",
+   "email": "sheebakdd@gmail.com",
+   "phone": "9744380575",
+   "letRegNo": "170415",
+   "letRank": "136",
+   "caste": "Thiyya",
+   "religion": " Hindu",
+   "category": "EZ",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10",
+   "mark": "70.9"
+ },
+ {
+   "name": "VINEETH KUMAR V T",
+   "email": "vineeth.b @gmail.com",
+   "phone": "9400948405",
+   "letRegNo": "17240329",
+   "letRank": "233",
+   "caste": "NAIR ",
+   "religion": " HINDU",
+   "category": "GENERAL",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "15",
+   "mark": "72"
+ },
+ {
+   "name": "MAHESH M",
+   "email": "mahesh9159@gmail.com",
+   "phone": "8681883392",
+   "letRegNo": "170648",
+   "letRank": "2215",
+   "caste": "PALLAN",
+   "religion": " HINDU",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "8",
+   "mark": "73.93"
+ },
+ {
+   "name": "Akshay Chandran L",
+   "email": "akshaychandran.l1999@gmail.com",
+   "phone": "8921837926",
+   "letRegNo": "170045",
+   "letRank": "296",
+   "caste": " Nair",
+   "religion": "HINDU",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "6",
+   "mark": "72"
+ },
+ {
+   "name": "RAKHI .R .B",
+   "email": "rakhirbrajan1996@gmail.com",
+   "phone": "9526962972",
+   "letRegNo": "170414",
+   "letRank": "91",
+   "caste": " Nair",
+   "religion": "HINDU",
+   "category": "nill",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "15",
+   "mark": "87.1"
+ },
+ {
+   "name": "BIBIN RAJ V C",
+   "email": "bibinrajvc1996@gmail.com",
+   "phone": "9048954016",
+   "letRegNo": "170074",
+   "letRank": "45",
+   "caste": "SIUC NADAR",
+   "religion": " CHRISTIAN",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "35",
+   "mark": "77"
+ },
+ {
+   "name": "JUGNU J WIN",
+   "email": "jugnujwin2010@gmail.com",
+   "phone": "9497851690",
+   "letRegNo": "NA",
+   "letRank": "NA",
+   "caste": "SIUC NADAR",
+   "religion": " SIUC CHRISTIAN",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "30",
+   "mark": "79"
+ },
+ {
+   "name": "SINI VISWANATH",
+   "email": "sinivkurup@gmail.com",
+   "phone": "9446283401",
+   "letRegNo": "NIL",
+   "letRank": "NIL",
+   "caste": "Nair",
+   "religion": "hindhu",
+   "category": "NA",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "12",
+   "mark": "63.1"
+ },
+ {
+   "name": "Rakhi R B",
+   "email": "rakhirbrajan1996@gmail.com",
+   "phone": "9446283402",
+   "letRegNo": "170414",
+   "letRank": "91",
+   "caste": " Nair",
+   "religion": "HINDU",
+   "category": "Nill",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "15",
+   "mark": "87.1"
+ },
+ {
+   "name": "ANOOP S",
+   "email": "pioneerpools@outlook.com",
+   "phone": "9544875551",
+   "letRegNo": "170649",
+   "letRank": "1191",
+   "caste": "Ezhava",
+   "religion": "HINDU",
+   "category": "OEC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5",
+   "mark": "63.34"
+ },
+ {
+   "name": "prem gs",
+   "email": "premgs11@gmail.com",
+   "phone": "9730620903",
+   "letRegNo": "24234248",
+   "letRank": "2874",
+   "caste": "vellan",
+   "religion": "",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "11",
+   "mark": "82.5"
+ },
+ {
+   "name": "Amal m",
+   "email": "amalm41996@gmail.com",
+   "phone": "6282656401",
+   "letRegNo": "170678",
+   "letRank": "48",
+   "caste": "EZHAVA",
+   "religion": "Hindu ",
+   "category": "OBC NCL",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "4",
+   "mark": "83.03"
+ },
+ {
+   "name": "ATHUL A S",
+   "email": "athulas446@gmail.com",
+   "phone": "8821724847",
+   "letRegNo": "24234274",
+   "letRank": "3872",
+   "caste": " Nair",
+   "religion": "Hindu ",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "20",
+   "mark": "36"
+ },
+ {
+   "name": "Shalini Manoharan",
+   "email": "ammuzshalini8@gmail.com",
+   "phone": "7306584316",
+   "letRegNo": "170124",
+   "letRank": "320",
+   "caste": "MALA ARAYAN ",
+   "religion": "HINDU",
+   "category": "ST",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "151",
+   "mark": "54"
+ },
+ {
+   "name": "LIJU GOLDEN",
+   "email": "lijugolden@gmail.com",
+   "phone": "9895751856",
+   "letRegNo": "170500",
+   "letRank": "88",
+   "caste": "OBC/NADAR ",
+   "religion": "Christian",
+   "category": "SEBC ( Other Backward Christians)",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "0",
+   "mark": "70.68"
+ },
+ {
+   "name": "LIJU GOLDEN",
+   "email": "lijugolden@gmail.com",
+   "phone": "9895751856",
+   "letRegNo": "170500",
+   "letRank": "88",
+   "caste": "OBC/NADAR ",
+   "religion": " Christian",
+   "category": "Special Reservation ( The Staff of the Department of Technical Education )& SEBC(Other Backward Christians)",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "0",
+   "mark": "70.68"
+ },
+ {
+   "name": "ARUN SASI",
+   "email": "arunayoor007@gmail.com",
+   "phone": "9074772803",
+   "letRegNo": "170521",
+   "letRank": "108",
+   "caste": "NAIR",
+   "religion": "HINDU",
+   "category": "GENERAL",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "10",
+   "mark": "86.545"
+ },
+ {
+   "name": "AKHIL RAJ. R. A",
+   "email": "akhilrajraj.ra2014@gmail.com",
+   "phone": "8139099071",
+   "letRegNo": "170640",
+   "letRank": "313",
+   "caste": "Ezhava",
+   "religion": " Hindu",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Civil Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "13",
+   "mark": "65"
+ },
+ {
+   "name": "CHKKAIAH G",
+   "email": "kuttystellamay4@gmail.com",
+   "phone": "9944220526",
+   "letRegNo": "170994",
+   "letRank": "332",
+   "caste": "",
+   "religion": "HINDU",
+   "category": "SC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5",
+   "mark": "8.13"
+ },
+ {
+   "name": "Sona Pradeep T",
+   "email": "sonapradeep1998@gmail.com",
+   "phone": "9447878842",
+   "letRegNo": "16240101",
+   "letRank": "3011",
+   "caste": "Thiyya",
+   "religion": "HINDU",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "8.9",
+   "mark": "78.66"
+ },
+ {
+   "name": "Mahesh M S",
+   "email": "maheshkabaddi@gmail.com",
+   "phone": "9809193834",
+   "letRegNo": "170566",
+   "letRank": "1",
+   "caste": "Chakkala",
+   "religion": " Hindu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Civil Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "30",
+   "mark": "75.46"
+ },
+ {
+   "name": "ANEESH M S",
+   "email": "aneeshramattu@gmail.com",
+   "phone": "9446282587",
+   "letRegNo": "170482",
+   "letRank": "78",
+   "caste": "VISWAKARMA",
+   "religion": " HINDU",
+   "category": "VISWAKARMA",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "9",
+   "mark": "86.3"
+ },
+ {
+   "name": "Athul Swaminathan P",
+   "email": "athuathul07@gmail.com",
+   "phone": "7025973995",
+   "letRegNo": "170523",
+   "letRank": "2890",
+   "caste": "Viswakarma",
+   "religion": "Hindu ",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "14",
+   "mark": "75"
+ },
+ {
+   "name": "ARCHANA L G",
+   "email": "archanalg01@gmail.com",
+   "phone": "7306543883",
+   "letRegNo": "17340528",
+   "letRank": "102",
+   "caste": "Velaar",
+   "religion": "Hindu",
+   "category": "OEC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "",
+   "mark": "48.33"
+ },
+ {
+   "name": "Athul Krishnan M A",
+   "email": "athulk672@gmail.com",
+   "phone": "7591938596",
+   "letRegNo": "170094",
+   "letRank": "82",
+   "caste": "Nair",
+   "religion": " Hindu",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "75.81"
+ },
+ {
+   "name": "ABINS ASSIS",
+   "email": "abinsassis378@gmail.com",
+   "phone": "9633954971",
+   "letRegNo": "170093",
+   "letRank": "56",
+   "caste": " Islam",
+   "religion": "Muslim",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "83.32"
+ },
+ {
+   "name": "Saidali S",
+   "email": "saidalisaid279@gmail.com",
+   "phone": "9061509620",
+   "letRegNo": "170490",
+   "letRank": "20",
+   "caste": " Islam",
+   "religion": "Muslim",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "83.03"
+ },
+ {
+   "name": "Sarath K",
+   "email": "sarathk.kalathil@gmail.com",
+   "phone": "9645720526",
+   "letRegNo": "17240479",
+   "letRank": "861",
+   "caste": "Nair",
+   "religion": "HINDU",
+   "category": "Nil",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Civil Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "23",
+   "mark": "69"
+ },
+ {
+   "name": "MANJUSHA.R",
+   "email": "manjusharn@gmail.com",
+   "phone": "9846080074",
+   "letRegNo": "162752",
+   "letRank": "751",
+   "caste": "Nadar ",
+   "religion": "Christain",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "",
+   "mark": "76"
+ },
+ {
+   "name": "Enosh K Martin",
+   "email": "enoshmartin99@gmail.com",
+   "phone": "9072214695",
+   "letRegNo": "170116",
+   "letRank": "46",
+   "caste": "Latin catholic ",
+   "religion": "Christian",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "80.75"
+ },
+ {
+   "name": "Nahas N",
+   "email": "nahasn2002@gmail.com",
+   "phone": "7559065269",
+   "letRegNo": "170095",
+   "letRank": "71",
+   "caste": "MAPPILA",
+   "religion": " ISLAM",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "5.7",
+   "mark": "84.74"
+ },
+ {
+   "name": "Athul Krishnan M A",
+   "email": "athulk672@gmail.com",
+   "phone": "7591938596",
+   "letRegNo": "170094",
+   "letRank": "82",
+   "caste": "Nair",
+   "religion": " Hindu",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "75.81"
+ },
+ {
+   "name": "ABINS ASSIS",
+   "email": "abinsassis378@gmail.com",
+   "phone": "9633954971",
+   "letRegNo": "170093",
+   "letRank": "56",
+   "caste": " Islam",
+   "religion": "Muslim",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "83.32"
+ },
+ {
+   "name": "Renjandas DS",
+   "email": "renjanunni4@gmail.com",
+   "phone": "8778569628",
+   "letRegNo": "170697",
+   "letRank": "175",
+   "caste": "Ayyanavar",
+   "religion": " Christian",
+   "category": "OX",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "15",
+   "mark": "69"
+ },
+ {
+   "name": "Abishikth Sebastian",
+   "email": "abishikthsebastian@gmail.com",
+   "phone": "7558936172",
+   "letRegNo": "170097",
+   "letRank": "1599",
+   "caste": "Latin",
+   "religion": " Christian",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "5.7",
+   "mark": "89.1"
+ },
+ {
+   "name": "AKSHAYA SUNIL",
+   "email": "akshayasunil43@gmail.com",
+   "phone": "9048298357",
+   "letRegNo": "170572",
+   "letRank": "74",
+   "caste": "Hindu",
+   "religion": "",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "",
+   "mark": "70"
+ },
+ {
+   "name": "DIPIN T L",
+   "email": "dipin.anu@gmail.com",
+   "phone": "9747161618",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "LC CHRISTIAN OTHER THAN ANGLO INDIAN",
+   "religion": "Christain",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "31",
+   "mark": "74.3"
+ },
+ {
+   "name": "ALWIN KJ",
+   "email": "alwinjogee67@gmail.com",
+   "phone": "7907237709",
+   "letRegNo": "24234459",
+   "letRank": "144",
+   "caste": " Latin Catholics/OBC",
+   "religion": "Christain",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "3.4",
+   "mark": "83"
+ },
+ {
+   "name": "Anu Sabu",
+   "email": "anusabu803@gmail.com",
+   "phone": "6238116138",
+   "letRegNo": "24234234",
+   "letRank": "260",
+   "caste": " RCSC",
+   "religion": "",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "5.7",
+   "mark": "84.17"
+ },
+ {
+   "name": "Gokul G S",
+   "email": "gokulgs810@gmail.com",
+   "phone": "6238481981",
+   "letRegNo": "24234243",
+   "letRank": "2850",
+   "caste": "Nair",
+   "religion": " Hindu",
+   "category": "EWS",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "10",
+   "mark": "63.55"
+ },
+ {
+   "name": "DINO THOMAS",
+   "email": "dinothomas1996@gmail.com",
+   "phone": "8086982400",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "CHRISTIAN",
+   "religion": " RC",
+   "category": "Nil",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "6",
+   "mark": "82.65"
+ },
+ {
+   "name": "VISHNU SUJITH",
+   "email": "vishnusujith2000@gmail.com",
+   "phone": "8089011567",
+   "letRegNo": "171023",
+   "letRank": "207",
+   "caste": "ezhava",
+   "religion": "hindu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Civil Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "4",
+   "mark": "84.64"
+ },
+ {
+   "name": "Gokul G S",
+   "email": "gokulgs810@gmail.com",
+   "phone": "6238481981",
+   "letRegNo": "24234243",
+   "letRank": "259",
+   "caste": "Nair",
+   "religion": " Hindu",
+   "category": "EWS",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "10",
+   "mark": "63.5"
+ },
+ {
+   "name": "BASIL BABU",
+   "email": "gbbaysil456@gmail.com",
+   "phone": "7736908552",
+   "letRegNo": "170580",
+   "letRank": "8",
+   "caste": " Roman catholic",
+   "religion": "Christain",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "6",
+   "mark": "85"
+ },
+ {
+   "name": "Sanju Lal S S",
+   "email": "sanjusanjulalss@gmail.com",
+   "phone": "8921268523",
+   "letRegNo": "170606",
+   "letRank": "153",
+   "caste": "Ezhava",
+   "religion": " Hindu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "6",
+   "mark": "80.56"
+ },
+ {
+   "name": "ROJIN RAJ N",
+   "email": "rojinraj82@gmail.com",
+   "phone": "6235824451",
+   "letRegNo": "170741",
+   "letRank": "3759",
+   "caste": "Cristian",
+   "religion": "",
+   "category": "Yes",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "10",
+   "mark": "67"
+ },
+ {
+   "name": "FARIS P",
+   "email": "18030638farisp@gmail.com",
+   "phone": "8714418171",
+   "letRegNo": "170636",
+   "letRank": "25",
+   "caste": "Mappila",
+   "religion": " Islam",
+   "category": "OEC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "10",
+   "mark": "85"
+ },
+ {
+   "name": "Lalukrishnan",
+   "email": "lalukrishnancm@gmail.com",
+   "phone": "9447266701",
+   "letRegNo": "170990",
+   "letRank": "11",
+   "caste": "Paravan",
+   "religion": " Hindu",
+   "category": "SC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "21",
+   "mark": "64.2"
+ },
+ {
+   "name": "Manu v",
+   "email": "manu.velukutty@gmail.com",
+   "phone": "8848772488",
+   "letRegNo": "163440",
+   "letRank": "3184",
+   "caste": " SIUC Nadar",
+   "religion": "Christain",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "3",
+   "mark": "7173"
+ },
+ {
+   "name": "Arun .A .R",
+   "email": "arun18041984@gmail.com",
+   "phone": "9895153453",
+   "letRegNo": "170688",
+   "letRank": "124",
+   "caste": "Hindu",
+   "religion": " Nair",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10",
+   "mark": "69.67"
+ },
+ {
+   "name": "Ganesh Govind S",
+   "email": "ganeshgovind000@gmail.com",
+   "phone": "9061971379",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "Ezhava ",
+   "religion": " Hindu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Civil Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "",
+   "mark": "76"
+ },
+ {
+   "name": "SURESH S",
+   "email": "suresh85vssc@gmail.com",
+   "phone": "9446963896",
+   "letRegNo": "163192",
+   "letRank": "",
+   "caste": "Nadar",
+   "religion": "Hindu ",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "8",
+   "mark": "95.62"
+ },
+ {
+   "name": "SUBASH KUMAR S J",
+   "email": "subashkumarsj@gmail.com",
+   "phone": "9633565798",
+   "letRegNo": "170770",
+   "letRank": "266",
+   "caste": "NADAR",
+   "religion": " HINDU",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "21",
+   "mark": "89"
+ },
+ {
+   "name": "Kichu S Kumar",
+   "email": "kichuskumarvgr@gmail.com",
+   "phone": "9995263359",
+   "letRegNo": "170723",
+   "letRank": "248",
+   "caste": "Nair",
+   "religion": " Hindu",
+   "category": "EWS",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "10",
+   "mark": "69.2"
+ },
+ {
+   "name": "GOKUL SUDHAKAR",
+   "email": "gokulsudhakar4@gmail.com",
+   "phone": "8848968026",
+   "letRegNo": "170518",
+   "letRank": "2465",
+   "caste": " Ezhava",
+   "religion": "HINDU",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "1656",
+   "mark": "77"
+ },
+ {
+   "name": "sachin.o",
+   "email": "sachinolakkal05@gmail.com",
+   "phone": "9847927959",
+   "letRegNo": "24232611",
+   "letRank": "3351",
+   "caste": "Thiyya",
+   "religion": "HINDU",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Civil Engineering",
+       "2": "Civil Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "5.4",
+   "mark": "70.87"
+ },
+ {
+   "name": "VARUGHESE GEORGE",
+   "email": "vgeorge324@gmail.com",
+   "phone": "8547023264",
+   "letRegNo": "NA",
+   "letRank": "NA",
+   "caste": "Orthodox ",
+   "religion": "Christian",
+   "category": "NA",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "1",
+   "mark": "75.5"
+ },
+ {
+   "name": "SHIJUKUMAR A",
+   "email": "shiju.shijuantony@gmail.com",
+   "phone": "9895302555",
+   "letRegNo": "170940",
+   "letRank": "354",
+   "caste": "Nadar ",
+   "religion": "Christian",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "25",
+   "mark": "35.83"
+ },
+ {
+   "name": "Adarsh M",
+   "email": "adarshm0309@gmail.com",
+   "phone": "9048649112",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": " Nair",
+   "religion": "HINDU",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "6",
+   "mark": "75.81"
+ },
+ {
+   "name": "Johnson Raju",
+   "email": "johnsonraju337@gmail.com",
+   "phone": "9562984098",
+   "letRegNo": "",
+   "letRank": "",
+   "caste": "General",
+   "religion": " Christian",
+   "category": "No",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Civil Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "7",
+   "mark": "66"
+ },
+ {
+   "name": "VISHNU T V",
+   "email": "tv.vishnu937@gmail.com",
+   "phone": "9633084323",
+   "letRegNo": "17240749",
+   "letRank": "323",
+   "caste": "Nair",
+   "religion": "HINDU",
+   "category": "NA",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "15",
+   "mark": "45"
+ },
+ {
+   "name": "Thripthimol R S",
+   "email": "rsthripthi002@gmail.com",
+   "phone": "9037621370",
+   "letRegNo": "170469",
+   "letRank": "226",
+   "caste": " Nair",
+   "religion": "HINDU",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "5.7",
+   "mark": "87.4"
+ },
+ {
+   "name": "Sijin S Sanal kumar",
+   "email": "sijinssanal@gmail.com",
+   "phone": "8304996251",
+   "letRegNo": "24230288",
+   "letRank": "921",
+   "caste": "Nadar ",
+   "religion": "Christian",
+   "category": "SEBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "5",
+   "mark": "70"
+ },
+ {
+   "name": "R PANDIARAJ",
+   "email": "pandiaraj2505@gmail.com",
+   "phone": "8124324252",
+   "letRegNo": "171045",
+   "letRank": "252",
+   "caste": "MARAVAR ",
+   "religion": "HINDU",
+   "category": "PWD",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "15",
+   "mark": "82"
+ },
+ {
+   "name": "Satheesh S",
+   "email": "satheeshthirikkaparambil@gmail.com",
+   "phone": "9995607543",
+   "letRegNo": "164029",
+   "letRank": "2202",
+   "caste": "Nair",
+   "religion": "Hindu",
+   "category": "General",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Civil Engineering"
+    },
+   "distance": "6",
+   "mark": "84.1"
+ },
+ {
+   "name": "Jinny James",
+   "email": "jinnyjames123@gmail.com",
+   "phone": "9446351338",
+   "letRegNo": "17240635",
+   "letRank": "271",
+   "caste": "Christian",
+   "religion": "",
+   "category": "Na",
+   "priorityChoices":{
+
+       "1": "Mechanical Engineering",
+       "2": "Mechanical Engineering",
+       "3": "Mechanical Engineering"
+    },
+   "distance": "15",
+   "mark": "76"
+ },
+ {
+   "name": "Syam Ramesh R",
+   "email": "shyamramesh69@gmail.com",
+   "phone": "8075456247",
+   "letRegNo": "170758",
+   "letRank": "340",
+   "caste": "Ezhava ",
+   "religion": "Hindu",
+   "category": "OBC",
+   "priorityChoices":{
+
+       "1": "Electrical and Electronics Engineering",
+       "2": "Electrical and Electronics Engineering",
+       "3": "Electrical and Electronics Engineering"
+    },
+   "distance": "10",
+   "mark": "58.71"
+ }
+]

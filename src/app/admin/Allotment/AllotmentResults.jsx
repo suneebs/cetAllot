@@ -13,8 +13,8 @@ export const AllotmentResults = () => {
   useEffect(() => {
     const fetchAllottedStudents = async () => {
       try {
-        const departments = ["me", "ee", "mech"];
-        const data = { me: [], ee: [], mech: [] };
+        const departments = ["ce", "ee", "mech"];
+        const data = { ce: [], ee: [], mech: [] };
 
         for (const dept of departments) {
           const snapshot = await getDocs(collection(db, `allotment/${dept}/students`));
@@ -80,7 +80,7 @@ export const AllotmentResults = () => {
   }
 
   if (
-    allottedData.me.length === 0 &&
+    allottedData.ce.length === 0 &&
     allottedData.ee.length === 0 &&
     allottedData.mech.length === 0
   ) {
@@ -93,7 +93,7 @@ export const AllotmentResults = () => {
 
   return (
     <div className="space-y-8">
-      {renderTable(allottedData.me, "ME")}
+      {renderTable(allottedData.ce, "CE")}
       {renderTable(allottedData.ee, "EE")}
       {renderTable(allottedData.mech, "MECH")}
     </div>

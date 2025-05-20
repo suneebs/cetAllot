@@ -23,7 +23,7 @@ export const calculateAllotment = (applications, departments) => {
       const map = {
         "Electrical and Electronics Engineering": "ee",
         "Mechanical Engineering": "mech",
-        "Civil Engineering": "me"
+        "Civil Engineering": "ce"
       };
       return map[name] || null;
     };

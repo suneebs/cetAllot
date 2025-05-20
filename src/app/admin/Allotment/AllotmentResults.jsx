@@ -49,7 +49,7 @@ export const AllotmentResults = () => {
               <tr>
                 <th className="border px-4 py-2">#</th>
                 <th className="border px-4 py-2">Name</th>
-                <th className="border px-4 py-2">Email</th>
+                <th className="border px-4 py-2">Distance</th>
                 <th className="border px-4 py-2">LET Rank</th>
                 <th className="border px-4 py-2">Category</th>
               </tr>
@@ -59,9 +59,9 @@ export const AllotmentResults = () => {
                 <tr key={student.id} className="hover:bg-gray-50">
                   <td className="border px-4 py-2">{index + 1}</td>
                   <td className="border px-4 py-2 font-medium">{student.name}</td>
-                  <td className="border px-4 py-2">{student.email}</td>
+                  <td className="border px-4 py-2">{student.distance}</td>
                   <td className="border px-4 py-2">{student.letRank || "-"}</td>
-                  <td className="border px-4 py-2">{student.category || "-"}</td>
+                  <td className="border px-4 py-2">{student.reservationCategory || "-"}</td>
                 </tr>
               ))}
             </tbody>

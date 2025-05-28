@@ -990,24 +990,6 @@
    "mark": "70.68"
  },
  {
-   "name": "ANOOP S",
-   "email": "pioneerpools@outlook.com",
-   "phone": "9544875551",
-   "letRegNo": "24234247",
-   "letRank": "92",
-   "caste": "Ezhava",
-   "religion": " Hindu",
-   "category": "OBC",
-   "priorityChoices":{
-
-       "1": "Electrical and Electronics Engineering",
-       "2": "Civil Engineering",
-       "3": "Mechanical Engineering"
-    },
-   "distance": "10",
-   "mark": "63.34"
- },
- {
    "name": "LIJU GOLDEN",
    "email": "lijugolden@gmail.com",
    "phone": "9895751856",
@@ -1746,24 +1728,6 @@
    "mark": "70.87"
  },
  {
-   "name": "SHIJUKUMAR A",
-   "email": "shiju.shijuantony@gmail.com",
-   "phone": "9895302555",
-   "letRegNo": "24234290",
-   "letRank": "354",
-   "caste": "NADAR",
-   "religion": " CHRISTIAN",
-   "category": "OBC",
-   "priorityChoices":{
-
-       "1": "Electrical and Electronics Engineering",
-       "2": "Electrical and Electronics Engineering",
-       "3": "Electrical and Electronics Engineering"
-    },
-   "distance": "25",
-   "mark": "35.83"
- },
- {
    "name": "VARUGHESE GEORGE",
    "email": "vgeorge324@gmail.com",
    "phone": "8547023264",
@@ -1816,24 +1780,6 @@
     },
    "distance": "6",
    "mark": "75.81"
- },
- {
-   "name": "VINEETH KUMAR V T",
-   "email": "vineeth.b @gmail.com",
-   "phone": "9400948405",
-   "letRegNo": "24234317",
-   "letRank": "233",
-   "caste": " NAIR",
-   "religion": "HINDU",
-   "category": "GENERAL",
-   "priorityChoices":{
-
-       "1": "Mechanical Engineering",
-       "2": "Civil Engineering",
-       "3": "Electrical and Electronics Engineering"
-    },
-   "distance": "11",
-   "mark": "72"
  },
  {
    "name": "Johnson Raju",

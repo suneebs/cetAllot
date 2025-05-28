@@ -164,6 +164,7 @@ export const ApplicationTable = ({
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>#</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Address</TableHead>
@@ -182,8 +183,9 @@ export const ApplicationTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredApps.map((app) => (
+          {filteredApps.map((app,index) => (
             <TableRow key={app.id}>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.address}</TableCell>

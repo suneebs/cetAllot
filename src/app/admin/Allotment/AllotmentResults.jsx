@@ -13,8 +13,8 @@ export const AllotmentResults = () => {
   useEffect(() => {
     const fetchAllottedStudents = async () => {
       try {
-        const departments = ["me", "ee", "mech"];
-        const data = { me: [], ee: [], mech: [] };
+        const departments = ["ce", "ee", "mech"];
+        const data = { ce: [], ee: [], mech: [] };
 
         for (const dept of departments) {
           const snapshot = await getDocs(collection(db, `allotment/${dept}/students`));
@@ -49,7 +49,7 @@ export const AllotmentResults = () => {
               <tr>
                 <th className="border px-4 py-2">#</th>
                 <th className="border px-4 py-2">Name</th>
-                <th className="border px-4 py-2">Email</th>
+                <th className="border px-4 py-2">Distance</th>
                 <th className="border px-4 py-2">LET Rank</th>
                 <th className="border px-4 py-2">Category</th>
               </tr>
@@ -59,9 +59,9 @@ export const AllotmentResults = () => {
                 <tr key={student.id} className="hover:bg-gray-50">
                   <td className="border px-4 py-2">{index + 1}</td>
                   <td className="border px-4 py-2 font-medium">{student.name}</td>
-                  <td className="border px-4 py-2">{student.email}</td>
+                  <td className="border px-4 py-2">{student.distance}</td>
                   <td className="border px-4 py-2">{student.letRank || "-"}</td>
-                  <td className="border px-4 py-2">{student.category || "-"}</td>
+                  <td className="border px-4 py-2">{student.reservationCategory || "-"}</td>
                 </tr>
               ))}
             </tbody>
@@ -80,7 +80,7 @@ export const AllotmentResults = () => {
   }
 
   if (
-    allottedData.me.length === 0 &&
+    allottedData.ce.length === 0 &&
     allottedData.ee.length === 0 &&
     allottedData.mech.length === 0
   ) {
@@ -93,7 +93,7 @@ export const AllotmentResults = () => {
 
   return (
     <div className="space-y-8">
-      {renderTable(allottedData.me, "ME")}
+      {renderTable(allottedData.ce, "CE")}
       {renderTable(allottedData.ee, "EE")}
       {renderTable(allottedData.mech, "MECH")}
     </div>

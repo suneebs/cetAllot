@@ -25,9 +25,9 @@ export const runAllotmentHandler = async () => {
 
     console.log("⚙️ Running calculateAllotment...");
     const departments = [
-      { name: "me", totalSeats: 10 },
-      { name: "ee", totalSeats: 10 },
-      { name: "mech", totalSeats: 10 },
+      { name: "ce", totalSeats: 30 },
+      { name: "ee", totalSeats: 30 },
+      { name: "mech", totalSeats: 30 },
     ];
     const { updatedApplications, updatedDepartments } = calculateAllotment(applications, departments);
     console.log("🧮 Allotment completed. Departments:", updatedDepartments);

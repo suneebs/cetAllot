@@ -11,31 +11,43 @@ export const AllotmentResults = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAllottedStudents = async () => {
-      try {
-        const departments = ["ce", "ee", "mech"];
-        const data = { ce: [], ee: [], mech: [] };
+  const fetchAllottedStudents = async () => {
+    try {
+      const departments = ["ce", "ee", "mech"];
+      const data = { ce: [], ee: [], mech: [] };
 
-        for (const dept of departments) {
-          const snapshot = await getDocs(collection(db, `allotment/${dept}/students`));
-          snapshot.forEach((doc) => {
-            data[dept].push({
-              id: doc.id,
-              ...doc.data(),
-            });
-          });
-        }
+      for (const dept of departments) {
+        const snapshot = await getDocs(collection(db, `allotment/${dept}/students`));
+        const students = [];
 
-        setAllottedData(data);
-      } catch (error) {
-        console.error("Error fetching allotted students:", error);
-      } finally {
-        setLoading(false);
+        snapshot.forEach((doc) => {
+          const student = { id: doc.id, ...doc.data() };
+          students.push(student);
+        });
+
+        // Sort by letRank (increasing order)
+        students.sort((a, b) => {
+          const rankA = Number(a.letRank);
+          const rankB = Number(b.letRank);
+
+          if (isNaN(rankA)) return 1; // push invalid ranks to bottom
+          if (isNaN(rankB)) return -1;
+          return rankA - rankB;
+        });
+
+        data[dept] = students;
       }
-    };
 
-    fetchAllottedStudents();
-  }, []);
+      setAllottedData(data);
+    } catch (error) {
+      console.error("Error fetching allotted students:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAllottedStudents();
+}, []);
 
   const renderTable = (students, deptName) => {
     if (students.length === 0) return null;

@@ -21,10 +21,10 @@ const scrollbarStyles = `
 
 const baseNavigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Programs", href: "/programs" },
+  // { name: "About", href: "/about" },
+  // { name: "Programs", href: "/programs" },
   { name: "Admission", href: "/admission" },
-  { name: "Eligibility", href: "/eligibility" },
+  // { name: "Eligibility", href: "/eligibility" },
   { name: "Help", href: "/help" },
   { name: "Contact", href: "/contact" },
 ];

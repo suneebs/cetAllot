@@ -1,22 +1,17 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  Clock,
-  Briefcase,
-  FileText,
-  Users,
-  Calendar,
-  Building,
-  Aperture,
-  BookOpen,
-  CheckCircle,
-  GraduationCap,
+  ArrowRight, Clock, Briefcase, FileText, Users, Calendar,
+  Building, Aperture, BookOpen, CheckCircle, GraduationCap,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import {motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+import { db } from "@/firebase";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import AllottedTable from "./admin/Allotment/AllottedTable";
 export default function PartTimeBtech() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -27,10 +22,59 @@ export default function PartTimeBtech() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.2]);
 
+  const [isPublished, setIsPublished] = useState(false);
+  const [allottedData, setAllottedData] = useState({ ce: [], ee: [], mech: [] });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Check if published
+        const publishSnap = await getDoc(doc(db, "allotment", "publishStatus"));
+        const published = publishSnap.exists() && publishSnap.data().published;
+        setIsPublished(published);
+
+        // If not published, skip fetching
+        if (!published) return;
+
+        const departments = ["ce", "ee", "mech"];
+        const data = { ce: [], ee: [], mech: [] };
+
+        for (const dept of departments) {
+          const snapshot = await getDocs(collection(db, `allotment/${dept}/students`));
+          const students = [];
+
+          snapshot.forEach((doc) => {
+            const student = { id: doc.id, ...doc.data() };
+            students.push(student);
+          });
+
+          students.sort((a, b) => {
+            const rankA = Number(a.letRank);
+            const rankB = Number(b.letRank);
+            if (isNaN(rankA)) return 1;
+            if (isNaN(rankB)) return -1;
+            return rankA - rankB;
+          });
+
+          data[dept] = students;
+        }
+
+        setAllottedData(data);
+      } catch (err) {
+        console.error("Error loading data", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="relative overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        {/* Hero Section */}
+        {/* Existing UI */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -57,7 +101,7 @@ export default function PartTimeBtech() {
           </motion.p>
         </motion.div>
 
-        {/* Program Highlights with Parallax */}
+        {/* Result Info */}
         <motion.div
           style={{ y, opacity }}
           className="relative bg-gradient-to-br from-primary/10 to-blue-900/10 rounded-3xl p-8 mb-16 overflow-hidden"
@@ -72,8 +116,7 @@ export default function PartTimeBtech() {
             >
               Admission Results
             </motion.h2>
-            
-            {/* Admission Result Details */}
+
             <div className="bg-white rounded-xl shadow-md p-6 mb-8">
               <h3 className="text-xl font-semibold mb-4 text-primary">Result Announcement</h3>
               <div className="space-y-4">
@@ -84,7 +127,7 @@ export default function PartTimeBtech() {
                     <p className="text-muted-foreground text-sm">August 15, 2024</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <Calendar className="h-6 w-6 text-blue-500 mt-1 flex-shrink-0" />
                   <div>
@@ -92,7 +135,7 @@ export default function PartTimeBtech() {
                     <p className="text-muted-foreground text-sm">August 25, 2024</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <GraduationCap className="h-6 w-6 text-purple-500 mt-1 flex-shrink-0" />
                   <div>
@@ -103,7 +146,7 @@ export default function PartTimeBtech() {
               </div>
             </div>
 
-            {/* Merit List Information */}
+            {/* Info Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="border-primary/20">
                 <CardHeader>
@@ -141,10 +184,18 @@ export default function PartTimeBtech() {
               </Card>
             </div>
           </div>
+
           <div className="absolute inset-0 bg-white/30 z-0" />
         </motion.div>
 
-        
+        {/* Allotment Tables (if published) */}
+        {isPublished && !loading && (
+          <div className="space-y-8">
+            <AllottedTable students={allottedData.ce} deptName="CE" />
+            <AllottedTable students={allottedData.ee} deptName="EE" />
+            <AllottedTable students={allottedData.mech} deptName="MECH" />
+          </div>
+        )}
 
         {/* CTA */}
         <motion.div
@@ -161,12 +212,6 @@ export default function PartTimeBtech() {
             Selected candidates should complete the admission formalities to secure their seat in CET's prestigious part-time B.Tech program.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/admission-portal">
-              <Button size="lg" className="group">
-                Check Your Result{" "}
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
             <Link to="/contact">
               <Button size="lg" variant="outline">
                 <Users className="mr-2 h-4 w-4" />

@@ -214,7 +214,7 @@ export default function Help() {
         </motion.div>
 
         {/* Resources Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -263,10 +263,10 @@ export default function Help() {
               </Card>
             </motion.div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Contact Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
@@ -304,7 +304,7 @@ export default function Help() {
               </Link>
             </CardContent>
           </Card>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );

@@ -74,8 +74,8 @@ const CONTACT_INFO = {
   ],
   hours: [
     { day: "Monday - Friday", time: "9:00 AM - 5:00 PM" },
-    { day: "Saturday", time: "9:00 AM - 1:00 PM" },
-    { day: "Sunday", time: "Closed" },
+    // { day: "Saturday", time: "9:00 AM - 1:00 PM" },
+    { day: "Saturday & Sunday", time: "Closed" },
   ],
 };
 
@@ -277,7 +277,7 @@ export default function Contact() {
             </motion.div>
 
             {/* Map with loading animation */}
-            <motion.div
+            {/* <motion.div
               variants={item}
               className="mt-8 rounded-xl overflow-hidden h-[350px] border shadow-lg"
               initial={{ opacity: 0 }}
@@ -304,7 +304,7 @@ export default function Contact() {
                   </Marker>
                 </MapContainer>
               )}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           {/* Contact Form */}

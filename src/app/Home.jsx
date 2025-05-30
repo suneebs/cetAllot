@@ -155,12 +155,12 @@ useEffect(() => {
                 <Link to="/apply">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    className="w-full md:w-auto hover:shadow-lg hover:scale-105 transition-all duration-300"
                   >
                     Apply Now
                   </Button>
                 </Link>
-                <Link to="/programs">
+                {/* <Link to="/programs">
                   <Button
                     size="lg"
                     variant="outline"
@@ -168,7 +168,7 @@ useEffect(() => {
                   >
                     Explore Programs
                   </Button>
-                </Link>
+                </Link> */}
               </motion.div>
             </motion.div>
 
@@ -264,7 +264,7 @@ useEffect(() => {
                   icon: <BookOpen className="h-10 w-10 text-primary" />,
                 },
                 {
-                  title: "Electrical Engineering",
+                  title: "Civil Engineering",
                   description:
                     "Covers power generation, electrical machines, control systems, and renewable energy.",
                   icon: <GraduationCap className="h-10 w-10 text-primary" />,
@@ -291,13 +291,13 @@ useEffect(() => {
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`}
                       >
-                        <Button
+                        {/* <Button
                           variant="outline"
                           className="w-full group-hover:bg-primary/10 group-hover:text-primary"
                         >
                           Learn More{" "}
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        </Button> */}
                       </Link>
                     </CardContent>
                   </Card>
@@ -310,7 +310,7 @@ useEffect(() => {
               variants={fadeIn}
               transition={{ delay: 0.3 }}
             >
-              <Link to="/programs">
+              {/* <Link to="/programs">
                 <Button
                   variant="outline"
                   className="hover:scale-105 transition-transform"
@@ -318,7 +318,7 @@ useEffect(() => {
                   View All Programs{" "}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </Link>
+              </Link> */}
             </motion.div>
           </div>
         </div>
@@ -386,12 +386,12 @@ useEffect(() => {
               variants={fadeIn}
               transition={{ delay: 0.4 }}
             >
-              <Link to="/admission">
+              {/* <Link to="/admission">
                 <Button className="hover:scale-105 transition-transform">
                   Learn More About Admissions{" "}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </Link>
+              </Link> */}
             </motion.div>
           </div>
         </div>

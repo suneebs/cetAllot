@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 export default function PartTimeBtech() {

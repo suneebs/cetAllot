@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase";
 import {
   ArrowRight,
   BookOpen,
@@ -84,6 +86,26 @@ export default function Home() {
       });
     }
   }, [heroControls, heroInView]);
+
+  // Display Notices for Notice section
+const [notices, setNotices] = useState([]);
+
+useEffect(() => {
+  const fetchNotices = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, "notices"));
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNotices(data);
+    } catch (error) {
+      console.error("Error fetching notices:", error);
+    }
+  };
+
+  fetchNotices();
+}, []);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">
@@ -168,6 +190,59 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Notices Section */}
+<SectionWrapper>
+  <div className="py-16 bg-background">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div className="text-center mb-12" variants={fadeIn}>
+        <h2 className="text-3xl font-bold mb-4">Latest Notices</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Stay updated with important announcements and updates.
+        </p>
+      </motion.div>
+
+      <motion.div
+        className="max-w-3xl mx-auto"
+        variants={fadeIn}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="space-y-6">
+          {notices.length === 0 ? (
+            <p className="text-center text-muted-foreground">No notices at the moment.</p>
+          ) : (
+            notices
+              .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds) // latest first
+              .slice(0, 5) // show only the latest 5
+              .map((notice, index) => (
+                <motion.div
+                  key={notice.id}
+                  className="flex items-start gap-4 p-6 rounded-lg border bg-card hover:shadow-md transition-all group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="min-w-[120px] font-semibold text-primary">
+                    {new Date(notice.createdAt?.seconds * 1000).toLocaleDateString("en-GB")}
+                  </div>
+                  <div>
+                    <div className="font-medium">{notice.title}</div>
+                    <p className="text-muted-foreground">{notice.message}</p>
+                    {notice.important && (
+                      <span className="inline-block mt-2 px-2 py-1 text-xs font-semibold text-red-800 bg-red-100 border border-red-300 rounded">
+                        Important
+                      </span>
+                    )}
+                  </div>
+                </motion.div>
+              ))
+          )}
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</SectionWrapper>
+      
       {/* Programs Section */}
       <SectionWrapper>
         <div className="py-16 bg-background">
@@ -322,71 +397,7 @@ export default function Home() {
         </div>
       </SectionWrapper>
 
-      {/* Key Dates */}
-      <SectionWrapper>
-        <div className="py-16 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div className="text-center mb-12" variants={fadeIn}>
-              <h2 className="text-3xl font-bold mb-4">Key Dates</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Mark your calendar with these important dates for the 2024-2025
-                BTech admission cycle.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="max-w-3xl mx-auto"
-              variants={fadeIn}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="space-y-6">
-                {[
-                  {
-                    date: "January 15, 2024",
-                    event: "Application Portal Opens",
-                  },
-                  {
-                    date: "March 31, 2024",
-                    event: "Application Deadline",
-                  },
-                  {
-                    date: "April 15-30, 2024",
-                    event: "Interview Process",
-                  },
-                  {
-                    date: "May 15, 2024",
-                    event: "Admission Results Announced",
-                  },
-                  {
-                    date: "June 30, 2024",
-                    event: "Confirmation Deadline",
-                  },
-                  {
-                    date: "August 1, 2024",
-                    event: "Program Commencement",
-                  },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-start gap-4 p-6 rounded-lg border bg-card hover:shadow-md transition-all group"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <div className="min-w-[120px] font-semibold text-primary group-hover:scale-105 transition-transform">
-                      {item.date}
-                    </div>
-                    <div className="group-hover:translate-x-2 transition-transform">
-                      {item.event}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </SectionWrapper>
+      
 
       {/* CTA Section */}
       <SectionWrapper>

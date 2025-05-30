@@ -4,6 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription 
 } from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -23,6 +24,11 @@ export const NoticeDialog = ({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{notice?.id ? "Edit Notice" : "New Notice"}</DialogTitle>
+          <DialogDescription>
+    {notice?.id
+      ? "Update the notice details below."
+      : "Fill in the notice information to add a new notice."}
+  </DialogDescription>
         </DialogHeader>
         <div className="space-y-3">
           <div className="space-y-1">

@@ -98,11 +98,11 @@ export const ApplicationTable = ({
     const exportData = filteredApps.map((app) => ({
       Name: app.name,
       Email: app.email,
-      Address: app.address,
-      Age: app.age,
+      // Address: app.address,
+      // Age: app.age,
       Caste: app.caste,
       Religion: app.religion,
-      Category: app.category,
+      Category: app.reservationCategory,
       Distance: app.distance,
       Mark: app.mark,
       Phone: app.phone,
@@ -158,8 +158,8 @@ export const ApplicationTable = ({
             <TableHead>#</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Address</TableHead>
-            <TableHead>Age</TableHead>
+            {/* <TableHead>Address</TableHead> */}
+            {/* <TableHead>Age</TableHead> */}
             <TableHead>Caste</TableHead>
             <TableHead>Religion</TableHead>
             <TableHead>Category</TableHead>
@@ -179,11 +179,11 @@ export const ApplicationTable = ({
               <TableCell>{index + 1}</TableCell>
               <TableCell>{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
-              <TableCell>{app.address}</TableCell>
-              <TableCell>{app.age}</TableCell>
+              {/* <TableCell>{app.address}</TableCell> */}
+              {/* <TableCell>{app.age}</TableCell> */}
               <TableCell>{app.caste}</TableCell>
               <TableCell>{app.religion}</TableCell>
-              <TableCell>{app.category}</TableCell>
+              <TableCell>{app.reservationCategory}</TableCell>
               <TableCell>{app.distance}</TableCell>
               <TableCell>{app.mark}</TableCell>
               <TableCell>{app.phone}</TableCell>

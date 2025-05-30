@@ -57,5 +57,18 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "vite": "^6.2.0"
-  }
+  },
+  "description": "<img src=\"https://readme-typing-svg.demolab.com/?lines=Progress...;Loading+...;Almost+Done!\" alt=\"Typing SVG\" />",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suneebs/cetAllot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suneebs/cetAllot/issues"
+  },
+  "homepage": "https://github.com/suneebs/cetAllot#readme"
 }

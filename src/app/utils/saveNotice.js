@@ -3,13 +3,14 @@ import {
   collection,
   addDoc,
   updateDoc,
+  deleteDoc,
   doc,
   Timestamp,
 } from "firebase/firestore";
 
+// Add or update a notice
 export const saveNoticeToFirestore = async (notice) => {
   try {
-    console.log("📥 Notice received:", notice);
     if (notice?.id) {
       const ref = doc(db, "notices", notice.id);
       await updateDoc(ref, {
@@ -18,7 +19,6 @@ export const saveNoticeToFirestore = async (notice) => {
         important: notice.important,
         updatedAt: Timestamp.now(),
       });
-      console.log("📝 Notice updated successfully");
     } else {
       await addDoc(collection(db, "notices"), {
         title: notice.title,
@@ -26,10 +26,19 @@ export const saveNoticeToFirestore = async (notice) => {
         important: notice.important,
         createdAt: Timestamp.now(),
       });
-      console.log("✅ Notice added successfully");
     }
   } catch (error) {
-    console.error("❌ Error saving notice:", error);
-    throw error; // rethrow so AdminPage can catch
+    throw error;
+  }
+};
+
+// Delete a notice
+export const deleteNoticeFromFirestore = async (noticeId) => {
+  try {
+    if (!noticeId) throw new Error("Notice ID is required to delete.");
+    const ref = doc(db, "notices", noticeId);
+    await deleteDoc(ref);
+  } catch (error) {
+    throw error;
   }
 };

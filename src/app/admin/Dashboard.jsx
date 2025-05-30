@@ -5,11 +5,10 @@ import { DashboardHeader } from "./DashboardHeader";
 import { ApplicationTable } from "./ApplicationTable";
 import { NoticeCards } from "./Notices/NoticeCards";
 import { NoticeDialog } from "./Notices/NoticeDialog";
-import { AllotmentDialog } from "./AllotmentDialog";
 import { AllotmentResults } from "./Allotment/AllotmentResults";
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { saveNoticeToFirestore } from "../utils/saveNotice";
+import { saveNoticeToFirestore,deleteNoticeFromFirestore } from "../utils/saveNotice";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -20,12 +19,7 @@ export default function Dashboard() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [departmentFilter, setDepartmentFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
-
-  const [isAppDialogOpen, setAppDialogOpen] = useState(false);
   const [isNoticeDialogOpen, setNoticeDialogOpen] = useState(false);
-  const [isAllotmentDialogOpen, setAllotmentDialogOpen] = useState(false);
-
-  const [editAppData, setEditAppData] = useState(null);
   const [editNoticeData, setEditNoticeData] = useState(null);
 
   // Fetch data from Firestore
@@ -102,6 +96,24 @@ export default function Dashboard() {
     setIsLoading(false);
   }
 };
+const handleDeleteNotice = async (noticeId) => {
+  const confirm = window.confirm("Are you sure you want to delete this notice?");
+  if (!confirm) return;
+
+  setIsLoading(true);
+  try {
+    await deleteNoticeFromFirestore(noticeId);
+
+    // Update the local state without refetching everything
+    setNotices((prev) => prev.filter((n) => n.id !== noticeId));
+  } catch (error) {
+    console.error("Error deleting notice:", error);
+    // Optionally show a toast or alert here
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
 
   return (
@@ -150,8 +162,11 @@ export default function Dashboard() {
         <TabsContent value="notices">
           <NoticeCards
             notices={notices}
-            onEdit={() => {}} // Placeholder
-            onDelete={() => {}} // Placeholder
+            onEdit={(notice) => {
+            setEditNoticeData(notice);
+            setNoticeDialogOpen(true);
+            }}
+            onDelete={handleDeleteNotice}
             onNewNotice={() => {
               setEditNoticeData({
                 title: "",
@@ -171,15 +186,6 @@ export default function Dashboard() {
         notice={editNoticeData}
         onSave={handleSaveNotice}
         onChange={setEditNoticeData}
-        isLoading={isLoading}
-      />
-
-      <AllotmentDialog
-        open={isAllotmentDialogOpen}
-        onOpenChange={setAllotmentDialogOpen}
-        departments={departments}
-        applications={applications}
-        onPublish={() => {}} // Placeholder
         isLoading={isLoading}
       />
     </div>

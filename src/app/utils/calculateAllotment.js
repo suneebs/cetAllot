@@ -54,17 +54,30 @@ export const calculateAllotment = (applications, departments) => {
       };
     });
   
-    const eligibleApplications = applications
-      .filter((app) => {
-        const valid = parseFloat(app.distance) <= MAX_DISTANCE && parseFloat(app.mark) >= MIN_MARK;
-        if (!valid) {
-          console.log(`⛔ Skipping ${app.name || app.id} — distance: ${app.distance}, mark: ${app.mark}`);
-        }
-        return valid;
-      })
-      .sort((a, b) => parseFloat(b.mark) - parseFloat(a.mark));
-  
-    const allotments = [];
+  const isValidRank = (rank) => {
+  const num = Number(rank);
+  return !isNaN(num) && Number.isFinite(num) && num >= 1;
+};
+
+
+const eligibleApplications = applications
+  .filter((app) => {
+    const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
+    const validMark = parseFloat(app.mark) >= MIN_MARK;
+    const validRank = isValidRank(app.letRank);
+
+    const valid = validDistance && validMark && validRank;
+
+    if (!valid) {
+      console.log(`⛔ Skipping ${app.name || app.id} — distance: ${app.distance}, mark: ${app.mark}, rank: ${app.rank}`);
+    }
+
+    return valid;
+  })
+  .sort((a, b) => parseFloat(b.mark) - parseFloat(a.mark));
+
+  const allotments = [];
+
   
     for (const app of eligibleApplications) {
       const choices = extractChoices(app); // use new function

@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { DashboardHeader } from "./DashboardHeader";
 import { ApplicationTable } from "./ApplicationTable";
-import { NoticeCards } from "./NoticeCards";
-import { NoticeDialog } from "./NoticeDialog";
+import { NoticeCards } from "./Notices/NoticeCards";
+import { NoticeDialog } from "./Notices/NoticeDialog";
 import { AllotmentDialog } from "./AllotmentDialog";
 import { AllotmentResults } from "./Allotment/AllotmentResults";
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { saveNoticeToFirestore } from "../utils/saveNotice";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -78,6 +79,31 @@ export default function Dashboard() {
     return matchesSearch && matchesStatus;
   });
 
+  // Handling Save Notices
+  const handleSaveNotice = async () => {
+  if (!editNoticeData) return;
+  setIsLoading(true);
+  try {
+    await saveNoticeToFirestore(editNoticeData);
+    setNoticeDialogOpen(false);
+    setEditNoticeData(null);
+
+    // Re-fetch notices after saving
+    const noticesSnapshot = await getDocs(collection(db, "notices"));
+    const noticesData = noticesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setNotices(noticesData);
+  } catch (error) {
+    console.error("Error saving notice:", error);
+    // Optionally show user feedback (e.g., toast)
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+
   return (
     <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <DashboardHeader
@@ -143,7 +169,7 @@ export default function Dashboard() {
         open={isNoticeDialogOpen}
         onOpenChange={setNoticeDialogOpen}
         notice={editNoticeData}
-        onSave={() => {}} // Placeholder
+        onSave={handleSaveNotice}
         onChange={setEditNoticeData}
         isLoading={isLoading}
       />

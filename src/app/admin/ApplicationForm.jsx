@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -152,8 +151,8 @@ export const ApplicationForm = ({ onSuccess }) => {
           { name: "phone", label: required("Phone Number"), type: "number" },
           { name: "letRegNo", label: required("LET Registration Number"), type: "text" },
           { name: "letRank", label: required("LET Rank"), type: "number" },
-          { name: "caste", label: required("Caste") },
-          { name: "religion", label: required("Religion") },
+          // { name: "caste", label: required("Caste") },
+          // { name: "religion", label: required("Religion") },
           {
             name: "mark",
             label: required("Marks (%)"),
@@ -187,6 +186,62 @@ export const ApplicationForm = ({ onSuccess }) => {
           />
         ))}
 
+{/* Caste Dropdown */}
+<FormField
+  name="caste"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{required("Caste")}</FormLabel>
+      <FormControl>
+        <Select value={field.value} onValueChange={field.onChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select your caste" />
+          </SelectTrigger>
+          <SelectContent>
+            {["Latin Catholic","Roman Catholic","Orthodox Syrian",  "Jacobite Syrian", "Marthoma","Dalit Christian",
+            "Mappila","Islam",
+            "Nair","Ezhava","Nadar","Viswakarma","Thiyya","Pulaya","Cheramar", "Panan",  "Velan", "Chakyar","Brahmin", "Others"].map((opt) => (
+              <SelectItem key={opt} value={opt}>
+                {opt}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
+
+{/* Religion Dropdown */}
+<FormField
+  name="religion"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>{required("Religion")}</FormLabel>
+      <FormControl>
+        <Select value={field.value} onValueChange={field.onChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select your religion" />
+          </SelectTrigger>
+          <SelectContent>
+            {["Hindu", "Muslim/Islam", "Christian", "Other"].map((opt) => (
+              <SelectItem key={opt} value={opt}>
+                {opt}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
+
+        
+
         {/* Reservation Category */}
         <FormField
           name="reservationCategory"
@@ -199,7 +254,7 @@ export const ApplicationForm = ({ onSuccess }) => {
                     <SelectValue placeholder="Select your category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {["SC", "ST", "OBC", "General", "OEC", "Others"].map((opt) => (
+                    {["SC", "ST", "OBC", "General","Muslim", "OEC","SEBC", "Others"].map((opt) => (
                       <SelectItem key={opt} value={opt}>
                         {opt}
                       </SelectItem>

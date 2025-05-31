@@ -35,7 +35,7 @@ export default function Help() {
 
   const branches = [
     {
-      name: "Electrical Engineering (EE)",
+      name: "Civil Engineering (CE)",
       totalSeats: 30,
       categorySeats: {
         General: 15,

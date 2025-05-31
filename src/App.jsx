@@ -16,6 +16,9 @@ import Home from "./app/Home";
 // import About from "./app/About";
 import Admission from "./app/Admission";
 // import Eligibility from "./app/Eligibility";
+import NotFound from "./app/NotFound"; // Import at the 
+import HelpDesk from "./app/HelpDesk";
+
 
 import Apply from "./app/Apply";
 // import Programs from "./app/Programs";
@@ -47,6 +50,7 @@ const App = () => {
         {/* <Route path="/admin/dashboard" element={<Dashboard />} /> */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/help-desk" element={<HelpDesk />} />
         <Route
           path="/admin/dashboard"
           element={
@@ -55,6 +59,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+          <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       {/* </ThemeProvider> */}

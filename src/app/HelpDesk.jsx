@@ -17,10 +17,10 @@ const HelpDesk = () => {
           Our support team is not online right now. You can reach out through our contact page, and we’ll get back to you as soon as possible.
         </p>
         <Link
-          to="/contact"
+          to="/"
           className="inline-block bg-primary text-white font-semibold px-6 py-3 rounded-md hover:bg-primary-700 transition"
         >
-          Contact Support
+          Back To Home
         </Link>
       </div>
     </div>

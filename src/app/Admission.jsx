@@ -20,7 +20,7 @@ export default function PartTimeBtech() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.2]);
+  // const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.2]);
 
   const [isPublished, setIsPublished] = useState(false);
   const [allottedData, setAllottedData] = useState({ ce: [], ee: [], mech: [] });
@@ -88,7 +88,7 @@ export default function PartTimeBtech() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-             Admission Status
+            Admission Results
           </motion.h1>
 
           <motion.p
@@ -97,12 +97,13 @@ export default function PartTimeBtech() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-           View your admission status for the  B.Tech Program at College of Engineering Trivandrum
+           View your admission status for the B.Tech Program at College of Engineering Trivandrum 
           </motion.p>
         </motion.div>
 
-     {loading ? (
-      <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
+
+        {loading ? (
+  <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
   <svg
     className="animate-spin h-8 w-8 text-primary mb-4"
     xmlns="http://www.w3.org/2000/svg"
@@ -127,9 +128,6 @@ export default function PartTimeBtech() {
   <p className="text-sm text-muted-foreground mt-1">Please wait while we fetch the latest updates.</p>
 </div>
 
-  // <div className="text-center text-muted-foreground py-8">
-  //   Loading result status...
-  // </div>
 ) : isPublished ? (
   <div className="space-y-8">
     <AllottedTable students={allottedData.ce} deptName="CE" />
@@ -144,101 +142,88 @@ export default function PartTimeBtech() {
     </p>
   </div>
 )}
+{/* Program Highlights */}
+<motion.div
+  style={{ y }} // Only y, no opacity
+  className="relative bg-gradient-to-br from-primary/10 to-blue-900/10 rounded-3xl p-8 mb-16 overflow-hidden"
+>
+  <div className="relative z-10">
+    <h2 className="text-2xl font-bold mb-8 text-center">
+      Program Highlights
+    </h2>
 
-
-          {/* Program Highlights */}
-          <div className="mt-28 mb-46">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Working Professionals",
+          description:
+            "Designed for employed individuals with diploma qualifications",
+          icon: <Briefcase className="h-10 w-10 text-primary" />,
+        },
+        {
+          title: "Evening Classes",
+          description:
+            "6:00 PM to 9:00 PM on weekdays + Saturday sessions",
+          icon: <Clock className="h-10 w-10 text-primary" />,
+        },
+        {
+          title: "Duration",
+          description:
+            "4-year program (8 semesters) following Kerala University syllabus",
+          icon: <Calendar className="h-10 w-10 text-primary" />,
+        },
+        {
+          title: "Eligibility",
+          description:
+            "Currently No such Eligibility Criteria has to be mentioned",
+          icon: <BookOpen className="h-10 w-10 text-primary" />,
+        },
+        {
+          title: "Specializations",
+          description:
+            "Electronics, Mechanical and Civil Engineering",
+          icon: <Aperture className="h-10 w-10 text-primary" />,
+        },
+        {
+          title: "Approval",
+          description: "Approved by AICTE and Kerala University",
+          icon: <Building className="h-10 w-10 text-primary" />,
+        },
+      ].map((item, index) => (
         <motion.div
-          style={{ y, opacity }}
-          className="relative bg-gradient-to-br from-primary/10 to-blue-900/10 rounded-3xl p-8 mb-16 overflow-hidden"
+          key={index}
+          initial={{ y: 50 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.15 }}
         >
-          <div className="relative z-10">
-            <motion.h2
-              className="text-2xl font-bold mb-8 text-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
-              Program Highlights
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Working Professionals",
-                  description:
-                    "Designed for employed individuals with diploma qualifications",
-                  icon: <Briefcase className="h-10 w-10 text-primary" />,
-                },
-                {
-                  title: "Evening Classes",
-                  description:
-                    "6:00 PM to 9:00 PM on weekdays + Saturday sessions",
-                  icon: <Clock className="h-10 w-10 text-primary" />,
-                },
-                {
-                  title: "Duration",
-                  description:
-                    "4-year program (8 semesters) following Kerala University syllabus",
-                  icon: <Calendar className="h-10 w-10 text-primary" />,
-                },
-                {
-                  title: "Eligibility",
-                  description:
-                    "Currently No such Eligibility Criteria has to be mentioned",
-                  icon: <BookOpen className="h-10 w-10 text-primary" />,
-                },
-                {
-                  title: "Specializations",
-                  description:
-                    "Electronics, Mechanical and Civil Engineering",
-                  icon: <Aperture className="h-10 w-10 text-primary" />,
-                },
-                {
-                  title: "Approval",
-                  description: "Approved by AICTE and Kerala University",
-                  icon: <Building className="h-10 w-10 text-primary" />,
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                >
-                  <Card className="transition-all hover:shadow-md h-full">
-                    <CardHeader>
-                      <motion.div
-                        className="mb-4"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring" }}
-                      >
-                        {item.icon}
-                      </motion.div>
-                      <CardTitle>{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <div className="absolute inset-0 bg-white/30 z-0" />
+          <Card className="transition-all hover:shadow-md h-full">
+            <CardHeader>
+              <motion.div
+                className="mb-4"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring" }}
+              >
+                {item.icon}
+              </motion.div>
+              <CardTitle>{item.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">{item.description}</p>
+            </CardContent>
+          </Card>
         </motion.div>
-</div>
-
-   
+      ))}
+    </div>
+  </div>
+  <div className="absolute inset-0 bg-white/30 z-0" />
+</motion.div>
 
         
 
         {/* CTA */}
         <motion.div
-          className="text-center mt-28"
+          className="text-center mt-68"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

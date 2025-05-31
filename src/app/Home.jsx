@@ -189,59 +189,98 @@ useEffect(() => {
           </div>
         </div>
       </section>
-
-      {/* Notices Section */}
+      {/* notice section  */}
 <SectionWrapper>
-  <div className="py-16 bg-background">
+  <div className="py-16 bg-gray-50">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.div className="text-center mb-12" variants={fadeIn}>
-        <h2 className="text-3xl font-bold mb-4">Latest Notices</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+      {/* Header */}
+      <motion.div
+        className="text-center mb-14"
+        variants={fadeIn}
+        initial="hidden"
+        animate="visible"
+      >
+        <h2 className="text-4xl font-extrabold text-gray-900 mb-2">
+          Latest Notices
+        </h2>
+        <p className="text-gray-500 max-w-xl mx-auto text-lg">
           Stay updated with important announcements and updates.
         </p>
       </motion.div>
 
+      {/* Notices List */}
       <motion.div
-        className="max-w-3xl mx-auto"
+        className="max-w-4xl mx-auto grid gap-6 sm:grid-cols-1 md:grid-cols-2"
         variants={fadeIn}
+        initial="hidden"
+        animate="visible"
         transition={{ delay: 0.2 }}
       >
-        <div className="space-y-6">
-          {notices.length === 0 ? (
-            <p className="text-center text-muted-foreground">No notices at the moment.</p>
-          ) : (
-            notices
-              .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds) // latest first
-              .slice(0, 5) // show only the latest 5
-              .map((notice, index) => (
-                <motion.div
-                  key={notice.id}
-                  className="flex items-start gap-4 p-6 rounded-lg border bg-card hover:shadow-md transition-all group"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="min-w-[120px] font-semibold text-primary">
-                    {new Date(notice.createdAt?.seconds * 1000).toLocaleDateString("en-GB")}
-                  </div>
-                  <div>
-                    <div className="font-medium">{notice.title}</div>
-                    <p className="text-muted-foreground">{notice.message}</p>
-                    {notice.important && (
-                      <span className="inline-block mt-2 px-2 py-1 text-xs font-semibold text-red-800 bg-red-100 border border-red-300 rounded">
-                        Important
-                      </span>
+        {notices.length === 0 ? (
+          <p className="text-center text-gray-400 col-span-full">
+            No notices at the moment.
+          </p>
+        ) : (
+          notices
+            .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds)
+            .slice(0, 6)
+            .map((notice, index) => (
+              <motion.div
+                key={notice.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 * index }}
+                whileHover={{ scale: 1.03 }}
+                className="bg-white shadow-lg rounded-xl border border-gray-200 p-6 flex flex-col justify-between group cursor-pointer transition-transform"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <time
+                    className="text-sm font-semibold text-indigo-600"
+                    dateTime={new Date(
+                      notice.createdAt?.seconds * 1000
+                    ).toISOString()}
+                  >
+                    {new Date(notice.createdAt?.seconds * 1000).toLocaleDateString(
+                      "en-GB",
+                      { day: "2-digit", month: "short", year: "numeric" }
                     )}
-                  </div>
-                </motion.div>
-              ))
-          )}
-        </div>
+                  </time>
+
+                  {notice.important && (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700 border border-red-300 select-none">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 8v4m0 4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        ></path>
+                      </svg>
+                      Important
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                  {notice.title}
+                </h3>
+
+                <p className="text-gray-600 line-clamp-4">{notice.message}</p>
+              </motion.div>
+            ))
+        )}
       </motion.div>
     </div>
   </div>
 </SectionWrapper>
+
       
       {/* Programs Section */}
       <SectionWrapper>

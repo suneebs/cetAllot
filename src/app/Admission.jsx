@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+
 
 import { db } from "@/firebase";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
@@ -189,13 +189,34 @@ export default function PartTimeBtech() {
         </motion.div>
 
         {/* Allotment Tables (if published) */}
-        {isPublished && !loading && (
+        {/* {isPublished && !loading && (
           <div className="space-y-8">
             <AllottedTable students={allottedData.ce} deptName="CE" />
             <AllottedTable students={allottedData.ee} deptName="EE" />
             <AllottedTable students={allottedData.mech} deptName="MECH" />
           </div>
-        )}
+        )} */}
+
+        {loading ? (
+  <div className="text-center text-muted-foreground py-8">
+    Loading result status...
+  </div>
+) : isPublished ? (
+  <div className="space-y-8">
+    <AllottedTable students={allottedData.ce} deptName="CE" />
+    <AllottedTable students={allottedData.ee} deptName="EE" />
+    <AllottedTable students={allottedData.mech} deptName="MECH" />
+  </div>
+) : (
+  <div className="text-center py-12">
+    <h3 className="text-2xl font-semibold mb-4">Results Not Yet Published</h3>
+    <p className="text-muted-foreground text-lg">
+      The admission results will be published soon. Please check back later.
+    </p>
+  </div>
+)}
+
+        
 
         {/* CTA */}
         <motion.div

@@ -34,19 +34,29 @@ export const DashboardHeader = () => {
   };
 
   return (
-    <div className="flex justify-between items-center mb-6">
-      <div>
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <p className="text-muted-foreground">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+      <div className="w-full sm:w-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold">Admin Dashboard</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
           Manage BTech applications and departments
         </p>
       </div>
-      <div className="flex gap-2">
-        <Button variant="outline" onClick={handleUploadRealData} disabled={uploading}>
+      <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+        <Button 
+          variant="outline" 
+          onClick={handleUploadRealData} 
+          disabled={uploading}
+          className="w-full sm:w-auto justify-center sm:justify-start"
+        >
           <UploadCloud className="mr-2 h-4 w-4" />
           {uploading ? "Uploading..." : "Upload Real Data"}
         </Button>
-        <Button variant="outline" onClick={handleRunAllotment} disabled={loadingAllotment}>
+        <Button 
+          variant="outline" 
+          onClick={handleRunAllotment} 
+          disabled={loadingAllotment}
+          className="w-full sm:w-auto justify-center sm:justify-start"
+        >
           <Check className="mr-2 h-4 w-4" />
           {loadingAllotment ? "Running..." : "Run Allotment"}
         </Button>

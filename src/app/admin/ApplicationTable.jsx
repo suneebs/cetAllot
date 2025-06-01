@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import ApplicationModal from "./ApplicationModal";
 import { toast } from "sonner";
-import * as XLSX from "xlsx"; // ✅ added for export
+import * as XLSX from "xlsx";
 
 export const ApplicationTable = ({
   departments,
@@ -62,9 +62,7 @@ export const ApplicationTable = ({
   }, []);
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this application?");
-    if (!confirmDelete) return;
-
+    if (!window.confirm("Are you sure you want to delete this application?")) return;
     try {
       await deleteDoc(doc(db, "applications", id));
       toast.success("Application deleted successfully");
@@ -93,13 +91,10 @@ export const ApplicationTable = ({
     return matchesSearch && matchesStatus && matchesDepartment;
   });
 
-  // ✅ EXPORT FUNCTIONALITY
   const onExport = () => {
     const exportData = filteredApps.map((app) => ({
       Name: app.name,
       Email: app.email,
-      // Address: app.address,
-      // Age: app.age,
       Caste: app.caste,
       Religion: app.religion,
       Category: app.reservationCategory,
@@ -122,96 +117,152 @@ export const ApplicationTable = ({
 
   return (
     <>
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex gap-2 flex-1">
-          <Input
-            placeholder="Search applications..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="max-w-sm"
-          />
-          
-          <div className="flex justify-end">
-        <Button
-          variant="outline"
-          className="gap-1"
-          onClick={onExport}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Download className="h-4 w-4" />
-          )}
-          Export
-        </Button>
-      </div>
+      {/* Header & Filters */}
+      <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+        <Input
+          placeholder="Search applications..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="max-w-md w-full"
+          type="search"
+        />
+
+        <div className="flex gap-2 flex-wrap justify-end items-center">
+          {/* Export Button */}
+          <Button
+            variant="outline"
+            className="flex items-center gap-2"
+            onClick={onExport}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : (
+              <Download className="h-5 w-5" />
+            )}
+            Export
+          </Button>
+
+          {/* New Application Button */}
+          <Button
+            className="flex items-center gap-2 bg-primary hover:bg-indigo-700 text-white"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <PlusCircle className="h-5 w-5" />
+            New Application
+          </Button>
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>
-          <PlusCircle className="mr-2 h-4 w-4" /> New Application
-        </Button>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>#</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            {/* <TableHead>Address</TableHead> */}
-            {/* <TableHead>Age</TableHead> */}
-            <TableHead>Caste</TableHead>
-            <TableHead>Religion</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Distance</TableHead>
-            <TableHead>Mark</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Priority 1</TableHead>
-            <TableHead>Priority 2</TableHead>
-            <TableHead>Priority 3</TableHead>
-            <TableHead>Let Reg No</TableHead>
-            <TableHead>Let Rank</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredApps.map((app,index) => (
-            <TableRow key={app.id}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{app.name}</TableCell>
-              <TableCell>{app.email}</TableCell>
-              {/* <TableCell>{app.address}</TableCell> */}
-              {/* <TableCell>{app.age}</TableCell> */}
-              <TableCell>{app.caste}</TableCell>
-              <TableCell>{app.religion}</TableCell>
-              <TableCell>{app.reservationCategory}</TableCell>
-              <TableCell>{app.distance}</TableCell>
-              <TableCell>{app.mark}</TableCell>
-              <TableCell>{app.phone}</TableCell>
-              <TableCell>{app.priorityChoices?.[1]}</TableCell>
-              <TableCell>{app.priorityChoices?.[2]}</TableCell>
-              <TableCell>{app.priorityChoices?.[3]}</TableCell>
-              <TableCell>{app.letRegNo}</TableCell>
-              <TableCell>{app.letRank}</TableCell>
+     {/* Table Container */}
+<div className="overflow-x-auto rounded-xl border border-gray-200 shadow-lg">
+  <Table className="min-w-full table-auto">
+    {/* Header */}
+ <TableHeader className="bg-primary sticky top-0 z-10 shadow-md">
+  <TableRow>
+    {[
+      "No.", "Full Name", "Email", "Caste", "Religion", "Category", "Distance (km)",
+      "Score", "Phone", "Priority 1", "Priority 2", "Priority 3", "LET Reg No", "LET Rank", "Actions"
+    ].map((title, i) => (
+      <TableHead
+        key={i}
+        className={`px-4 py-3.5 text-left text-sm font-bold text-white uppercase tracking-wider border-r border-indigo-400/50 ${
+          title === "Actions" ? "text-right border-r-0 pr-6" : ""
+        }`}
+      >
+        {title}
+      </TableHead>
+    ))}
+  </TableRow>
+</TableHeader> 
 
-              <TableCell className="text-right space-x-2 flex items-center">
-                <Button size="sm" variant="outline" onClick={() => onEdit(app)}>
-                  <Pencil className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="destructive"
-                  onClick={() => handleDelete(app.id)}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </TableCell>
-              
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    {/* Body */}
+    <TableBody className="divide-y divide-gray-100 bg-white text-gray-800 text-sm">
+      {filteredApps.length === 0 && (
+        <TableRow>
+          <TableCell colSpan={16} className="text-center py-6 text-gray-400">
+            No applications found.
+          </TableCell>
+        </TableRow>
+      )}
 
-      
+      {filteredApps.map((app, index) => (
+        <TableRow
+  key={app.id}
+  className="hover:bg-indigo-50 even:bg-gray-50 transition-colors duration-200"
+>
+  {/* All cells except last have right border */}
+  <TableCell className="px-4 py-3 font-medium border-r border-gray-200">
+    {index + 1}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.name}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.email}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.caste}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.religion}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.reservationCategory}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.distance}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.mark}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.phone}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.priorityChoices?.[1]}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.priorityChoices?.[2]}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.priorityChoices?.[3]}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.letRegNo}
+  </TableCell>
+  <TableCell className="px-4 py-3 border-r border-gray-200">
+    {app.letRank}
+  </TableCell>
+  
+  {/* Last cell (Actions) has no right border */}
+  <TableCell className="px-4 py-3 text-right">
+    <div className="flex justify-end items-center gap-2">
+      <Button
+        size="sm"
+        variant="outline"
+        className="hover:bg-indigo-100 transition-colors duration-200"
+        onClick={() => onEdit(app)}
+        aria-label={`Edit ${app.name}`}
+      >
+        <Pencil className="w-4 h-4 text-indigo-600" />
+      </Button>
+      <Button
+        size="sm"
+        variant="destructive"
+        onClick={() => handleDelete(app.id)}
+        aria-label={`Delete ${app.name}`}
+      >
+        <Trash2 className="w-4 h-4" />
+      </Button>
+    </div>
+  </TableCell>
+</TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</div>
+
 
       <ApplicationModal
         open={isModalOpen}

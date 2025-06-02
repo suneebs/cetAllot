@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 // import { Button } from "../components/ui/Button";
 // import Button from './ui/Button'; // if inside the same folder
-import { Button } from "./ui/Button.jsx";
+import { Button } from "./ui/Button";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";

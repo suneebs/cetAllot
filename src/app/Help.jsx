@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight, Info, BookOpen, Users, Phone } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Info, Users } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Card,
   CardContent,
@@ -9,10 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
-import { motion, useScroll, useTransform } from "framer-motion";
 
-export default function Help() {
+export default function HelpCenter() {
   const containerRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -33,44 +32,29 @@ export default function Help() {
     },
   };
 
-  const branches = [
-    {
-      name: "Civil Engineering (CE)",
-      totalSeats: 30,
-      categorySeats: {
-        General: 15,
-        OBC: 8,
-        SC: 4,
-        ST: 3,
-      },
-      description:
-        "Focuses on power systems, electrical machines, and control systems",
-    },
-    {
-      name: "Electronics & Communication (EC)",
-      totalSeats: 30,
-      categorySeats: {
-        General: 15,
-        OBC: 8,
-        SC: 4,
-        ST: 3,
-      },
-      description:
-        "Covers analog/digital electronics, communication systems, and VLSI",
-    },
-    {
-      name: "Mechanical Engineering (ME)",
-      totalSeats: 30,
-      categorySeats: {
-        General: 15,
-        OBC: 8,
-        SC: 4,
-        ST: 3,
-      },
-      description:
-        "Includes thermal engineering, manufacturing, and machine design",
-    },
-  ];
+  const branches = ["Civil Engineering (CE)", "Electronics & Communication (EC)", "Mechanical Engineering (ME)"];
+
+  const commonReservation = {
+    "State Merit": "50%",
+    "EWS": "10%",
+    "SEBC":"30%",
+    "Ezhava": "9%",
+    "Muslim": "8%",
+    "Other Backward Hindu": "3%",
+    "Latin Catholic and Anglo Indian": "3%",
+    "Dheevara": "2%",
+    "Viswakarma": "2%",
+    "Kusavan": "1%",
+    "OBC Christian": "1%",
+    "Kudumbi": "1%",
+    "Scheduled Caste": "8%",
+    "Scheduled Tribe": "2%",
+    "PD (Physically Disabled)": "5% (min. of 40% disability)",
+    "Transgender": "1 seat",
+    "Sports Quota": "1 seat",
+    "DTE Staff": "1 seat",
+    "Central Govt. Employee": "1 seat",
+  };
 
   const faqs = [
     {
@@ -96,7 +80,7 @@ export default function Help() {
   ];
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden min-h-screen">
+    <div ref={containerRef} className="relative overflow-hidden min-h-screen bg-white">
       {/* Parallax Background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white -z-10"
@@ -104,207 +88,104 @@ export default function Help() {
       />
 
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Page Header */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="max-w-3xl mx-auto text-center mb-12"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6">
-            Help Center
-          </h1>
-          <p className="text-xl text-gray-600">
-            College of Engineering Trivandrum (CET)
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Help Center</h1>
+          <p className="text-lg text-gray-600">College of Engineering Trivandrum (CET)</p>
         </motion.div>
 
-        {/* Seat Availability Section */}
+        {/* Branch List */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="max-w-4xl mx-auto mb-12"
+        >
+          <Card className="border border-blue-100 shadow-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-xl text-primary">
+                <Users className="h-6 w-6" />
+                Departments Offering BTech for working professionals.
+              </CardTitle>
+              <CardDescription>All departments follow the same seat structure</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+                {branches.map((branch, idx) => (
+                  <li key={idx}>{branch}</li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Common Reservation Table */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="max-w-6xl mx-auto mb-16"
+          className="max-w-4xl mx-auto mb-16"
         >
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-black">
-            <Users className="h-6 w-6" /> Seat Availability (2024 Intake)
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {branches.map((branch, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <Card className="h-full border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-xl text-primary">
-                      {branch.name}
-                    </CardTitle>
-                    <CardDescription>{branch.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">Total Seats:</span>
-                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
-                          {branch.totalSeats}
-                        </span>
-                      </div>
-
-                      <div className="border-t pt-4">
-                        <h4 className="font-medium mb-3">
-                          Category-wise Distribution:
-                        </h4>
-                        <div className="space-y-2">
-                          {Object.entries(branch.categorySeats).map(
-                            ([category, seats]) => (
-                              <div
-                                key={category}
-                                className="flex justify-between"
-                              >
-                                <span>{category}:</span>
-                                <span className="font-medium">{seats}</span>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <Card className="border border-blue-100 shadow-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-xl text-primary">
+                <Users className="h-6 w-6" />
+                Reservation-Based Seat Distribution
+              </CardTitle>
+              <CardDescription>Total Intake per Branch: 30 Seats</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                {Object.entries(commonReservation).map(([category, seats]) => (
+                  <div key={category} className="flex justify-between border-b py-1">
+                    <span className="text-gray-700">{category}</span>
+                    <span className="font-medium text-right">{seats}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
 
-        {/* FAQs Section */}
+        {/* FAQ Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="max-w-4xl mx-auto mb-16"
+          className="max-w-4xl mx-auto"
         >
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-primary">
-            <Info className="h-6 w-6" /> Frequently Asked Questions
+          <h2 className="text-2xl font-semibold text-primary flex items-center gap-2 mb-6">
+            <Info className="h-6 w-6" />
+            Frequently Asked Questions
           </h2>
 
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 + index * 0.1 }}
               >
-                <Card className="border border-gray-200">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg">{faq.question}</CardTitle>
+                <Card className="border border-gray-100 shadow-sm">
+                  <CardHeader className="pb-1">
+                    <CardTitle className="text-base font-medium">
+                      {faq.question}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">{faq.answer}</p>
+                    <p className="text-gray-700 text-sm">{faq.answer}</p>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
           </div>
         </motion.div>
-
-        {/* Resources Section */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="max-w-4xl mx-auto mb-16"
-        >
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-primary">
-            <BookOpen className="h-6 w-6" /> Helpful Resources
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div whileHover={{ scale: 1.02 }}>
-              <Card className="border border-blue-100">
-                <CardHeader>
-                  <CardTitle className="text-lg">
-                    Syllabus & Curriculum
-                  </CardTitle>
-                  <CardDescription>
-                    Detailed syllabus for all semesters
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link to="/syllabus">
-                    <Button variant="outline" className="gap-2 w-full">
-                      View Syllabus <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div whileHover={{ scale: 1.02 }}>
-              <Card className="border border-blue-100">
-                <CardHeader>
-                  <CardTitle className="text-lg">Academic Calendar</CardTitle>
-                  <CardDescription>
-                    Important dates and schedules
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link to="/calendar">
-                    <Button variant="outline" className="gap-2 w-full">
-                      View Calendar <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </motion.div> */}
-
-        {/* Contact Section */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-primary">
-                <Phone className="h-6 w-6" /> Need More Help?
-              </CardTitle>
-              <CardDescription>
-                Contact our part-time BTech program office
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p>
-                  <strong>Email:</strong> ptbtech@cet.ac.in
-                </p>
-                <p>
-                  <strong>Phone:</strong> +91 471 251 5530
-                </p>
-                <p>
-                  <strong>Office Hours:</strong> Mon-Fri, 10 AM to 4 PM
-                </p>
-              </div>
-            </CardContent>
-            <CardContent>
-              <Link to="/contact">
-                <div className="flex justify-center">
-                  <Button className="bg-primary gap-2 items-center">
-                    Contact Us <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </Link>
-            </CardContent>
-          </Card>
-        </motion.div> */}
       </div>
     </div>
   );

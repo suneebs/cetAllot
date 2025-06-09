@@ -14,7 +14,7 @@ const AllottedTable = ({ students, deptName }) => {
             <tr>
               <th className="px-3 py-3 rounded-tl-2xl border-r border-white/30">No.</th>
               <th className="px-3 py-3 border-r border-white/30">Name</th>
-              <th className="px-3 py-3 border-r border-white/30">Distance</th>
+              {/* <th className="px-3 py-3 border-r border-white/30">Distance</th> */}
               <th className="px-3 py-3 border-r border-white/30">Rank</th>
               <th className="px-3 py-3 rounded-tr-2xl">Category</th>
             </tr>
@@ -31,9 +31,9 @@ const AllottedTable = ({ students, deptName }) => {
                 <td className="px-3 py-3 border-r border-gray-200/50 whitespace-nowrap">
                   {student.name}
                 </td>
-                <td className="px-3 py-3 border-r border-gray-200/50 whitespace-nowrap">
+                {/* <td className="px-3 py-3 border-r border-gray-200/50 whitespace-nowrap">
                   {student.distance}km
-                </td>
+                </td> */}
                 <td className="px-3 py-3 border-r border-gray-200/50 whitespace-nowrap">
                   {student.letRank || "-"}
                 </td>

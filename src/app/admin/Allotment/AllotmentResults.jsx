@@ -80,10 +80,10 @@ export const AllotmentResults = () => {
   const workbook = XLSX.utils.book_new();
 
   const appendWithDept = (students, deptLabel) => {
-    const sheetData = students.map((student) => ({
+    const sheetData = students.map((student,index) => ({
         Name: student.name,
         LET_Rank: student.letRank,
-        Reservation_Category: student.reservationCategory,
+    Reservation_Category: index < 15 ? "Merit" : student.reservationCategory,
         Department: deptLabel
     }));
     const worksheet = XLSX.utils.json_to_sheet(sheetData);
@@ -128,7 +128,7 @@ export const AllotmentResults = () => {
           className="flex items-center gap-2"
         >
           <Download className="h-5 w-5" />
-          Export to Excel
+          Export
         </Button>
 
         <Button
@@ -141,9 +141,9 @@ export const AllotmentResults = () => {
         </Button>
       </div>
 
-      <AllottedTable students={allottedData.ce} deptName="CE" />
-      <AllottedTable students={allottedData.ee} deptName="EE" />
-      <AllottedTable students={allottedData.mech} deptName="MECH" />
+      <AllottedTable students={allottedData.ce} deptName="Civil Engineering" />
+      <AllottedTable students={allottedData.ee} deptName="Electrical & Electronics Engineering" />
+      <AllottedTable students={allottedData.mech} deptName="Mechanical Engineering" />
     </div>
   );
 };

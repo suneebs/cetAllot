@@ -42,10 +42,30 @@ export const calculateAllotment = (applications, departments) => {
     const smSeats = Math.floor(totalSeats * 0.5); // 50%
     const remainingSeats = totalSeats - smSeats;
 
-    const seatDistribution = {};
-    Object.keys(reservationQuota).forEach((key) => {
-      seatDistribution[key] = Math.floor((reservationQuota[key] / 100) * remainingSeats);
-    });
+    const seatDistribution = {
+  SM: Math.floor(totalSeats * 0.5),
+  EWS: Math.floor(totalSeats * 0.1),
+  SC: Math.floor(totalSeats * 0.08),
+  ST: Math.floor(totalSeats * 0.02),
+  PD: Math.ceil(totalSeats * 0.05), // Always round up for PD
+  TG: 1,
+  SPORTS: 1,
+  STAFF: 1,
+  CENTRAL: 1,
+};
+
+// SEBC: Total 30%
+const sebcTotal = Math.floor(totalSeats * 0.3);
+seatDistribution["EZ"] = Math.floor(sebcTotal * 0.3);   // 9%
+seatDistribution["M"] = Math.floor(sebcTotal * 0.2667); // 8%
+seatDistribution["BH"] = Math.floor(sebcTotal * 0.1);   // 3%
+seatDistribution["LC"] = Math.floor(sebcTotal * 0.1);   // 3%
+seatDistribution["DV"] = Math.floor(sebcTotal * 0.0667); // 2%
+seatDistribution["VK"] = Math.floor(sebcTotal * 0.0667); // 2%
+seatDistribution["KN"] = Math.floor(sebcTotal * 0.0333); // 1%
+seatDistribution["BX"] = Math.floor(sebcTotal * 0.0333); // 1%
+seatDistribution["KU"] = Math.floor(sebcTotal * 0.0333); // 1%
+
     // Adjust any leftover seats
     const filled = Object.values(seatDistribution).reduce((a, b) => a + b, 0);
     if (filled < remainingSeats) seatDistribution.SM = remainingSeats - filled;
@@ -58,7 +78,7 @@ export const calculateAllotment = (applications, departments) => {
       smSeatLimit: smSeats,
       seatDistribution,
       categorySeatsFilled: Object.fromEntries(
-  [...Object.keys(reservationQuota), 'SM'].map((key) => [key, 0])
+  Object.keys(seatDistribution).map((key) => [key, 0])
 ),
 
     };

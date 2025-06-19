@@ -1,11 +1,10 @@
 export const calculateAllotment = (applications, departments) => {
     const MAX_DISTANCE = 70;
-    const MIN_MARK = 50;
   
     const reservationQuota = {
-      SM: 50, EWS: 10, EZ: 9, M: 8, BH: 3, LC: 3,
-      DV: 2, VK: 1, KN: 1, BX: 1, KU: 1, SC: 2, ST: 6,
-      PD: 5, TG: 0, SPORTS: 0, STAFF: 0, CENTRAL: 0,
+      EWS: 10, EZ: 9, M: 8, BH: 3, LC: 3, DV: 2,
+      VK: 1, KN: 1, BX: 1, KU: 1, SC: 8, ST: 2,
+      PD: 5, TG: 1, SPORTS: 1, STAFF: 1, CENTRAL: 1,
     };
   
     const getCategoryKey = (app) => {
@@ -13,8 +12,8 @@ export const calculateAllotment = (applications, departments) => {
         'EWS': 'EWS', 'Ezhava': 'EZ', 'Muslim': 'M', 'OBH': 'BH',
         'Latin Catholic': 'LC', 'Dheevara': 'DV', 'Viswakarma': 'VK',
         'Kusavan': 'KN', 'OBC Christian': 'BX', 'Kudumbi': 'KU',
-        'SC': 'SC', 'ST': 'ST', 'PD': 'PD', 'Transgender': 'TG',
-        'Sports': 'SPORTS', 'Staff': 'STAFF', 'Central': 'CENTRAL',
+        'SC': 'SC', 'ST': 'ST', 'Physically Disabled': 'PD', 'Transgender': 'TG',
+        'Sports': 'SPORTS', 'DTE Staff': 'STAFF', 'Central govt. employee': 'CENTRAL',
       };
       return map[app.reservationCategory] || 'SM';
     };
@@ -23,7 +22,7 @@ export const calculateAllotment = (applications, departments) => {
       const map = {
         "Electrical and Electronics Engineering": "ee",
         "Mechanical Engineering": "mech",
-        "Civil Engineering": "ce"
+        "Civil Engineering": "ce",
       };
       return map[name] || null;
     };
@@ -33,58 +32,121 @@ export const calculateAllotment = (applications, departments) => {
         return Object.values(app.priorityChoices)
           .filter(Boolean)
           .map(mapDepartmentNameToKey)
-          .filter(Boolean); // remove nulls
+          .filter(Boolean);
       }
       return [];
     };
   
     const updatedDepartments = departments.map((dept) => {
-      const seatDistribution = {};
-      Object.keys(reservationQuota).forEach((key) => {
-        seatDistribution[key] = Math.floor((reservationQuota[key] / 100) * dept.totalSeats);
-      });
-      seatDistribution.SM += dept.totalSeats - Object.values(seatDistribution).reduce((a, b) => a + b, 0);
+      const totalSeats = dept.totalSeats;
+      
+      
+      
+      const specialReservation = {
+        PD: Math.ceil(totalSeats * 0.05),
+        TG: 1,
+        SPORTS: 1,
+        STAFF: 1,
+        CENTRAL: 1,
+      };
+      
+      const fixedSeats =
+      specialReservation.TG +
+      specialReservation.PD +
+      specialReservation.SPORTS +
+      specialReservation.STAFF +
+      specialReservation.CENTRAL;
+      
+      const nonreservedSeats = totalSeats - fixedSeats;      
+      const smSeats = Math.floor(nonreservedSeats * 0.5); // 50%
+      const remainingSeats = nonreservedSeats - smSeats;
+
+    const seatDistribution = {
+    SM: Math.floor(nonreservedSeats* 0.5),
+    EWS: Math.floor(nonreservedSeats* 0.1),
+    SC: Math.floor(nonreservedSeats* 0.08),
+    ST: Math.floor(nonreservedSeats* 0.02),
+    ...specialReservation,
+  };
+  
+  // SEBC: Total 30%
+  const sebcTotal = Math.floor(nonreservedSeats * 0.3);
+  seatDistribution["EZ"] = Math.floor(sebcTotal * 0.3);   // 9%
+  seatDistribution["M"] = Math.floor(sebcTotal * 0.2667); // 8%
+  seatDistribution["BH"] = Math.floor(sebcTotal * 0.1);   // 3%
+  seatDistribution["LC"] = Math.floor(sebcTotal * 0.1);   // 3%
+  seatDistribution["DV"] = Math.floor(sebcTotal * 0.0667); // 2%
+  seatDistribution["VK"] = Math.floor(sebcTotal * 0.0667); // 2%
+  seatDistribution["KN"] = Math.floor(sebcTotal * 0.0333); // 1%
+  seatDistribution["BX"] = Math.floor(sebcTotal * 0.0333); // 1%
+  seatDistribution["KU"] = Math.floor(sebcTotal * 0.0333); // 1%
+  
+      // Adjust any leftover seats
+      const filled = Object.values(seatDistribution).reduce((a, b) => a + b, 0);
+      if (filled < remainingSeats) seatDistribution.SM = remainingSeats - filled;
   
       return {
         ...dept,
         allottedStudents: [],
         filledSeats: 0,
+        smSeatsFilled: 0,
+        smSeatLimit: smSeats,
         seatDistribution,
-        categorySeatsFilled: Object.fromEntries(Object.keys(reservationQuota).map((key) => [key, 0])),
+        categorySeatsFilled: Object.fromEntries(
+    Object.keys(seatDistribution).map((key) => [key, 0])
+  ),
+  
       };
     });
   
-  const isValidRank = (rank) => {
-  const num = Number(rank);
-  return !isNaN(num) && Number.isFinite(num) && num >= 1;
-};
-
-
-const eligibleApplications = applications
-  .filter((app) => {
-    const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
-    const validMark = parseFloat(app.mark) >= MIN_MARK;
-    const validRank = isValidRank(app.letRank);
-
-    const valid = validDistance && validMark && validRank;
-
-    if (!valid) {
-      console.log(`⛔ Skipping ${app.name || app.id} — distance: ${app.distance}, mark: ${app.mark}, rank: ${app.rank}`);
-    }
-
-    return valid;
-  })
-  .sort((a, b) => parseFloat(b.mark) - parseFloat(a.mark));
-
-  const allotments = [];
-
+    const isValidRank = (rank) => {
+      const num = Number(rank);
+      return !isNaN(num) && Number.isFinite(num) && num >= 1;
+    };
   
+    const eligibleApplications = applications
+      .filter((app) => {
+        const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
+        const validRank = isValidRank(app.letRank);
+        const valid = validDistance && validRank;
+  
+        if (!valid) {
+          // console.log(⛔ Skipping ${app.name || app.id} — distance: ${app.distance}, rank: ${app.letRank});
+        }
+        return valid;
+      })
+      .sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank)); // Lower rank = higher priority
+  
+    const allotments = new Map();
+  
+    // ----------- Step 1: State Merit (SM) Allotment -------------
+    let smCount = 0;
     for (const app of eligibleApplications) {
-      const choices = extractChoices(app); // use new function
+      if (smCount >= 45) break;
+  
+      const choices = extractChoices(app);
+      for (const choice of choices) {
+        const dept = updatedDepartments.find((d) => d.name === choice);
+        if (!dept) continue;
+  
+        if (dept.smSeatsFilled < dept.smSeatLimit) {
+          dept.smSeatsFilled++;
+          dept.filledSeats++;
+          dept.allottedStudents.push(app.id);
+          allotments.set(app.id, { ...app, allottedDepartment: dept.name });
+          smCount++;
+          // console.log(✅ [SM] Allotted ${app.name || app.id} to ${dept.name});
+          break;
+        }
+      }
+    }
+  
+    // ----------- Step 2: Reservation Quota Allotment -------------
+    for (const app of eligibleApplications) {
+      if (allotments.has(app.id)) continue;
+  
       const categoryKey = getCategoryKey(app);
-  
-      console.log(`🎯 ${app.name || app.id} - Category: ${categoryKey}, Choices: ${choices.join(", ")}`);
-  
+      const choices = extractChoices(app);
       for (const choice of choices) {
         const dept = updatedDepartments.find((d) => d.name === choice);
         if (!dept) continue;
@@ -94,8 +156,8 @@ const eligibleApplications = applications
             dept.categorySeatsFilled[catKey]++;
             dept.filledSeats++;
             dept.allottedStudents.push(app.id);
-            allotments.push({ ...app, allottedDepartment: dept.name });
-            console.log(`✅ Allotted ${app.name || app.id} to ${dept.name} under ${catKey}`);
+            allotments.set(app.id, { ...app, allottedDepartment: dept.name });
+            // console.log(✅ [${catKey}] Allotted ${app.name || app.id} to ${dept.name});
             return true;
           }
           return false;
@@ -123,13 +185,13 @@ const eligibleApplications = applications
   
     console.log("📊 Final Allotment Summary:");
     applications.forEach((app) => {
-      const match = allotments.find((a) => a.id === app.id);
-      console.log(`- ${app.name || app.id}: ${match ? `✅ ${match.allottedDepartment}` : "❌ Not Allotted"}`);
+      const match = allotments.get(app.id);
+      // console.log(- ${app.name || app.id}: ${match ? ✅ ${match.allottedDepartment} : "❌ Not Allotted"});
     });
   
     return {
       updatedApplications: applications.map((app) => {
-        const allot = allotments.find((a) => a.id === app.id);
+        const allot = allotments.get(app.id);
         return {
           ...app,
           allotmentStatus: allot ? "allotted" : "not_allotted",
@@ -139,4 +201,3 @@ const eligibleApplications = applications
       updatedDepartments,
     };
   };
-  

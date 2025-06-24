@@ -75,7 +75,7 @@ export default function HelpCenter() {
     {
       question: "What's the duration of the BTech Working Professionals programme?",
       answer:
-        "The program duration is 3 years (6 semesters) with classes typically on weekends and evenings.",
+        "The BTech Working Professionals programme duration is 3 years (6 semesters).",
     },
     {
       question: "What's the time of conduct of classes for BTech Working Professionals programme?",

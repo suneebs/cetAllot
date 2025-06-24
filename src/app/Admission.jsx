@@ -163,13 +163,13 @@ export default function PartTimeBtech() {
         {
           title: "Evening Classes",
           description:
-            "6:00 PM to 9:00 PM on weekdays + Saturday sessions",
+            "5:45 PM to 9:15 PM on weekdays",
           icon: <Clock className="h-10 w-10 text-primary" />,
         },
         {
           title: "Duration",
           description:
-            "4-year program (8 semesters) following Kerala University syllabus",
+            "3-year program (6 semesters) following KTU syllabus",
           icon: <Calendar className="h-10 w-10 text-primary" />,
         },
         {
@@ -186,7 +186,7 @@ export default function PartTimeBtech() {
         },
         {
           title: "Approval",
-          description: "Approved by AICTE and Kerala University",
+          description: "Approved by AICTE and KTU",
           icon: <Building className="h-10 w-10 text-primary" />,
         },
       ].map((item, index) => (
@@ -233,16 +233,16 @@ export default function PartTimeBtech() {
             Next Steps for Your Engineering Journey
           </h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Selected candidates should complete the admission formalities to secure their seat in CET's prestigious part-time B.Tech program.
+            Selected candidates should complete the admission formalities to secure their seat in CET's prestigious Btech working professionals program.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/help-desk">
               <Button size="lg" variant="outline">
                 <Users className="mr-2 h-4 w-4" />
                 Admission Help Desk
               </Button>
             </Link>
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </div>

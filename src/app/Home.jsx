@@ -130,7 +130,7 @@ useEffect(() => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                Pursue Your BTech from{" "}
+                Admission to Btech working professionals program{" "}
                 <span className="text-primary">
                   College of Engineering Trivandrum
                 </span>
@@ -384,20 +384,20 @@ useEffect(() => {
                   icon: <Calendar className="h-10 w-10 text-primary" />,
                 },
                 {
-                  title: "2. Review",
+                  title: "2. Allotment",
                   description:
-                    "Applications are reviewed by the departmental committee.",
+                    "Applications are reviewed and and allotment will be published based on the choice of candidates, LET rank list and reservations.",
                   icon: <CheckCircle className="h-10 w-10 text-primary" />,
                 },
                 {
-                  title: "3. Interview",
+                  title: "3. Document Verification",
                   description:
-                    "Shortlisted candidates are invited for an interview.",
+                    "Candidates will have to appear physically at CET with the originals of all documents mentioned for admission. Admission will be guaranteed only on payment of full fees on the day of admission. Fees has to be paid electronically via digipay. No cash payment is allowed.",
                   icon: <Users className="h-10 w-10 text-primary" />,
                 },
                 {
-                  title: "4. Admission",
-                  description: "Selected candidates receive admission offers.",
+                  title: "4. Commencement of classes",
+                  description: "Admitted candidates will have to attend classes commencing from July 1st.",
                   icon: <GraduationCap className="h-10 w-10 text-primary" />,
                 },
               ].map((step, index) => (

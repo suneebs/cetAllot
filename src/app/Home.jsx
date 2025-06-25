@@ -453,6 +453,7 @@ useEffect(() => {
       </span>
     </>
   ),
+  icon: <Users className="h-10 w-10 text-primary" />,
                 },
                 {
                   title: "4. Commencement of classes",

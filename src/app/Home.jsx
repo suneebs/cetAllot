@@ -263,7 +263,9 @@ useEffect(() => {
                   {notice.title}
                 </h3>
 
-                <p className="text-gray-600 line-clamp-4">{notice.message}</p>
+                <p className="text-gray-600 whitespace-pre-line">
+                  {notice.message}
+                </p>
               </motion.div>
             ))
         )}
@@ -272,7 +274,66 @@ useEffect(() => {
   </div>
 </SectionWrapper>
 
-      
+{/*Fees Structure */}
+<SectionWrapper>
+  <div className="py-16 bg-background relative">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div className="text-center mb-12" variants={fadeIn}>
+        <h2 className="text-3xl font-bold mb-4">Fee Structure</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Below is the detailed breakdown of the fee components applicable at the time of admission and during the course.
+        </p>
+      </motion.div>
+
+      <motion.div
+        className="max-w-2xl mx-auto space-y-6 text-base leading-relaxed text-muted-foreground"
+        variants={fadeIn}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">Admission Fee</span>
+          <span>Rs. 1500/- <span className="text-sm text-gray-500">(to be paid at the time of admission)</span></span>
+        </div>
+
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">Tuition Fee</span>
+          <span>Rs. 31,000/- <span className="text-sm text-gray-500">(per semester)</span></span>
+        </div>
+
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">Special Fee</span>
+          <span>Rs. 3,150/- <span className="text-sm text-gray-500">(per year)</span></span>
+        </div>
+
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">Caution Deposit</span>
+          <span>Rs. 2,500/- <span className="text-sm text-gray-500">(to be paid at the time of admission [refundable])</span></span>
+        </div>
+
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">Pre-Matriculation & Registration Fee</span>
+          <span>As prescribed by the University</span>
+        </div>
+
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">University Fee</span>
+          <span>Rs. 4,955/-</span>
+        </div>
+
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-medium text-foreground">PTA Fees</span>
+          <span>Rs. 15,000/-</span>
+        </div>
+
+        <div className="flex justify-between">
+          <span className="font-medium text-foreground">Bus Fee</span>
+          <span>Rs. 2,000/-</span>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</SectionWrapper>
+
       {/* Programs Section */}
       <SectionWrapper>
         <div className="py-16 bg-background">

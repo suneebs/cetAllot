@@ -81,7 +81,7 @@ export default function Contact() {
             Contact Us
           </h1>
           <p className="text-lg text-muted-foreground">
-            Office of The Evening Degree Course.
+            Office of The Evening Degree Programmes.
           </p>
         </motion.div>
 

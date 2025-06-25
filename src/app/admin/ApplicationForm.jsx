@@ -160,7 +160,7 @@ export const ApplicationForm = ({ onSuccess }) => {
             step: "0.01",
           },
           {
-            name: "distance",
+            name: "distance between your working place and CET",
             label: required("Distance (in km)"),
             type: "number",
           },

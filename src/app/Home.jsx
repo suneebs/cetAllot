@@ -312,11 +312,6 @@ useEffect(() => {
 
         <div className="flex justify-between border-b pb-2">
           <span className="font-medium text-foreground">Pre-Matriculation & Registration Fee</span>
-          <span>As prescribed by the University</span>
-        </div>
-
-        <div className="flex justify-between border-b pb-2">
-          <span className="font-medium text-foreground">University Fee</span>
           <span>Rs. 4,955/-</span>
         </div>
 
@@ -329,10 +324,17 @@ useEffect(() => {
           <span className="font-medium text-foreground">Bus Fee</span>
           <span>Rs. 2,000/-</span>
         </div>
+
+        {/* Highlighted Note */}
+        <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+          <strong>Note:</strong> Government and University fee payment is accepted only through <strong>QR Code, UPI, or Online payment methods</strong>. <br />
+          <span className="font-medium">Card and cash payments are not accepted.</span>
+        </div>
       </motion.div>
     </div>
   </div>
 </SectionWrapper>
+
 
       {/* Programs Section */}
       <SectionWrapper>
@@ -401,15 +403,7 @@ useEffect(() => {
               variants={fadeIn}
               transition={{ delay: 0.3 }}
             >
-              {/* <Link to="/programs">
-                <Button
-                  variant="outline"
-                  className="hover:scale-105 transition-transform"
-                >
-                  View All Programs{" "}
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link> */}
+              
             </motion.div>
           </div>
         </div>
@@ -444,9 +438,21 @@ useEffect(() => {
                 },
                 {
                   title: "3. Document Verification",
-                  description:
-                    "Candidates will have to appear physically at CET with the originals of all documents mentioned for admission. Admission will be guaranteed only on payment of full fees on the day of admission. Fees has to be paid electronically via digipay. No cash payment is allowed.",
-                  icon: <Users className="h-10 w-10 text-primary" />,
+                  description:(
+    <>
+      Candidates will have to appear physically at CET with the originals of all documents mentioned for admission. Admission will be guaranteed only on payment of full fees on the day of admission. Fees has to be paid electronically via digipay. No cash payment is allowed.
+      <br />
+      <span className="text-sm">
+        Documents to be produced:{" "}
+        <Link
+          to="https://drive.google.com/file/d/18VGvD7QSwIsNvrCwp_GQAO3Y2PCYAiDo/view?usp=sharing"
+          className="text-primary underline hover:text-primary/80"
+        >
+          Click here
+        </Link>
+      </span>
+    </>
+  ),
                 },
                 {
                   title: "4. Commencement of classes",

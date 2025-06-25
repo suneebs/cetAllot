@@ -443,7 +443,7 @@ useEffect(() => {
       Candidates will have to appear physically at CET with the originals of all documents mentioned for admission. Admission will be guaranteed only on payment of full fees on the day of admission. Fees has to be paid electronically via digipay. No cash payment is allowed.
       <br />
       <span className="text-sm">
-        Documents to be produced:{" "}
+        Documents to be produced at the time of admission:{" "}
         <Link
           to="https://drive.google.com/file/d/18VGvD7QSwIsNvrCwp_GQAO3Y2PCYAiDo/view?usp=sharing"
           className="text-primary underline hover:text-primary/80"
@@ -535,6 +535,15 @@ useEffect(() => {
                     className="w-full sm:w-auto border-primary text-black hover:bg-primary/10 hover:scale-105 transition-transform"
                   >
                     Contact Us
+                  </Button>
+                </Link>
+                <Link to="https://drive.google.com/file/d/1N9gARnxlDe95UEgKyLyoqndtDi17Qcy1/view?usp=sharing">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full sm:w-auto border-primary text-black hover:bg-primary/10 hover:scale-105 transition-transform"
+                  >
+                    Press Release
                   </Button>
                 </Link>
               </motion.div>

@@ -148,7 +148,7 @@ export const ApplicationForm = ({ onSuccess }) => {
         {[
           { name: "name", label: required("Name") },
           { name: "email", label: required("Email Address") },
-          { name: "phone", label: required("Phone Number"), type: "number" },
+          { name: "phone", label: required("Phone Number (preferably with WA)"), type: "number" },
           { name: "letRegNo", label: required("LET Registration Number"), type: "text" },
           { name: "letRank", label: required("LET Rank"), type: "number" },
           // { name: "caste", label: required("Caste") },
@@ -161,7 +161,7 @@ export const ApplicationForm = ({ onSuccess }) => {
           },
           {
             name: "distance",
-            label: required("Distance (in km)"),
+            label: required("Distance (between your workplace and CET)"),
             type: "number",
           },
         ].map(({ name, label, type = "text", step }) => (

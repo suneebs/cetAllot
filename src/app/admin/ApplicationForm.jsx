@@ -148,19 +148,19 @@ export const ApplicationForm = ({ onSuccess }) => {
         {[
           { name: "name", label: required("Name") },
           { name: "email", label: required("Email Address") },
-          { name: "phone (preferably with WA)", label: required("Phone Number"), type: "number" },
+          { name: "phone", label: required("Phone Number"), type: "number" },
           { name: "letRegNo", label: required("LET Registration Number"), type: "text" },
           { name: "letRank", label: required("LET Rank"), type: "number" },
           // { name: "caste", label: required("Caste") },
           // { name: "religion", label: required("Religion") },
           {
-            name: "% of marks obtained in diploma/Bsc/BVoc",
+            name: "mark",
             label: required("Marks (%)"),
             type: "number",
             step: "0.01",
           },
           {
-            name: "distance between your working place and CET",
+            name: "distance",
             label: required("Distance (in km)"),
             type: "number",
           },

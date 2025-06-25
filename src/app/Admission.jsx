@@ -136,9 +136,9 @@ export default function PartTimeBtech() {
   </div>
 ) : (
   <div className="text-center py-12">
-    <h3 className="text-2xl font-semibold mb-4">Results Not Yet Published</h3>
+    <h3 className="text-2xl font-semibold mb-4">Allotment - Not Yet Published</h3>
     <p className="text-muted-foreground text-lg">
-      The admission results will be published soon. Please check back later.
+      Allotment will be published on 29th June 2025 at 1 PM here.
     </p>
   </div>
 )}
@@ -157,7 +157,7 @@ export default function PartTimeBtech() {
         {
           title: "Working Professionals",
           description:
-            "Designed for employed individuals with diploma qualifications",
+            "Designed for employed individuals with diploma / B.sc. / DVoc qualifications",
           icon: <Briefcase className="h-10 w-10 text-primary" />,
         },
         {
@@ -173,20 +173,32 @@ export default function PartTimeBtech() {
           icon: <Calendar className="h-10 w-10 text-primary" />,
         },
         {
-          title: "Eligibility",
-          description:
-            "Currently No such Eligibility Criteria has to be mentioned",
-          icon: <BookOpen className="h-10 w-10 text-primary" />,
-        },
+  title: "Eligibility",
+  description: (
+    <>
+      <p>
+        <strong>Diploma:</strong> Diploma in <em>any branch of Engineering/Technology</em> awarded by a recognized State Board of Technical Education or equivalent with at least <strong>45% marks</strong> (40% in case of candidates belonging to reserved categories).
+      </p>
+      <p className="mt-2">
+        <strong>B.Sc. Degree:</strong> B.Sc. Degree from a recognized University as defined by UGC with at least <strong>45% marks</strong> (40% for reserved categories) and passed 10+2 examination with Mathematics as a subject. Candidates from B.Sc. stream shall study <em>Engineering Graphics/Drawing</em> and <em>Engineering Mechanics</em> of the First Year Engineering Program along with the Second Year Courses. These can be taken as audit courses.
+      </p>
+      <p className="mt-2">
+        <strong>D.Voc. Stream:</strong> D.Voc. in the same or allied sector is also eligible.
+      </p>
+    </>
+  ),
+  icon: <BookOpen className="h-10 w-10 text-primary" />,
+},
+
         {
           title: "Specializations",
           description:
-            "Electronics, Mechanical and Civil Engineering",
+            "Electrical and Electronics, Mechanical and Civil Engineering",
           icon: <Aperture className="h-10 w-10 text-primary" />,
         },
         {
           title: "Approval",
-          description: "Approved by AICTE and KTU",
+          description: "Approved by AICTE and Affiliated by KTU",
           icon: <Building className="h-10 w-10 text-primary" />,
         },
       ].map((item, index) => (

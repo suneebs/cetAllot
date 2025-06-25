@@ -125,13 +125,13 @@ useEffect(() => {
               className="space-y-6"
             >
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+                className="text-4xl md:text-5xl font-bold tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                Admission to Btech working professionals program{" "}
-                <span className="text-primary">
+                Admission to BTech Working Professionals program{" "}<br />
+                <span className="text-primary text-3xl md:text-4xl">
                   College of Engineering Trivandrum
                 </span>
               </motion.h1>
@@ -151,25 +151,17 @@ useEffect(() => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <Link to="/apply">
+                {/* <Link to="/apply">
                   <Button
                     size="lg"
                     className="w-full md:w-auto hover:shadow-lg hover:scale-105 transition-all duration-300"
                   >
                     Apply Now
                   </Button>
-                </Link>
-                {/* <Link to="/programs">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full sm:w-auto hover:shadow-lg hover:scale-105 transition-all duration-300"
-                  >
-                    Explore Programs
-                  </Button>
                 </Link> */}
+                
               </motion.div>
-            </motion.div>
+            </motion.div> 
 
             <motion.div
               className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-xl"

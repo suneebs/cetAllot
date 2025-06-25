@@ -104,6 +104,8 @@ export default function Contact() {
                   <div>
                     <h3 className="font-medium">Address</h3>
                     <p className="text-muted-foreground">
+                      {"Department of Evening Degree Programmes"}
+                      <br />
                       {CONTACT_INFO.address.name}
                       <br />
                       {CONTACT_INFO.address.lines.map((line, i) => (

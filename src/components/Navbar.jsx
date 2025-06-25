@@ -135,7 +135,7 @@ export default function Navbar() {
       Edu<span className="text-primary">Allot</span>
     </span>
     <span className="text-xs text-muted-foreground tracking-wide">
-      B.Tech Admission Portal
+      B.Tech WP Admission Portal
     </span>
   </div>
 </Link>

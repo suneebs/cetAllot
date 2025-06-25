@@ -123,14 +123,21 @@ export const ApplicationForm = ({ onSuccess }) => {
   
       await addDoc(collection(db, "applications"), formattedData);
   
-      toast.success("Application submitted successfully!");
+      toast.success("Submitted!", {
+  duration: 4000,
+  description: "We’ve received your application.",
+});
+
   
       form.reset(initialFormData); // 👈 Reset the form
       setSelectedBranches({ "1": "", "2": "", "3": "" }); // 👈 Reset selected branches
       onSuccess?.(); // optional callback
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Submission failed!", {
+  description: "Please try again later or contact support.",
+});
+
     }
   };
   

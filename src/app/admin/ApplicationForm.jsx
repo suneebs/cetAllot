@@ -148,13 +148,13 @@ export const ApplicationForm = ({ onSuccess }) => {
         {[
           { name: "name", label: required("Name") },
           { name: "email", label: required("Email Address") },
-          { name: "phone", label: required("Phone Number"), type: "number" },
+          { name: "phone (preferably with WA)", label: required("Phone Number"), type: "number" },
           { name: "letRegNo", label: required("LET Registration Number"), type: "text" },
           { name: "letRank", label: required("LET Rank"), type: "number" },
           // { name: "caste", label: required("Caste") },
           // { name: "religion", label: required("Religion") },
           {
-            name: "mark",
+            name: "% of marks obtained in diploma/Bsc/BVoc",
             label: required("Marks (%)"),
             type: "number",
             step: "0.01",

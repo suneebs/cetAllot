@@ -32,7 +32,7 @@ export default function HelpCenter() {
     },
   };
 
-  const branches = ["Civil Engineering (CE)", "Electronics & Communication (EC)", "Mechanical Engineering (ME)"];
+  const branches = ["Civil Engineering (CE)", "Electrical and Electronics Engineering(EEE)", "Mechanical Engineering (ME)"];
 
   const commonReservation = {
     "State Merit": "50%",

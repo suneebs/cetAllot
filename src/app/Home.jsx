@@ -445,7 +445,7 @@ useEffect(() => {
       <span className="text-sm">
         Documents to be produced at the time of admission:{" "}
         <Link
-          to="https://drive.google.com/file/d/18VGvD7QSwIsNvrCwp_GQAO3Y2PCYAiDo/view?usp=sharing"
+          to="https://drive.google.com/file/d/1KNvGF_31V_tL_hl0X3VbDy1QnPttbAju/view?usp=sharing"
           className="text-primary underline hover:text-primary/80"
         >
           Click here

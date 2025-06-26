@@ -317,7 +317,7 @@ useEffect(() => {
 
         <div className="flex justify-between border-b pb-2">
           <span className="font-medium text-foreground">PTA Fees</span>
-          <span>Rs. 15,000/-</span>
+          <span>Rs. 10,000/-</span>
         </div>
 
         <div className="flex justify-between">

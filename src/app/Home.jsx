@@ -451,6 +451,16 @@ useEffect(() => {
           Click here
         </Link>
       </span>
+      <br />
+      <span className="text-sm">
+        Instructions to candidate:{" "}
+        <Link
+          to="https://drive.google.com/file/d/1WLgFCCfhTuiGxBcKL0uLFjzzd1K3CrUz/view?usp=sharing"
+          className="text-primary underline hover:text-primary/80"
+        >
+          Click here
+        </Link>
+      </span>
     </>
   ),
   icon: <Users className="h-10 w-10 text-primary" />,

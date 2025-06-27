@@ -1,11 +1,6 @@
 export const calculateAllotment = (applications, departments) => {
     const MAX_DISTANCE = 70;
-  
-    const reservationQuota = {
-      EWS: 10, EZ: 9, M: 8, BH: 3, LC: 3, DV: 2,
-      VK: 1, KN: 1, BX: 1, KU: 1, SC: 8, ST: 2,
-      PD: 5, TG: 1, SPORTS: 1, STAFF: 1, CENTRAL: 1,
-    };
+    const MAX_MARK = 45;
   
     const getCategoryKey = (app) => {
       const map = {
@@ -109,13 +104,11 @@ export const calculateAllotment = (applications, departments) => {
   
     const eligibleApplications = applications
       .filter((app) => {
+        const validMark = parseFloat(app.mark) >= MAX_MARK;
         const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
         const validRank = isValidRank(app.letRank);
-        const valid = validDistance && validRank;
+        const valid = validDistance && validRank && validMark;
   
-        if (!valid) {
-          // console.log(⛔ Skipping ${app.name || app.id} — distance: ${app.distance}, rank: ${app.letRank});
-        }
         return valid;
       })
       .sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank)); // Lower rank = higher priority
@@ -138,7 +131,6 @@ export const calculateAllotment = (applications, departments) => {
           dept.allottedStudents.push(app.id);
           allotments.set(app.id, { ...app, allottedDepartment: dept.name });
           smCount++;
-          // console.log(✅ [SM] Allotted ${app.name || app.id} to ${dept.name});
           break;
         }
       }
@@ -160,7 +152,6 @@ export const calculateAllotment = (applications, departments) => {
             dept.filledSeats++;
             dept.allottedStudents.push(app.id);
             allotments.set(app.id, { ...app, allottedDepartment: dept.name });
-            // console.log(✅ [${catKey}] Allotted ${app.name || app.id} to ${dept.name});
             return true;
           }
           return false;
@@ -189,7 +180,6 @@ export const calculateAllotment = (applications, departments) => {
     console.log("📊 Final Allotment Summary:");
     applications.forEach((app) => {
       const match = allotments.get(app.id);
-      // console.log(- ${app.name || app.id}: ${match ? ✅ ${match.allottedDepartment} : "❌ Not Allotted"});
     });
   
     return {

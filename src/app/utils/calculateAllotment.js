@@ -1,6 +1,7 @@
 export const calculateAllotment = (applications, departments) => {
     const MAX_DISTANCE = 70;
-    const MAX_MARK = 45;
+    const MIN_MARK = 45;
+    const MIN_EXPERIENCE = 1;
   
     const getCategoryKey = (app) => {
       const map = {
@@ -104,10 +105,11 @@ export const calculateAllotment = (applications, departments) => {
   
     const eligibleApplications = applications
       .filter((app) => {
-        const validMark = parseFloat(app.mark) >= MAX_MARK;
+        const validMark = parseFloat(app.mark) >= MIN_MARK;
+        const validExperience = parseFloat(app.experience) >= MIN_EXPERIENCE;
         const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
         const validRank = isValidRank(app.letRank);
-        const valid = validDistance && validRank && validMark;
+        const valid = validDistance && validRank && validMark && validExperience;
   
         return valid;
       })
@@ -118,7 +120,7 @@ export const calculateAllotment = (applications, departments) => {
     // ----------- Step 1: State Merit (SM) Allotment -------------
     let smCount = 0;
     for (const app of eligibleApplications) {
-      if (smCount >= 45) break;
+      // if (smCount >= 45) break;
   
       const choices = extractChoices(app);
       for (const choice of choices) {

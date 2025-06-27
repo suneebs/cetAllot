@@ -126,6 +126,7 @@ export const ApplicationTable = ({
       "Priority 3": app.priorityChoices?.[3],
       "LET Reg No": app.letRegNo,
       "LET Rank": app.letRank,
+      experience: app.experience,
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(exportData);

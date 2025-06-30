@@ -130,15 +130,21 @@ export default function PartTimeBtech() {
 
 ) : isPublished ? (
   <div className="space-y-8">
-    <AllottedTable students={allottedData.ce} deptName="Civil Engineering" />
-    <AllottedTable students={allottedData.ee} deptName="Electrical & Electronics Engineering" />
-    <AllottedTable students={allottedData.mech} deptName="Mechanical Engineering" />
+    <div className="mb-10 p-4 border-l-4 border-yellow-500 bg-yellow-50 text-yellow-800 rounded">
+    <p className="text-sm md:text-base">
+      <strong>Note:</strong> This is a <span className="font-semibold">trial allotment</span> only. Inclusion of your name in the trial allotment list does not guarantee admission. If any candidate possessing a higher rank in the LET examination appears physically during the admission time, they will be given higher preference. Also, admission will be ensured only on payment of FULL fees and successful document verification.
+    </p>
   </div>
+  <AllottedTable students={allottedData.ce} deptName="Civil Engineering" />
+  <AllottedTable students={allottedData.ee} deptName="Electrical & Electronics Engineering" />
+  <AllottedTable students={allottedData.mech} deptName="Mechanical Engineering" /> 
+</div>
+
 ) : (
   <div className="text-center py-12">
     <h3 className="text-2xl font-semibold mb-4">Allotment - Not Yet Published</h3>
     <p className="text-muted-foreground text-lg">
-      Allotment will be published on 29th June 2025 at 1 PM here.
+      {/* Allotment will be published on 29th June 2025 at 1 PM here. */}
     </p>
   </div>
 )}

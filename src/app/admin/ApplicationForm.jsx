@@ -74,6 +74,32 @@ const initialFormData = {
   distance: "",
 };
 
+const getFirstErrorMessage = (errors) => {
+  for (const key in errors) {
+    if (!errors[key]) continue;
+
+    if (typeof errors[key]?.message === "string") {
+      return errors[key].message;
+    }
+
+    // Handle nested errors like priorityChoices
+    if (typeof errors[key] === "object") {
+      const nestedMessage = getFirstErrorMessage(errors[key]);
+      if (nestedMessage) return nestedMessage;
+    }
+  }
+  return null;
+};
+
+const onError = (errors) => {
+  const message = getFirstErrorMessage(errors) || "Please correct the errors and try again.";
+  toast.error("Submission Failed", {
+    description: message,
+  });
+};
+
+
+
 export const ApplicationForm = ({ onSuccess }) => {
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -150,7 +176,7 @@ export const ApplicationForm = ({ onSuccess }) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit,onError)} className="space-y-4">
         {/* Required Inputs */}
         {[
           { name: "name", label: required("Name") },

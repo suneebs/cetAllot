@@ -29,7 +29,15 @@ const extractChoices = (app) => {
 };  
 
 const MAX_DISTANCE = 70;
-const MIN_MARK = 45;
+const getMinMarkForCategory = (app) => {
+  const reservedCategories = [
+    "SC", "ST", "EZ", "M", "BH", "LC", "DV", "VK", "KN", "BX", "KU", "EWS",
+    "PD", "TG", "SPORTS", "STAFF", "CENTRAL"
+  ];
+  const categoryKey = getCategoryKey(app);
+  return reservedCategories.includes(categoryKey) ? 40 : 45;
+};
+
 const MIN_EXPERIENCE = 1; // Minimum experience requirement in years
 const SM_SEAT_LIMIT = 15; // Fixed SM seat limit per department
 
@@ -40,7 +48,7 @@ const isValidRank = (letRank) => {
 
 // Helper function to check if application is eligible for allotment
 const isEligibleForAllotment = (app) => {
-  const validMark = parseFloat(app.mark) >= MIN_MARK;
+const validMark = parseFloat(app.mark) >= getMinMarkForCategory(app);
   const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
   const validRank = isValidRank(app.letRank);
   const validExperience = parseFloat(app.experience) >= MIN_EXPERIENCE;
@@ -49,7 +57,7 @@ const isEligibleForAllotment = (app) => {
 
 // Helper function to check basic eligibility (without experience)
 const isBasicEligible = (app) => {
-  const validMark = parseFloat(app.mark) >= MIN_MARK;
+const validMark = parseFloat(app.mark) >= getMinMarkForCategory(app);
   const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
   const validRank = isValidRank(app.letRank);
   return validDistance && validRank && validMark;
@@ -191,7 +199,7 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
 
   // Filter eligible candidates from unallocated applications (including experience requirement)
   const eligibleUnallocated = unallocatedApplications.filter((app) => {
-    const validMark = parseFloat(app.mark) >= MIN_MARK;
+    const validMark = parseFloat(app.mark) >= getMinMarkForCategory(app);
     const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
       const validExperience = parseFloat(app.experience) >= MIN_EXPERIENCE;
     const validRank = isValidRank(app.letRank);

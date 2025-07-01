@@ -37,7 +37,7 @@ export default function PartTimeBtech() {
         // If not published, skip fetching
         if (!published) return;
 
-        const departments = ["ce", "ee", "mech"];
+        const departments = ["Civil Engineering", "Electrical and Electronics Engineering", "Mechanical Engineering", "Waiting List"];
         const data = { ce: [], ee: [], mech: [] };
 
         for (const dept of departments) {
@@ -135,9 +135,10 @@ export default function PartTimeBtech() {
       <strong>Note:</strong> This is a <span className="font-semibold">trial allotment</span> only. Inclusion of your name in the trial allotment list does not guarantee admission. If any candidate possessing a higher rank in the LET examination appears physically during the admission time, they will be given higher preference. Also, admission will be ensured only on payment of FULL fees and successful document verification.
     </p>
   </div>
-  <AllottedTable students={allottedData.ce} deptName="Civil Engineering" />
-  <AllottedTable students={allottedData.ee} deptName="Electrical & Electronics Engineering" />
-  <AllottedTable students={allottedData.mech} deptName="Mechanical Engineering" /> 
+  <AllottedTable students={allottedData['Civil Engineering']} deptName="Civil Engineering" />
+      <AllottedTable students={allottedData['Electrical and Electronics Engineering']} deptName="Electrical & Electronics Engineering" />
+      <AllottedTable students={allottedData['Mechanical Engineering']} deptName="Mechanical Engineering" />
+      <AllottedTable students={allottedData['Waiting List']} deptName="Waiting List" /> 
 </div>
 
 ) : (

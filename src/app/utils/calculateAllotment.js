@@ -30,6 +30,7 @@ const extractChoices = (app) => {
 
 const MAX_DISTANCE = 70;
 const MIN_MARK = 45;
+const MIN_EXPERIENCE = 1; // Minimum experience requirement in years
 const SM_SEAT_LIMIT = 15; // Fixed SM seat limit per department
 
 const isValidRank = (letRank) => {
@@ -37,15 +38,27 @@ const isValidRank = (letRank) => {
   return !isNaN(num) && Number.isFinite(num) && num >= 1;
 };
 
+// Helper function to check if application is eligible for allotment
+const isEligibleForAllotment = (app) => {
+  const validMark = parseFloat(app.mark) >= MIN_MARK;
+  const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
+  const validRank = isValidRank(app.letRank);
+  const validExperience = parseFloat(app.experience) >= MIN_EXPERIENCE;
+  return validDistance && validRank && validMark && validExperience;
+};
+
+// Helper function to check basic eligibility (without experience)
+const isBasicEligible = (app) => {
+  const validMark = parseFloat(app.mark) >= MIN_MARK;
+  const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
+  const validRank = isValidRank(app.letRank);
+  return validDistance && validRank && validMark;
+};
+
 export const calculateSMAllotment = (applications, departments) => {
-  // Filter eligible applications once
+  // Filter eligible applications for SM allotment (including experience requirement)
   const eligibleApplications = applications
-    .filter((app) => {
-      const validMark = parseFloat(app.mark) >= MIN_MARK;
-      const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
-      const validRank = isValidRank(app.letRank);
-      return validDistance && validRank && validMark;
-    })
+    .filter(isEligibleForAllotment)
     .sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank));
 
   const hasCandidate = (category) => {
@@ -131,7 +144,7 @@ export const calculateSMAllotment = (applications, departments) => {
 
   const allotments = new Map();
 
-  // SM Allotment
+  // SM Allotment - only for candidates with experience >= 1
   for (const app of eligibleApplications) {
     const choices = extractChoices(app);
     for (const choice of choices) {
@@ -176,16 +189,16 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
   const updatedDepartments = JSON.parse(JSON.stringify(departmentsFromSMAllotment));
   const allotments = new Map();
 
-  // Filter eligible candidates from unallocated applications
+  // Filter eligible candidates from unallocated applications (including experience requirement)
   const eligibleUnallocated = unallocatedApplications.filter((app) => {
     const validMark = parseFloat(app.mark) >= MIN_MARK;
     const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
+      const validExperience = parseFloat(app.experience) >= MIN_EXPERIENCE;
     const validRank = isValidRank(app.letRank);
     const hasCategory = getCategoryKey(app) !== undefined;
-    return validDistance && validRank && validMark && hasCategory;
-  }).sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank));
+    return validDistance && validRank && validMark && validExperience && hasCategory;
+  }).sort((a, b) => parseFloat(a.rank) - parseFloat(b.rank));
 
-  console.log(`Eligible unallocated candidates: ${eligibleUnallocated.length}`);
 
   for (const app of eligibleUnallocated) {
     const categoryKey = getCategoryKey(app);
@@ -283,25 +296,17 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
   };
 };
 
-// Helper function to check if application is eligible
-const isEligibleApplication = (app) => {
-  const validMark = parseFloat(app.mark) >= MIN_MARK;
-  const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
-  const validRank = isValidRank(app.letRank);
-  return validDistance && validRank && validMark;
-};
-
 export const calculateAllotment = (applications, departments) => {
   console.log(departments);
   
-  // Step 1: Calculate SM allotment
+  // Step 1: Calculate SM allotment (only for candidates with experience >= 1)
   const smResult = calculateSMAllotment(applications, departments);
   console.log("SM Allotment Result:", {
     totalAllocated: smResult.updatedApplications.filter(app => app.allotmentStatus === "allotted").length,
     unallocated: smResult.unallocatedApplications.length
   });
   
-  // Step 2: Calculate reservation allotment for unallocated candidates
+  // Step 2: Calculate reservation allotment for unallocated candidates (only those with experience >= 1)
   const reservationResult = calculateReservationAllotment(
     smResult.unallocatedApplications, 
     smResult.updatedDepartments
@@ -338,8 +343,18 @@ export const calculateAllotment = (applications, departments) => {
       };
     }
     
-    // Check if application is eligible
-    if (!isEligibleApplication(app)) {
+    // Check if application has insufficient experience
+    if (parseFloat(app.experience) < MIN_EXPERIENCE) {
+      return {
+        ...app,
+        allotmentStatus: "waiting_list",
+        allottedDepartment: "Waiting List",
+        allottedCategory: "experience_requirement"
+      };
+    }
+    
+    // Check if application is otherwise eligible (mark, distance, rank)
+    if (!isBasicEligible(app)) {
       return {
         ...app,
         allotmentStatus: "not_eligible",
@@ -361,11 +376,11 @@ export const calculateAllotment = (applications, departments) => {
     allotted: finalApplications.filter(app => app.allotmentStatus === "allotted").length,
     waiting_list: finalApplications.filter(app => app.allotmentStatus === "waiting_list").length,
     not_eligible: finalApplications.filter(app => app.allotmentStatus === "not_eligible").length,
+    insufficient_experience: finalApplications.filter(app => app.allottedCategory === "experience_requirement").length,
     sm_allotted: finalApplications.filter(app => app.allottedCategory === "SM").length,
-    reservation_allotted: finalApplications.filter(app => app.allottedCategory && app.allottedCategory !== "SM" && app.allottedCategory !== "not_allotted").length
+    reservation_allotted: finalApplications.filter(app => app.allottedCategory && app.allottedCategory !== "SM" && app.allottedCategory !== "not_allotted" && app.allottedCategory !== "experience_requirement").length
   };
 
-  console.log('Final allotment summary:', statusCounts);
 
   return {
     updatedApplications: finalApplications,

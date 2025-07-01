@@ -36,6 +36,10 @@ export const runAllotmentHandler = async () => {
   {
     "name": "Civil Engineering",
     "totalSeats":30
+},
+  {
+    "name": "Waiting List",
+    "totalSeats":100
 }
 ]
     const { updatedApplications, updatedDepartments } = calculateAllotment(applications, departments);

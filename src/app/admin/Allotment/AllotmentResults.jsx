@@ -15,7 +15,7 @@ export const AllotmentResults = () => {
   useEffect(() => {
     const fetchAllottedStudents = async () => {
       try {
-        const departments = ["Civil Engineering", "Electrical and Electronics Engineering", "Mechanical Engineering"];
+        const departments = ["Civil Engineering", "Electrical and Electronics Engineering", "Mechanical Engineering","Waiting List"];
         const data = { ce: [], ee: [], mech: [] };
 
         for (const dept of departments) {
@@ -117,6 +117,7 @@ console.log("Allotted Data:", data);
   appendWithDept(allottedData['Civil Engineering'], "Civil Engineering");
   appendWithDept(allottedData['Electrical and Electronics Engineering'], "Electrical Engineering");
   appendWithDept(allottedData['Mechanical Engineering'], "Mechanical Engineering");
+  appendWithDept(allottedData['Waiting List'], "Waiting List");
   XLSX.writeFile(workbook, "Allotment_Results.xlsx");
 
 };
@@ -167,6 +168,7 @@ console.log("Allotted Data:", data);
       <AllottedTable students={allottedData['Civil Engineering']} deptName="Civil Engineering" />
       <AllottedTable students={allottedData['Electrical and Electronics Engineering']} deptName="Electrical & Electronics Engineering" />
       <AllottedTable students={allottedData['Mechanical Engineering']} deptName="Mechanical Engineering" />
-    </div>
-  );
+      <AllottedTable students={allottedData['Waiting List']} deptName="Waiting List" />
+  </div>
+);
 };

@@ -132,13 +132,10 @@ export const calculateSMAllotment = (applications, departments) => {
   const allotments = new Map();
 
   // SM Allotment
-  
   for (const app of eligibleApplications) {
- 
     const choices = extractChoices(app);
     for (const choice of choices) {
       const dept = updatedDepartments.find((d) => mapDepartmentNameToKey(d.name) === choice);
-      
       if (!dept) continue;
 
       // Check SM seat limit strictly
@@ -188,7 +185,7 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
     return validDistance && validRank && validMark && hasCategory;
   }).sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank));
 
-  // console.log(Eligible unallocated candidates: ${eligibleUnallocated.length});
+  console.log(`Eligible unallocated candidates: ${eligibleUnallocated.length}`);
 
   for (const app of eligibleUnallocated) {
     const categoryKey = getCategoryKey(app);
@@ -294,102 +291,28 @@ const isEligibleApplication = (app) => {
   return validDistance && validRank && validMark;
 };
 
-export const calculateGeneralAllotment = (unallocatedApplications, departmentsFromReservation) => {
-  // Deep copy to avoid mutation
-  const updatedDepartments = JSON.parse(JSON.stringify(departmentsFromReservation));
-  const allotments = new Map();
-
-  const PREDEFINED_CATEGORIES = [
-    'EWS', 'EZ', 'M', 'BH', 'LC', 'DV', 'VK', 'KN', 'BX', 'KU',
-    'SC', 'ST', 'PD', 'TG', 'SPORTS', 'STAFF', 'CENTRAL'
-  ];
-
-  // Filter candidates with undefined categories (not in predefined list) and eligible
-  const generalCandidates = unallocatedApplications.filter((app) => {
-    const validMark = parseFloat(app.mark) >= MIN_MARK;
-    const validDistance = parseFloat(app.distance) <= MAX_DISTANCE;
-    const validRank = isValidRank(app.letRank);
-    const categoryKey = getCategoryKey(app);
-    const hasUndefinedCategory = !categoryKey || !PREDEFINED_CATEGORIES.includes(categoryKey);
-    
-    return validDistance && validRank && validMark && hasUndefinedCategory;
-  }).sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank));
-
-  // console.log(General candidates (undefined categories): ${generalCandidates.length});
-
-  for (const app of generalCandidates) {
-    const choices = extractChoices(app);
-    let allotted = false;
-    
-    for (const choice of choices) {
-      const deptIndex = updatedDepartments.findIndex((d) => mapDepartmentNameToKey(d.name) === choice);
-      if (deptIndex === -1) continue;
-      
-      const dept = updatedDepartments[deptIndex];
-      
-      // Check if there are any available seats in the department
-      if (dept.filledSeats < dept.totalSeats) {
-        dept.filledSeats++;
-        dept.allottedStudents.push(app.id);
-        allotments.set(app.id, { 
-          ...app, 
-          allottedDepartment: dept.name,
-          allottedCategory: "General"
-        });
-        allotted = true;
-        break;
-      }
-    }
-    
-    if (allotted) continue;
-  }
-
-  // Update applications with allotment results
-  const finalUpdatedApplications = unallocatedApplications.map((app) => {
-    const allot = allotments.get(app.id);
-    return {
-      ...app,
-      allotmentStatus: allot ? "allotted" : "not_allotted",
-      allottedDepartment: allot?.allottedDepartment || null,
-      allottedCategory: allot?.allottedCategory || null,
-    };
-  });
-
-  return {
-    updatedApplications: finalUpdatedApplications,
-    updatedDepartments
-  };
-};
-
 export const calculateAllotment = (applications, departments) => {
-  // console.log(departments);
+  console.log(departments);
   
   // Step 1: Calculate SM allotment
   const smResult = calculateSMAllotment(applications, departments);
-// console.log(smResult);
-
+  console.log("SM Allotment Result:", {
+    totalAllocated: smResult.updatedApplications.filter(app => app.allotmentStatus === "allotted").length,
+    unallocated: smResult.unallocatedApplications.length
+  });
+  
   // Step 2: Calculate reservation allotment for unallocated candidates
   const reservationResult = calculateReservationAllotment(
     smResult.unallocatedApplications, 
     smResult.updatedDepartments
   );
 
-  // console.log("Reservation Allotment Result:", {
-  //   totalAllocated: reservationResult.updatedApplications.filter(app => app.allotmentStatus === "allotted").length,
-  //   stillUnallocated: reservationResult.updatedApplications.filter(app => app.allotmentStatus === "not_allotted").length
-  // });
+  console.log("Reservation Allotment Result:", {
+    totalAllocated: reservationResult.updatedApplications.filter(app => app.allotmentStatus === "allotted").length,
+    stillUnallocated: reservationResult.updatedApplications.filter(app => app.allotmentStatus === "not_allotted").length
+  });
 
-  // Step 3: Calculate general allotment for candidates with undefined categories
-  const generalResult = calculateGeneralAllotment(
-    reservationResult.updatedApplications.filter(app => app.allotmentStatus === "not_allotted"),
-    reservationResult.updatedDepartments
-  );
-
-  // console.log("General Allotment Result:", {
-  //   totalAllocated: generalResult.updatedApplications.filter(app => app.allotmentStatus === "allotted").length
-  // });
-
-  // Step 4: Create a map of all allotted applications for efficient lookup
+  // Step 3: Create a map of all allotted applications for efficient lookup
   const allAllotments = new Map();
   
   // Add SM allotments
@@ -402,12 +325,7 @@ export const calculateAllotment = (applications, departments) => {
     .filter(app => app.allotmentStatus === "allotted")
     .forEach(app => allAllotments.set(app.id, app));
 
-  // Add general allotments
-  generalResult.updatedApplications
-    .filter(app => app.allotmentStatus === "allotted")
-    .forEach(app => allAllotments.set(app.id, app));
-
-  // Step 5: Create final applications array with proper status assignment
+  // Step 4: Create final applications array with proper status assignment
   const finalApplications = applications.map(app => {
     const allottedApp = allAllotments.get(app.id);
     
@@ -430,29 +348,28 @@ export const calculateAllotment = (applications, departments) => {
       };
     }
     
-    // For eligible but unallotted applications
+    // For eligible but unallotted applications - assign to waiting list
     return {
       ...app,
-      allotmentStatus: "not_allotted",
-      allottedDepartment: null,
-      allottedCategory: null
+      allotmentStatus: "waiting_list",
+      allottedDepartment: "Waiting List",
+      allottedCategory: "not_allotted"
     };
   });
 
   const statusCounts = {
     allotted: finalApplications.filter(app => app.allotmentStatus === "allotted").length,
-    not_allotted: finalApplications.filter(app => app.allotmentStatus === "not_allotted").length,
+    waiting_list: finalApplications.filter(app => app.allotmentStatus === "waiting_list").length,
     not_eligible: finalApplications.filter(app => app.allotmentStatus === "not_eligible").length,
     sm_allotted: finalApplications.filter(app => app.allottedCategory === "SM").length,
-    reservation_allotted: finalApplications.filter(app => app.allottedCategory && app.allottedCategory !== "SM" && app.allottedCategory !== "General").length,
-    general_allotted: finalApplications.filter(app => app.allottedCategory === "General").length
+    reservation_allotted: finalApplications.filter(app => app.allottedCategory && app.allottedCategory !== "SM" && app.allottedCategory !== "not_allotted").length
   };
 
-  // console.log(Final allotment summary:, statusCounts);
+  console.log('Final allotment summary:', statusCounts);
 
   return {
     updatedApplications: finalApplications,
-    updatedDepartments: generalResult.updatedDepartments,
+    updatedDepartments: reservationResult.updatedDepartments,
     summary: statusCounts
 };
 };

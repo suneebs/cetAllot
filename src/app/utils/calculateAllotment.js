@@ -46,6 +46,34 @@ const isValidRank = (letRank) => {
   return !isNaN(num) && Number.isFinite(num) && num >= 1;
 };
 
+// Helper function to get education priority
+const getEducationPriority = (education) => {
+  const priorityMap = {
+    'Diploma': 2,
+    'BSc': 3,
+    'BVoc': 4,
+    'BE': 1,
+    'BTech': 1,
+    'Other': 5 // Fallback for any other education types
+  };
+  return priorityMap[education] || 5; // Default to lowest priority if not found
+};
+
+const sortByEducationThenRank = (applications) => {
+  return applications.sort((a, b) => {
+    // First sort by education priority
+    const eduPriorityA = getEducationPriority(a.education);
+    const eduPriorityB = getEducationPriority(b.education);
+    
+    if (eduPriorityA !== eduPriorityB) {
+      return eduPriorityA - eduPriorityB; // Lower number = higher priority
+    }
+    
+    // If education priority is same, sort by letRank
+    return parseFloat(a.letRank) - parseFloat(b.letRank);
+  });
+};
+
 // Helper function to check if application is eligible for allotment
 const isEligibleForAllotment = (app) => {
 const validMark = parseFloat(app.mark) >= getMinMarkForCategory(app);
@@ -66,11 +94,12 @@ const validMark = parseFloat(app.mark) >= getMinMarkForCategory(app);
 export const calculateSMAllotment = (applications, departments) => {
   // Filter eligible applications for SM allotment (including experience requirement)
   const eligibleApplications = applications
-    .filter(isEligibleForAllotment)
-    .sort((a, b) => parseFloat(a.letRank) - parseFloat(b.letRank));
+    .filter(isEligibleForAllotment);
+
+    const sortedEligibleApplications = sortByEducationThenRank(eligibleApplications);
 
   const hasCandidate = (category) => {
-    return eligibleApplications.some(app => getCategoryKey(app) === category);
+    return sortedEligibleApplications.some(app => getCategoryKey(app) === category);
   };
 
   const SEBC_CATEGORIES = ["EZ", "M", "BH", "LC", "DV", "VK", "KN", "BX", "KU"];
@@ -153,7 +182,7 @@ export const calculateSMAllotment = (applications, departments) => {
   const allotments = new Map();
 
   // SM Allotment - only for candidates with experience >= 1
-  for (const app of eligibleApplications) {
+  for (const app of sortedEligibleApplications) {
     const choices = extractChoices(app);
     for (const choice of choices) {
       const dept = updatedDepartments.find((d) => mapDepartmentNameToKey(d.name) === choice);
@@ -161,6 +190,7 @@ export const calculateSMAllotment = (applications, departments) => {
 
       // Check SM seat limit strictly
       if (dept.smSeatsFilled < dept.seatDistribution.SM) {
+        // console.log(Allotting ${app.name} to ${dept.name} under SM category);
         dept.smSeatsFilled++;
         dept.filledSeats++;
         dept.categorySeatsFilled.SM++;
@@ -205,10 +235,13 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
     const validRank = isValidRank(app.letRank);
     const hasCategory = getCategoryKey(app) !== undefined;
     return validDistance && validRank && validMark && validExperience && hasCategory;
-  }).sort((a, b) => parseFloat(a.rank) - parseFloat(b.rank));
+  });
+
+  // Sort eligible applications by education priority and then by letRank
+  const sortedEligibleUnallocated = sortByEducationThenRank(eligibleUnallocated);
 
 
-  for (const app of eligibleUnallocated) {
+  for (const app of sortedEligibleUnallocated) {
     const categoryKey = getCategoryKey(app);
     if (!categoryKey) continue; // Skip if no valid category
     
@@ -304,11 +337,55 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
   };
 };
 
+
+
+const transformEducationData = (applications) => {
+  const normalizeEducation = (educationValue) => {
+    if (!educationValue || typeof educationValue !== 'string') {
+      return educationValue; // Return as-is if null, undefined, or not a string
+    }
+    
+    const education = educationValue.toLowerCase().trim();
+    
+    // Define education mappings with keywords
+    const educationMap = {
+      'Diploma': ['diploma'],
+      'BSc': ['bsc', 'b.sc', 'bachelor of science', 'b sc'],
+      'BVoc': ['bvoc', 'b.voc', 'bachelor of vocation', 'b voc'],
+      'BE': ['be', 'b.e', 'bachelor of engineering', 'b e'],
+      'BTech': ['btech', 'b.tech', 'bachelor of technology', 'b tech'],
+    };
+    
+    // Check for each education type
+    for (const [standardForm, keywords] of Object.entries(educationMap)) {
+      for (const keyword of keywords) {
+        if (education.includes(keyword)) {
+          return standardForm;
+        }
+      }
+    }
+    
+    // Return original value if no match found
+    return educationValue;
+  };
+  
+  // Transform all applications
+  return applications.map(app => ({
+    ...app,
+    education: normalizeEducation(app.highestEducation)
+  }));
+};
+
+
+
+
+
 export const calculateAllotment = (applications, departments) => {
-  console.log(departments);
+  const transformedApplications = transformEducationData(applications);
+  console.log("Transformed Applications:", transformedApplications);
   
   // Step 1: Calculate SM allotment (only for candidates with experience >= 1)
-  const smResult = calculateSMAllotment(applications, departments);
+  const smResult = calculateSMAllotment(transformedApplications, departments);
   console.log("SM Allotment Result:", {
     totalAllocated: smResult.updatedApplications.filter(app => app.allotmentStatus === "allotted").length,
     unallocated: smResult.unallocatedApplications.length
@@ -339,7 +416,7 @@ export const calculateAllotment = (applications, departments) => {
     .forEach(app => allAllotments.set(app.id, app));
 
   // Step 4: Create final applications array with proper status assignment
-  const finalApplications = applications.map(app => {
+  const finalApplications = transformedApplications.map(app => {
     const allottedApp = allAllotments.get(app.id);
     
     if (allottedApp) {
@@ -351,7 +428,19 @@ export const calculateAllotment = (applications, departments) => {
       };
     }
     
-    // Check if application is otherwise eligible (mark, distance, rank)
+    // If not allotted, check if application is eligible for waiting list
+    // if exam not attended
+    if ((!isValidRank(app.letRank) || app.letRank === "NA")&& parseFloat(app.distance) <= MAX_DISTANCE &&
+        parseFloat(app.mark) >= getMinMarkForCategory(app)) {
+      return {
+        ...app,
+        allotmentStatus: "waiting_list",
+        allottedDepartment: "Waiting List",
+        allottedCategory: "exam_not_attended"
+      };
+    }
+
+    // Check if application is otherwise eligible (mark, distance, letRank)
     
     if (!isBasicEligible(app)) {
       return {

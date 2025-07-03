@@ -84,42 +84,71 @@ console.log("Allotted Data:", data);
   const exportToExcel = () => {
   const workbook = XLSX.utils.book_new();
 
+  // Define education priority order (same as in AllottedTable)
+  const educationOrder = {
+    'BE': 1,
+    'BTech': 1,
+    'Diploma': 2,
+    'BSc': 3,
+    'BVoc': 4
+  };
+
+  const sortStudents = (students) => {
+    return [...students].sort((a, b) => {
+      // Get education priorities (default to 999 for unknown education types)
+      const eduPriorityA = educationOrder[a.education] || 999;
+      const eduPriorityB = educationOrder[b.education] || 999;
+
+      // First sort by education priority
+      if (eduPriorityA !== eduPriorityB) {
+        return eduPriorityA - eduPriorityB;
+      }
+
+      // If education is the same, sort by rank
+      const rankA = parseFloat(a.letRank ?? Infinity);
+      const rankB = parseFloat(b.letRank ?? Infinity);
+
+      return rankA - rankB;
+    });
+  };
+
   const appendWithDept = (students, deptLabel) => {
-    const sheetData = students.map((student,index) => ({
-        Name: student.name,
-        LET_Rank: student.letRank,
-    Reservation_Category: student.allottedCategory,
-    address:student.address,
-    aadhar: student.adharNumber,
-    age: student.age,
-    caste: student.caste,
-    category: student.category,
-    company: student.company,
-    distance: student.distance,
-    email: student.email,
-    experience: student.experience,
-    Education: student.highestEducation,
-    let_Reg: student.letRegNo,
-    mark: student.mark,
-    Phone: student.phone,
-    Priority_1: student.priorityChoices[1],
-    Priority_2: student.priorityChoices[2],
-    Priority_3: student.priorityChoices[3],
-    religion: student.religion,
-
-        Department: deptLabel
+    const sortedStudents = sortStudents(students);
+    const sheetData = sortedStudents.map((student, index) => ({
+      SlNo: index + 1,
+      Name: student.name,
+      LET_Rank: student.letRank,
+      Reservation_Category: student.allottedCategory,
+      Address: student.address,
+      Aadhar: student.adharNumber,
+      Age: student.age,
+      Caste: student.caste,
+      Category: student.category,
+      Company: student.company,
+      Distance: student.distance,
+      Email: student.email,
+      Experience: student.experience,
+      Education: student.education,
+      LET_Reg: student.letRegNo,
+      Mark: student.mark,
+      Phone: student.phone,
+      Priority_1: student.priorityChoices?.[1],
+      Priority_2: student.priorityChoices?.[2],
+      Priority_3: student.priorityChoices?.[3],
+      Religion: student.religion,
+      Department: deptLabel
     }));
+    
     const worksheet = XLSX.utils.json_to_sheet(sheetData);
-          XLSX.utils.book_append_sheet(workbook, worksheet, deptLabel);
-
+    XLSX.utils.book_append_sheet(workbook, worksheet, deptLabel);
   };
 
   appendWithDept(allottedData['Civil Engineering'], "Civil Engineering");
   appendWithDept(allottedData['Electrical and Electronics Engineering'], "Electrical Engineering");
   appendWithDept(allottedData['Mechanical Engineering'], "Mechanical Engineering");
   appendWithDept(allottedData['Waiting List'], "Waiting List");
+  
   XLSX.writeFile(workbook, "Allotment_Results.xlsx");
-
 };
 
 

@@ -351,6 +351,17 @@ export const calculateAllotment = (applications, departments) => {
       };
     }
     
+    // Check if application is otherwise eligible (mark, distance, rank)
+    
+    if (!isBasicEligible(app)) {
+      return {
+        ...app,
+        allotmentStatus: "not_eligible",
+        allottedDepartment: null,
+        allottedCategory: null
+      };
+    }
+
     // Check if application has insufficient experience
     if (parseFloat(app.experience) < MIN_EXPERIENCE) {
       return {
@@ -361,15 +372,7 @@ export const calculateAllotment = (applications, departments) => {
       };
     }
     
-    // Check if application is otherwise eligible (mark, distance, rank)
-    if (!isBasicEligible(app)) {
-      return {
-        ...app,
-        allotmentStatus: "not_eligible",
-        allottedDepartment: null,
-        allottedCategory: null
-      };
-    }
+    
     
     // For eligible but unallotted applications - assign to waiting list
     return {

@@ -1,40 +1,47 @@
 import React from "react";
 
+const RESERVED_CATEGORIES = [
+  "EWS", "Ezhava", "Muslim", "Other Backward Hindu", "Latin Catholic and Anglo Indian",
+  "Dheevara", "Viswakarma", "Kusavan", "OBC Christian", "Kudumbi",
+  "SC", "ST", "Physically Disabled", "Transgender", "Sports", "DTE Staff", "Central govt. employee"
+];
+
 const AllottedNoTable = ({ students, deptName }) => {
   if (!students || students.length === 0) return null;
 
-  // Define education priority order
   const educationOrder = {
-    'BE': 1,
-    'BTech': 1,
-    'Diploma': 2,
-    'BSc': 3,
-    'BVoc': 4
+    BE: 1,
+    BTech: 1,
+    Diploma: 2,
+    BSc: 3,
+    BVoc: 4,
   };
 
-  // ✅ Sort students: First by education priority, then by rank
-  const sortedStudents = [...students].sort((a, b) => {
-    // Get education priorities (default to 999 for unknown education types)
-    const eduPriorityA = educationOrder[a.education] || 999;
-    const eduPriorityB = educationOrder[b.education] || 999;
+  const isReserved = (category) => RESERVED_CATEGORIES.includes(category);
 
-    // First sort by education priority
-    if (eduPriorityA !== eduPriorityB) {
-      return eduPriorityA - eduPriorityB;
-    }
+  const reservedStudents = students.filter((s) => isReserved(s.reservationCategory));
+  const generalStudents = students.filter((s) => s.reservationCategory === "General");
 
-    // If education is the same, sort by rank
-    const rankA = parseFloat(a.letRank ?? Infinity);
-    const rankB = parseFloat(b.letRank ?? Infinity);
+  const sortStudents = (arr) => {
+    return [...arr].sort((a, b) => {
+      const eduPriorityA = educationOrder[a.education] || 999;
+      const eduPriorityB = educationOrder[b.education] || 999;
+      if (eduPriorityA !== eduPriorityB) return eduPriorityA - eduPriorityB;
 
-    return rankA - rankB;
-  });
+      const rankA = parseFloat(a.letRank ?? Infinity);
+      const rankB = parseFloat(b.letRank ?? Infinity);
+      return rankA - rankB;
+    });
+  };
+
+  const sortedStudents = [...sortStudents(reservedStudents), ...sortStudents(generalStudents)];
 
   return (
     <div className="backdrop-blur-sm bg-white/80 border border-gray-200 rounded-3xl shadow-xl p-6 transition-all duration-300">
       <h2 className="text-3xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-3">
-        {deptName} <span className="text-gray-500 text-lg font-medium">— Allotted Students</span>
+        {deptName} <span className="text-gray-500 text-lg font-medium">— Non LET Allotted Students</span>
       </h2>
+
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left text-gray-700">
           <thead className="bg-primary text-white uppercase text-xs tracking-widest">
@@ -42,7 +49,7 @@ const AllottedNoTable = ({ students, deptName }) => {
               <th className="px-3 py-3 rounded-tl-2xl border-r border-white/30">No.</th>
               <th className="px-3 py-3 border-r border-white/30">Name</th>
               <th className="px-3 py-3 border-r border-white/30">Education</th>
-              
+              <th className="px-3 py-3 border-r border-white/30">Category</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -60,7 +67,9 @@ const AllottedNoTable = ({ students, deptName }) => {
                 <td className="px-3 py-3 border-r border-gray-200/50 whitespace-nowrap">
                   {student.education || "-"}
                 </td>
-                
+                <td className="px-3 py-3 border-r border-gray-200/50 whitespace-nowrap">
+                  {student.reservationCategory || "-"}
+                </td>
               </tr>
             ))}
           </tbody>

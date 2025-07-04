@@ -160,6 +160,9 @@ export default function PartTimeBtech() {
       <AllottedTable students={allottedData['Waiting List']} deptName="Waiting List" /> 
       <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-700 uppercase tracking-wide border-b-4 border-blue-700 pb-2 mt-32">
   Allotment Results: Non-LET Candidates
+  <p className="mt-4 text-sm md:text-base text-gray-700 text-center max-w-3xl mx-auto px-4">
+  <strong>Note:</strong> Allotment for non-LET candidates follows the official reservation policy. Students belonging to reservation categories are considered first in their respective quotas. General category candidates will be considered only after reserved seats are filled, and purely based on availability. Inclusion in this list does not guarantee admission.
+</p>
 </h2>
       <AllottedNoTable students={allottedData2['Civil Engineering']} deptName="Civil Engineering" />
       <AllottedNoTable students={allottedData2['Electrical and Electronics Engineering']} deptName="Electrical & Electronics Engineering" />

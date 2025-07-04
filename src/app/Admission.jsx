@@ -12,6 +12,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { db } from "@/firebase";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import AllottedTable from "./admin/Allotment/AllottedTable";
+import AllottedNoTable from "./admin/Allotment/AllottedNoTable";
 export default function PartTimeBtech() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -24,6 +25,7 @@ export default function PartTimeBtech() {
 
   const [isPublished, setIsPublished] = useState(false);
   const [allottedData, setAllottedData] = useState({ ce: [], ee: [], mech: [] });
+  const [allottedData2, setAllottedData2] = useState({ ce: [], ee: [], mech: [] });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export default function PartTimeBtech() {
       try {
         // Check if published
         const publishSnap = await getDoc(doc(db, "allotment", "publishStatus"));
+        const publishSnap2 = await getDoc(doc(db, "no_exam_allotment", "publishStatus"));
         const published = publishSnap.exists() && publishSnap.data().published;
         setIsPublished(published);
 
@@ -39,14 +42,21 @@ export default function PartTimeBtech() {
 
         const departments = ["Civil Engineering", "Electrical and Electronics Engineering", "Mechanical Engineering", "Waiting List"];
         const data = { ce: [], ee: [], mech: [] };
+        const data2 = { ce: [], ee: [], mech: [] };
 
         for (const dept of departments) {
           const snapshot = await getDocs(collection(db, `allotment/${dept}/students`));
+          const snapshot2 = await getDocs(collection(db, `no_exam_allotment/${dept}/students`));
           const students = [];
+          const students2 = [];
 
           snapshot.forEach((doc) => {
             const student = { id: doc.id, ...doc.data() };
             students.push(student);
+          });
+          snapshot2.forEach((doc) => {
+            const student = { id: doc.id, ...doc.data() };
+            students2.push(student);
           });
 
           students.sort((a, b) => {
@@ -57,10 +67,19 @@ export default function PartTimeBtech() {
             return rankA - rankB;
           });
 
+          students2.sort((a, b) => {
+            const rankA = Number(a.letRank);
+            const rankB = Number(b.letRank);
+            if (isNaN(rankA)) return 1;
+            if (isNaN(rankB)) return -1;
+            return rankA - rankB;
+          });
           data[dept] = students;
+          data2[dept] = students2;
         }
 
         setAllottedData(data);
+        setAllottedData2(data2);
       } catch (err) {
         console.error("Error loading data", err);
       } finally {
@@ -139,6 +158,13 @@ export default function PartTimeBtech() {
       <AllottedTable students={allottedData['Electrical and Electronics Engineering']} deptName="Electrical & Electronics Engineering" />
       <AllottedTable students={allottedData['Mechanical Engineering']} deptName="Mechanical Engineering" />
       <AllottedTable students={allottedData['Waiting List']} deptName="Waiting List" /> 
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-700 uppercase tracking-wide border-b-4 border-blue-700 pb-2 mt-32">
+  Allotment Results: Non-LET Candidates
+</h2>
+      <AllottedNoTable students={allottedData2['Civil Engineering']} deptName="Civil Engineering" />
+      <AllottedNoTable students={allottedData2['Electrical and Electronics Engineering']} deptName="Electrical & Electronics Engineering" />
+      <AllottedNoTable students={allottedData2['Mechanical Engineering']} deptName="Mechanical Engineering" />
+      <AllottedNoTable students={allottedData2['Waiting List']} deptName="Waiting List" />
 </div>
 
 ) : (

@@ -434,8 +434,9 @@ export const calculateAllotment = (applications, departments) => {
         parseFloat(app.mark) >= getMinMarkForCategory(app)) {
       return {
         ...app,
-        allotmentStatus: "waiting_list",
-        allottedDepartment: "Waiting List",
+        letRank:99999,
+        allotmentStatus: "not_eligible",
+        allottedDepartment: null,
         allottedCategory: "exam_not_attended"
       };
     }
@@ -485,6 +486,7 @@ export const calculateAllotment = (applications, departments) => {
   return {
     updatedApplications: finalApplications,
     updatedDepartments: reservationResult.updatedDepartments,
+    noExamApplications: finalApplications.filter(app => app.allottedCategory === "exam_not_attended"),
     summary: statusCounts
 };
 };

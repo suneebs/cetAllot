@@ -147,9 +147,17 @@ export const AllotmentResults = () => {
       const rankA = parseFloat(a.letRank ?? Infinity);
       const rankB = parseFloat(b.letRank ?? Infinity);
 
-      return rankA - rankB;
-    });
-  };
+      if (rankA !== rankB) {
+        return rankA - rankB;
+      }
+
+      // If rank is also the same, sort by marks (assuming higher marks = better)
+      const marksA = parseFloat(a.mark ?? 0);
+      const marksB = parseFloat(b.mark ?? 0);
+
+      return marksB - marksA;
+    });
+  };
 
   const appendWithDept = (students, deptLabel) => {
     const sortedStudents = sortStudents(students);

@@ -22,17 +22,32 @@ const AllottedNoTable = ({ students, deptName }) => {
   const reservedStudents = students.filter((s) => isReserved(s.reservationCategory));
   const generalStudents = students.filter((s) => s.reservationCategory === "General");
 
-  const sortStudents = (arr) => {
-    return [...arr].sort((a, b) => {
+  const sortStudents = (students) => {
+    return [...students].sort((a, b) => {
+      // Get education priorities (default to 999 for unknown education types)
       const eduPriorityA = educationOrder[a.education] || 999;
       const eduPriorityB = educationOrder[b.education] || 999;
-      if (eduPriorityA !== eduPriorityB) return eduPriorityA - eduPriorityB;
 
+      // First sort by education priority
+      if (eduPriorityA !== eduPriorityB) {
+        return eduPriorityA - eduPriorityB;
+      }
+
+      // If education is the same, sort by rank
       const rankA = parseFloat(a.letRank ?? Infinity);
       const rankB = parseFloat(b.letRank ?? Infinity);
-      return rankA - rankB;
+
+      if (rankA !== rankB) {
+        return rankA - rankB;
+      }
+
+      // If rank is also the same, sort by marks (assuming higher marks = better)
+      const marksA = parseFloat(a.mark ?? 0);
+      const marksB = parseFloat(b.mark ?? 0);
+
+      return marksB - marksA;
     });
-  };
+};
 
   const sortedStudents = [...sortStudents(reservedStudents), ...sortStudents(generalStudents)];
 

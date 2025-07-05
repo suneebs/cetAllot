@@ -59,7 +59,7 @@ const getEducationPriority = (education) => {
   return priorityMap[education] || 5; // Default to lowest priority if not found
 };
 
-const sortByEducationThenRank = (applications) => {
+const sortByEducationThenRankThenMarks = (applications) => {
   return applications.sort((a, b) => {
     // First sort by education priority
     const eduPriorityA = getEducationPriority(a.education);
@@ -69,8 +69,16 @@ const sortByEducationThenRank = (applications) => {
       return eduPriorityA - eduPriorityB; // Lower number = higher priority
     }
     
-    // If education priority is same, sort by letRank
-    return parseFloat(a.letRank) - parseFloat(b.letRank);
+    // If education priority is same, sort by rank
+    const rankA = parseFloat(a.letRank);
+    const rankB = parseFloat(b.letRank);
+    
+    if (rankA !== rankB) {
+      return rankA - rankB;
+    }
+    
+    // If rank is also same, sort by marks (assuming higher marks = better)
+    return parseFloat(b.mark) - parseFloat(a.mark);
   });
 };
 
@@ -96,7 +104,7 @@ export const calculateSMAllotment = (applications, departments) => {
   const eligibleApplications = applications
     .filter(isEligibleForAllotment);
 
-    const sortedEligibleApplications = sortByEducationThenRank(eligibleApplications);
+    const sortedEligibleApplications = sortByEducationThenRankThenMarks(eligibleApplications);
 
   const hasCandidate = (category) => {
     return sortedEligibleApplications.some(app => getCategoryKey(app) === category);
@@ -238,7 +246,7 @@ export const calculateReservationAllotment = (unallocatedApplications, departmen
   });
 
   // Sort eligible applications by education priority and then by letRank
-  const sortedEligibleUnallocated = sortByEducationThenRank(eligibleUnallocated);
+  const sortedEligibleUnallocated = sortByEducationThenRankThenMarks(eligibleUnallocated);
 
 
   for (const app of sortedEligibleUnallocated) {
